@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://diohj4tqgqc7s"]
+
+[ext_resource type="Script" path="res://Scenes/GameController.gd" id="1_ja4hw"]
+[ext_resource type="PackedScene" uid="uid://dmhyo6tmrmtsh" path="res://Player/PlayerController.tscn" id="1_xlw7c"]
+[ext_resource type="Script" path="res://Scripts/Camera.gd" id="2_g67e5"]
+[ext_resource type="PackedScene" uid="uid://dc8c2m6m4pib0" path="res://Enemy/Enemy.tscn" id="3_50qa3"]
+
+[sub_resource type="Curve" id="Curve_hax16"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lw88h"]
+width = 1920
+curve = SubResource("Curve_hax16")
+
+[node name="TestScene" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_ja4hw")
+enemy_prefab = ExtResource("3_50qa3")
+player = NodePath("Player")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.490196, 1, 0.709804, 1)
+scale = Vector2(1, 1080)
+texture = SubResource("CurveTexture_lw88h")
+
+[node name="Player" parent="." instance=ExtResource("1_xlw7c")]
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position_smoothing_speed = 10.0
+script = ExtResource("2_g67e5")
+player = NodePath("../Player")
