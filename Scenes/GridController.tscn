@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpc4qn3bix2nh"]
+
+[ext_resource type="Script" path="res://Scenes/GridController.gd" id="1_d6soy"]
+[ext_resource type="PackedScene" uid="uid://bcruqu6j56sxy" path="res://Player/Traps/TrapStandin.tscn" id="2_ndrmh"]
+
+[node name="GridController" type="Node2D"]
+script = ExtResource("1_d6soy")
+trap_placement_prefab = ExtResource("2_ndrmh")

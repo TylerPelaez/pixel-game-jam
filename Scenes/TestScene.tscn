@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://diohj4tqgqc7s"]
+[gd_scene load_steps=9 format=3 uid="uid://diohj4tqgqc7s"]
 
 [ext_resource type="Script" path="res://Scenes/GameController.gd" id="1_ja4hw"]
 [ext_resource type="PackedScene" uid="uid://dmhyo6tmrmtsh" path="res://Player/PlayerController.tscn" id="1_xlw7c"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="2_g67e5"]
 [ext_resource type="PackedScene" uid="uid://dc8c2m6m4pib0" path="res://Enemy/Enemy.tscn" id="3_50qa3"]
 [ext_resource type="PackedScene" uid="uid://clhjj6y2kg2ux" path="res://Player/Core.tscn" id="5_5uk77"]
+[ext_resource type="PackedScene" uid="uid://bpc4qn3bix2nh" path="res://Scenes/GridController.tscn" id="6_fjncl"]
 
 [sub_resource type="Curve" id="Curve_hax16"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -32,4 +33,6 @@ script = ExtResource("2_g67e5")
 player = NodePath("../Player")
 
 [node name="Core" parent="." instance=ExtResource("5_5uk77")]
-position = Vector2(0, -423)
+position = Vector2(-32, -416)
+
+[node name="GridController" parent="." instance=ExtResource("6_fjncl")]

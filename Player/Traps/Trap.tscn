@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwr11fohp87hh"]
+
+[ext_resource type="Script" path="res://Player/Traps/Trap.gd" id="1_1mc55"]
+[ext_resource type="Texture2D" uid="uid://bxn8kvm570f80" path="res://Textures/Test/White.png" id="2_hspgu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_difry"]
+size = Vector2(64, 64)
+
+[node name="Trap" type="Node2D"]
+script = ExtResource("1_1mc55")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.811765, 0.482353, 1)
+texture = ExtResource("2_hspgu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 65
+collision_mask = 98
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_difry")
