@@ -1,12 +1,77 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmhyo6tmrmtsh"]
+[gd_scene load_steps=13 format=3 uid="uid://dmhyo6tmrmtsh"]
 
 [ext_resource type="Script" path="res://Player/PlayerController.gd" id="1_utrqs"]
 [ext_resource type="Texture2D" uid="uid://bxn8kvm570f80" path="res://Textures/Test/White.png" id="2_lpqb7"]
+[ext_resource type="PackedScene" uid="uid://cbibtl5k17ewk" path="res://Overlap/Hurtbox.tscn" id="3_vacdi"]
+[ext_resource type="PackedScene" uid="uid://binqjvrc1rjh6" path="res://Scripts/Stats/Stats.tscn" id="4_nbcsh"]
+[ext_resource type="PackedScene" uid="uid://dra8whow2jomb" path="res://Overlap/SoftCollision.tscn" id="5_105mu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ux33o"]
+size = Vector2(48, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xofqy"]
 size = Vector2(64, 64)
 
+[sub_resource type="Animation" id="Animation_6bmqp"]
+resource_name = "Start"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_n2m5v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_3xspq"]
+resource_name = "Stop"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xcn3j"]
+_data = {
+"RESET": SubResource("Animation_n2m5v"),
+"Start": SubResource("Animation_6bmqp"),
+"Stop": SubResource("Animation_3xspq")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nc7mb"]
+size = Vector2(48, 48)
+
 [node name="PlayerController" type="CharacterBody2D" groups=["PlayerGroup"]]
+collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_utrqs")
 MAX_SPEED = 300
@@ -16,3 +81,34 @@ texture = ExtResource("2_lpqb7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ux33o")
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_vacdi")]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("RectangleShape2D_xofqy")
+
+[node name="Timer" parent="Hurtbox" index="1"]
+wait_time = 0.8
+one_shot = true
+
+[node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xcn3j")
+}
+
+[node name="Stats" parent="." instance=ExtResource("4_nbcsh")]
+max_health = 3
+
+[node name="SoftCollision" parent="." instance=ExtResource("5_105mu")]
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource("RectangleShape2D_nc7mb")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
+[connection signal="no_health" from="Stats" to="." method="_on_stats_no_health"]
+
+[editable path="Hurtbox"]
+[editable path="SoftCollision"]

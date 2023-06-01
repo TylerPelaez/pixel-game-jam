@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dra8whow2jomb"]
+
+[ext_resource type="Script" path="res://Overlap/SoftCollision.gd" id="1_utlog"]
+
+[node name="SoftCollision" type="Area2D"]
+collision_layer = 64
+collision_mask = 64
+script = ExtResource("1_utlog")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -3,9 +3,9 @@ class_name PlayerController
 
 signal died
 
-@export var ACCELERATION = 500
-@export var MAX_SPEED = 100
-@export var FRICTION = 500
+@export var ACCELERATION := 500
+@export var MAX_SPEED := 100
+@export var FRICTION := 500
 
 enum State {
 	MOVE
@@ -13,17 +13,16 @@ enum State {
 
 var state: State = State.MOVE
 var scratch_velocity: Vector2 = Vector2.ZERO
-#var stats = PlayerStats
 
+@onready var stats: Stats = $Stats
+@onready var hurtbox = $Hurtbox
+@onready var blink_animation_player: AnimationPlayer = $BlinkAnimationPlayer
 
 # initialize as if it was being initialized in _ready
 #@onready var animationTree = $AnimationTree
 #@onready var animationState = animationTree.get("parameters/playback")
-#@onready var hurtbox = $Hurtbox
-#@onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 
 func _ready():
-#	stats.connect("no_health", Callable(self, "_on_Stats_no_health"))
 	reset()
 
 func reset():
@@ -33,7 +32,7 @@ func reset():
 	
 	scratch_velocity = Vector2.ZERO
 
-#	stats.reset()
+	stats.reset()
 
 # Update
 func _physics_process(delta):
@@ -66,23 +65,24 @@ func move():
 	move_and_slide()
 	scratch_velocity = velocity
 
-#func _on_Stats_no_health():
-#	emit_signal("died")
+func _on_Hurtbox_area_entered(area: Area2D):
+	if area is Hitbox && !hurtbox.invincible:
+		got_hit(area.damage)
 
-#func _on_Hurtbox_area_entered(area):
-#	if area is HitBox && !hurtbox.invincible:
-#		got_hit(area.damage)
-#
-#func got_hit(damage):
-#	stats.health -= damage
-#	hurtbox.start_invincibility(0.6)
-#	_invincibility_started()
-#	hurtbox.create_hit_effect()
+func got_hit(damage: int):
+	stats.health -= damage
+	hurtbox.start_invincibility(0.6)
+	_invincibility_started()
+	hurtbox.create_hit_effect()
 #	var playerHurtSound = PlayerHurtSound.instantiate()
 #	get_tree().current_scene.add_child(playerHurtSound)
 
-#func _invincibility_started():
-#	blinkAnimationPlayer.play("Start")
+
+func _on_Hurtbox_invincibility_ended():
+	blink_animation_player.play("Stop")
+
+func _invincibility_started():
+	blink_animation_player.play("Start")
 
 #func pickup_health():
 #	$ItemPickupPlayer.stream = PickupHealthSound
@@ -92,18 +92,6 @@ func move():
 #	$ItemPickupPlayer.stream = PickupGemSound
 #	$ItemPickupPlayer.play()
 
-#func _on_Hurtbox_invincibility_ended():
-#	blinkAnimationPlayer.play("Stop")
-
-
-#func _on_Hurtbox_body_entered(body):
-#	if body is RockWallTileMap && !hurtbox.invincible:
-#		var result = Utils.shape_cast_get_result(hurtbox.collisionShape.shape, hurtbox.collisionShape.global_transform)
-#		if result == null || result.is_empty():
-#			return
-#		else:
-#			for res in result:
-#				body.delete_cell(res["metadata"][0], res["metadata"][1])
-#
-#		got_hit(body.damage)
-	
+func _on_stats_no_health():
+	emit_signal("died")
+	print("Died")

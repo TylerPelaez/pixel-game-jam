@@ -54,6 +54,17 @@ ui_down={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="PlayerHurtbox"
+2d_physics/layer_4="EnemyHitbox"
+2d_physics/layer_5="EnemyHurtbox"
+2d_physics/layer_6="Enemy"
+2d_physics/layer_7="SoftCollision"
+2d_physics/layer_8="PlayerHitbox"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
