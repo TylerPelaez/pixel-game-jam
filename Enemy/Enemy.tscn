@@ -27,6 +27,7 @@ script = ExtResource("1_ffyyh")
 ACCELERATION = 2000
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 0, 0, 1)
 texture = ExtResource("1_42nnu")
 
@@ -64,7 +65,7 @@ libraries = {
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 shape = SubResource("RectangleShape2D_g87tr")
 
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="no_health" from="Stats" to="." method="_on_stats_no_health"]
 
