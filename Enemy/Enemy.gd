@@ -12,7 +12,7 @@ enum State {
 	MOVE
 }
 
-var player: PlayerController
+var target: Node2D
 var state: State = State.MOVE
 var scratch_velocity: Vector2 = Vector2.ZERO
 
@@ -30,11 +30,11 @@ func _ready():
 
 func reset():
 	state = State.MOVE
-	var players = get_tree().get_nodes_in_group(&"PlayerGroup")
-	if players.size() != 1:
-		push_error("Found Non-1 number of players!")
+	var cores = get_tree().get_nodes_in_group(&"Core")
+	if cores.size() != 1:
+		push_error("Found Non-1 number of cores!")
 		return
-	player = players[0]
+	target = cores[0]
 	
 #	animationTree.active = true
 	
@@ -49,7 +49,7 @@ func _physics_process(delta):
 			move_state(delta)
 	
 func move_state(delta):
-	var input_vector = (player.global_position - global_position).normalized()
+	var input_vector = (target.global_position - global_position).normalized()
 	
 	if input_vector != Vector2.ZERO:
 		scratch_velocity = scratch_velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
@@ -72,15 +72,15 @@ func _on_Hurtbox_area_entered(area: Area2D):
 
 func got_hit(damage):
 	stats.health -= damage
-	hurtbox.start_invincibility(0.6)
+	hurtbox.start_invincibility(stats.hit_invincibility_time_seconds)
 	_invincibility_started()
 	hurtbox.create_hit_effect()
 
 func _on_Hurtbox_invincibility_ended():
-	blink_animation_player.play("Stop")
+	blink_animation_player.play("Blink/Stop")
 
 func _invincibility_started():
-	blink_animation_player.play("Start")
+	blink_animation_player.play("Blink/Start")
 
 func _on_stats_no_health():
 	emit_signal("died")

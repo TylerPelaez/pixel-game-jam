@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://clhjj6y2kg2ux"]
+
+[ext_resource type="Script" path="res://Player/Core.gd" id="1_05bff"]
+[ext_resource type="Texture2D" uid="uid://bxn8kvm570f80" path="res://Textures/Test/White.png" id="1_vy51w"]
+[ext_resource type="PackedScene" uid="uid://cbibtl5k17ewk" path="res://Overlap/Hurtbox.tscn" id="2_lcxv0"]
+[ext_resource type="Script" path="res://Scripts/Stats/Stats.gd" id="4_ww6hr"]
+[ext_resource type="AnimationLibrary" uid="uid://dm5xt7fr45ifi" path="res://Animation/Blink.res" id="5_j1yul"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lrvun"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u77lf"]
+size = Vector2(56, 56)
+
+[node name="Core" type="Node2D" groups=["Core"]]
+script = ExtResource("1_05bff")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.486275, 1, 1, 1)
+texture = ExtResource("1_vy51w")
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_lcxv0")]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("RectangleShape2D_lrvun")
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("4_ww6hr")
+max_health = 20
+hit_invincibility_time_seconds = 1.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 34
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_u77lf")
+
+[node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Blink/Stop"
+libraries = {
+"Blink": ExtResource("5_j1yul")
+}
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
+[connection signal="no_health" from="Stats" to="." method="_on_stats_no_health"]
+
+[editable path="Hurtbox"]

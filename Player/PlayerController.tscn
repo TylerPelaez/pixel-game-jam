@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dmhyo6tmrmtsh"]
+[gd_scene load_steps=14 format=3 uid="uid://dmhyo6tmrmtsh"]
 
 [ext_resource type="Script" path="res://Player/PlayerController.gd" id="1_utrqs"]
 [ext_resource type="Texture2D" uid="uid://bxn8kvm570f80" path="res://Textures/Test/White.png" id="2_lpqb7"]
 [ext_resource type="PackedScene" uid="uid://cbibtl5k17ewk" path="res://Overlap/Hurtbox.tscn" id="3_vacdi"]
+[ext_resource type="AnimationLibrary" uid="uid://dm5xt7fr45ifi" path="res://Animation/Blink.res" id="4_0rdqy"]
 [ext_resource type="PackedScene" uid="uid://binqjvrc1rjh6" path="res://Scripts/Stats/Stats.tscn" id="4_nbcsh"]
 [ext_resource type="PackedScene" uid="uid://dra8whow2jomb" path="res://Overlap/SoftCollision.tscn" id="5_105mu"]
 
@@ -11,6 +12,21 @@ size = Vector2(48, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xofqy"]
 size = Vector2(64, 64)
+
+[sub_resource type="Animation" id="Animation_n2m5v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_6bmqp"]
 resource_name = "Start"
@@ -27,21 +43,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_n2m5v"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_3xspq"]
@@ -95,7 +96,8 @@ one_shot = true
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_xcn3j")
+"": SubResource("AnimationLibrary_xcn3j"),
+"Blink": ExtResource("4_0rdqy")
 }
 
 [node name="Stats" parent="." instance=ExtResource("4_nbcsh")]

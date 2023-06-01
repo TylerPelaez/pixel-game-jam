@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dc8c2m6m4pib0"]
+[gd_scene load_steps=12 format=3 uid="uid://dc8c2m6m4pib0"]
 
 [ext_resource type="Texture2D" uid="uid://bxn8kvm570f80" path="res://Textures/Test/White.png" id="1_42nnu"]
 [ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_ffyyh"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cvk3t6e3yov1" path="res://Overlap/Hitbox.tscn" id="4_hjfwo"]
 [ext_resource type="PackedScene" uid="uid://binqjvrc1rjh6" path="res://Scripts/Stats/Stats.tscn" id="5_lj4q2"]
 [ext_resource type="PackedScene" uid="uid://dra8whow2jomb" path="res://Overlap/SoftCollision.tscn" id="6_o3krd"]
+[ext_resource type="AnimationLibrary" uid="uid://dm5xt7fr45ifi" path="res://Animation/Blink.res" id="6_t53d6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mcrok"]
 size = Vector2(48, 48)
@@ -50,8 +51,13 @@ collision_mask = 4
 shape = SubResource("RectangleShape2D_tv82w")
 
 [node name="Stats" parent="." instance=ExtResource("5_lj4q2")]
+hit_invincibility_time_seconds = 0.3
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Blink/Stop"
+libraries = {
+"Blink": ExtResource("6_t53d6")
+}
 
 [node name="SoftCollision" parent="." instance=ExtResource("6_o3krd")]
 
