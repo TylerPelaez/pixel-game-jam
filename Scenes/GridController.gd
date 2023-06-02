@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var trap_placement_prefab: PackedScene
-@export var GRID_SIZE_PIXELS: int = 64
+@export var GRID_SIZE_PIXELS: int = 8
 
 enum State {
 	DEFAULT,

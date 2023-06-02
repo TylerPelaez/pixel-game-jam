@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bcruqu6j56sxy"]
 
 [ext_resource type="Script" path="res://Player/Traps/TrapStandin.gd" id="1_kb56t"]
-[ext_resource type="Texture2D" uid="uid://bxn8kvm570f80" path="res://Textures/Test/White.png" id="1_yx0l3"]
 [ext_resource type="PackedScene" uid="uid://bwr11fohp87hh" path="res://Player/Traps/Trap.tscn" id="2_7o8dq"]
+[ext_resource type="Texture2D" uid="uid://cr0df0oy1wyrc" path="res://Textures/Test/White8.png" id="3_r8dp1"]
 
 [node name="TrapStandin" type="Node2D"]
 script = ExtResource("1_kb56t")
@@ -10,4 +10,4 @@ real_trap = ExtResource("2_7o8dq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.811765, 0.482353, 0.498039)
-texture = ExtResource("1_yx0l3")
+texture = ExtResource("3_r8dp1")

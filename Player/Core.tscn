@@ -1,28 +1,27 @@
 [gd_scene load_steps=10 format=3 uid="uid://clhjj6y2kg2ux"]
 
 [ext_resource type="Script" path="res://Player/Core.gd" id="1_05bff"]
-[ext_resource type="Texture2D" uid="uid://bxn8kvm570f80" path="res://Textures/Test/White.png" id="1_vy51w"]
+[ext_resource type="Texture2D" uid="uid://cr0df0oy1wyrc" path="res://Textures/Test/White8.png" id="2_i11aw"]
 [ext_resource type="PackedScene" uid="uid://cbibtl5k17ewk" path="res://Overlap/Hurtbox.tscn" id="2_lcxv0"]
 [ext_resource type="Script" path="res://Scripts/Stats/Stats.gd" id="4_ww6hr"]
 [ext_resource type="AnimationLibrary" uid="uid://dm5xt7fr45ifi" path="res://Animation/Blink.res" id="5_j1yul"]
 [ext_resource type="PackedScene" uid="uid://cvk3t6e3yov1" path="res://Overlap/Hitbox.tscn" id="6_mo1l7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrvun"]
-size = Vector2(64, 64)
+size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u77lf"]
-size = Vector2(56, 56)
+size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7h86i"]
-size = Vector2(64, 64)
+size = Vector2(8, 8)
 
 [node name="Core" type="Node2D" groups=["Core"]]
 script = ExtResource("1_05bff")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(0.486275, 1, 1, 1)
-texture = ExtResource("1_vy51w")
+texture = ExtResource("2_i11aw")
 
 [node name="Hurtbox" parent="." instance=ExtResource("2_lcxv0")]
 collision_layer = 4

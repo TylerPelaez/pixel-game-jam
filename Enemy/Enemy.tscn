@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dc8c2m6m4pib0"]
 
-[ext_resource type="Texture2D" uid="uid://bxn8kvm570f80" path="res://Textures/Test/White.png" id="1_42nnu"]
 [ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_ffyyh"]
+[ext_resource type="Texture2D" uid="uid://b5ohs5orx6duk" path="res://Textures/Test/White6.png" id="2_eg3ho"]
 [ext_resource type="PackedScene" uid="uid://cbibtl5k17ewk" path="res://Overlap/Hurtbox.tscn" id="3_vranu"]
 [ext_resource type="PackedScene" uid="uid://cvk3t6e3yov1" path="res://Overlap/Hitbox.tscn" id="4_hjfwo"]
 [ext_resource type="PackedScene" uid="uid://binqjvrc1rjh6" path="res://Scripts/Stats/Stats.tscn" id="5_lj4q2"]
@@ -9,27 +9,27 @@
 [ext_resource type="AnimationLibrary" uid="uid://dm5xt7fr45ifi" path="res://Animation/Blink.res" id="6_t53d6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mcrok"]
-size = Vector2(48, 48)
+size = Vector2(4, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cl6yr"]
-size = Vector2(64, 64)
+size = Vector2(6, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tv82w"]
-size = Vector2(64, 64)
+size = Vector2(6, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g87tr"]
-size = Vector2(48, 48)
+size = Vector2(6, 6)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 32
 motion_mode = 1
 script = ExtResource("1_ffyyh")
 ACCELERATION = 2000
+MAX_SPEED = 50
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(1, 0, 0, 1)
-texture = ExtResource("1_42nnu")
+texture = ExtResource("2_eg3ho")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mcrok")
@@ -39,6 +39,7 @@ collision_layer = 16
 collision_mask = 128
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
+visible = false
 shape = SubResource("RectangleShape2D_cl6yr")
 
 [node name="Timer" parent="Hurtbox" index="1"]
@@ -49,6 +50,7 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
+visible = false
 shape = SubResource("RectangleShape2D_tv82w")
 
 [node name="Stats" parent="." instance=ExtResource("5_lj4q2")]
@@ -63,6 +65,7 @@ libraries = {
 [node name="SoftCollision" parent="." instance=ExtResource("6_o3krd")]
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
+visible = false
 shape = SubResource("RectangleShape2D_g87tr")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
