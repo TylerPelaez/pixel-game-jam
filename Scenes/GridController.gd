@@ -1,6 +1,7 @@
 extends Node2D
 
-@export var trap_placement_prefab: PackedScene
+@export var trap_placement_prefab_1: PackedScene
+@export var trap_placement_prefab_2: PackedScene
 @export var GRID_SIZE_PIXELS: int = 8
 
 enum State {
@@ -24,13 +25,15 @@ func _process(delta):
 
 func _input(event):
 	if state == State.DEFAULT and event.is_action_pressed("Place Trap 1"):
-		start_placing()
+		start_placing(trap_placement_prefab_1)
+	elif state == State.DEFAULT and event.is_action_pressed("Place Trap 2"):
+		start_placing(trap_placement_prefab_2)
 	
 	if state == State.PLACING and event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			place_trap(trap_placement_instance, snap_to_grid(get_global_mouse_position()))
 
-func start_placing():
+func start_placing(trap_placement_prefab: PackedScene):
 	state = State.PLACING
 	trap_placement_instance = trap_placement_prefab.instantiate()
 	get_tree().root.add_child.call_deferred(trap_placement_instance)

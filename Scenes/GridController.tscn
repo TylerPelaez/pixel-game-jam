@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpc4qn3bix2nh"]
+[gd_scene load_steps=4 format=3 uid="uid://bpc4qn3bix2nh"]
 
 [ext_resource type="Script" path="res://Scenes/GridController.gd" id="1_d6soy"]
 [ext_resource type="PackedScene" uid="uid://bcruqu6j56sxy" path="res://Player/Traps/TrapStandin.tscn" id="2_ndrmh"]
+[ext_resource type="PackedScene" uid="uid://gvo1yvogxxak" path="res://Player/Traps/MeleeTrapStandin.tscn" id="3_h5fbk"]
 
 [node name="GridController" type="Node2D"]
 script = ExtResource("1_d6soy")
-trap_placement_prefab = ExtResource("2_ndrmh")
+trap_placement_prefab_1 = ExtResource("2_ndrmh")
+trap_placement_prefab_2 = ExtResource("3_h5fbk")
