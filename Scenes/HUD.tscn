@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://0jdd0aehwng4"]
+
+[ext_resource type="PackedScene" uid="uid://diohj4tqgqc7s" path="res://Scenes/TestScene.tscn" id="1_uepg1"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+audio_listener_enable_2d = true
+gui_snap_controls_to_pixels = false
+size = Vector2i(1024, 960)
+render_target_update_mode = 4
+
+[node name="TestScene" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_uepg1")]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -28.0
+offset_right = 28.0
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "Wave 1"

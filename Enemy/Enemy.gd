@@ -21,6 +21,8 @@ var scratch_velocity: Vector2 = Vector2.ZERO
 @onready var blink_animation_player = $BlinkAnimationPlayer
 @onready var soft_collision = $SoftCollision
 
+@onready var agent: NavigationAgent2D = $NavigationAgent2D
+
 # initialize as if it was being initialized in _ready
 #@onready var animationTree = $AnimationTree
 #@onready var animationState = animationTree.get("parameters/playback")
@@ -41,6 +43,8 @@ func reset():
 	scratch_velocity = Vector2.ZERO
 
 	stats.reset()
+	
+	agent.set_target_position(target.global_position)
 
 # Update
 func _physics_process(delta):
@@ -49,7 +53,8 @@ func _physics_process(delta):
 			move_state(delta)
 	
 func move_state(delta):
-	var input_vector = (target.global_position - global_position).normalized()
+	var next_path_pos = agent.get_next_path_position()
+	var input_vector = (next_path_pos - global_position).normalized()
 	
 	if input_vector != Vector2.ZERO:
 		scratch_velocity = scratch_velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
@@ -83,5 +88,5 @@ func _invincibility_started():
 	blink_animation_player.play("Blink/Start")
 
 func _on_stats_no_health():
-	emit_signal("died")
+	died.emit()
 	queue_free()

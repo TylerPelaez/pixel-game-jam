@@ -91,9 +91,11 @@ radius = 12.0
 script = ExtResource("2_252ls")
 
 [node name="Sprite2D" parent="." index="0"]
-modulate = Color(0.388235, 0.811765, 0.482353, 1)
+modulate = Color(1, 1, 1, 0.580392)
+offset = Vector2(0.06, 0)
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="." index="3"]
+visible = false
 shape = SubResource("CircleShape2D_1m3yo")
 target_position = Vector2(0, 0)
 collision_mask = 16
@@ -111,6 +113,7 @@ collision_mask = 16
 damage = 2
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
+visible = false
 shape = SubResource("CircleShape2D_44vhq")
 disabled = true
 

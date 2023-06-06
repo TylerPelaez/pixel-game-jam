@@ -1,8 +1,11 @@
 extends Node2D
+class_name GridController
 
 @export var trap_placement_prefab_1: PackedScene
 @export var trap_placement_prefab_2: PackedScene
 @export var GRID_SIZE_PIXELS: int = 8
+
+@export var GRID_DIMENSIONS: Vector2i = Vector2.ZERO
 
 enum State {
 	DEFAULT,
@@ -14,6 +17,9 @@ var trap_placement_instance: Node2D
 
 func snap_to_grid(pos: Vector2) -> Vector2:
 	return Vector2(floor(pos.x / GRID_SIZE_PIXELS) * GRID_SIZE_PIXELS,  floor(pos.y / GRID_SIZE_PIXELS) * GRID_SIZE_PIXELS) + Vector2(GRID_SIZE_PIXELS / 2, GRID_SIZE_PIXELS / 2)
+
+func world_pos_to_grid_coords(pos: Vector2) -> Vector2i:
+	return ((GRID_DIMENSIONS * GRID_SIZE_PIXELS / 2.0) + snap_to_grid(pos)) / GRID_SIZE_PIXELS
 
 func _process(delta):
 	match state:

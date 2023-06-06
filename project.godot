@@ -21,7 +21,7 @@ window/size/viewport_width=256
 window/size/viewport_height=240
 window/size/window_width_override=1024
 window/size/window_height_override=960
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [input]
 
@@ -67,7 +67,9 @@ ui_down={
 [layer_names]
 
 2d_physics/layer_1="World"
+2d_navigation/layer_1="Walkable"
 2d_physics/layer_2="Player"
+2d_navigation/layer_2="Breakable"
 2d_physics/layer_3="PlayerHurtbox"
 2d_physics/layer_4="EnemyHitbox"
 2d_physics/layer_5="EnemyHurtbox"
@@ -75,8 +77,13 @@ ui_down={
 2d_physics/layer_7="SoftCollision"
 2d_physics/layer_8="PlayerHitbox"
 
+[navigation]
+
+3d/layer_2=""
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/lossless_compression/force_png=true

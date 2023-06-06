@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Player/Traps/Trap.gd" id="1_1mc55"]
 [ext_resource type="Texture2D" uid="uid://cr0df0oy1wyrc" path="res://Textures/Test/White8.png" id="2_k0gc5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_difry"]
-size = Vector2(8, 8)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfor1"]
+size = Vector2(6, 6)
 
 [node name="Trap" type="Node2D"]
 script = ExtResource("1_1mc55")
@@ -17,8 +17,15 @@ texture = ExtResource("2_k0gc5")
 collision_layer = 65
 collision_mask = 98
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_difry")
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_mfor1")
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="NavCollider" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavCollider"]
+polygon = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)

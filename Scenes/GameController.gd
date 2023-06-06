@@ -1,6 +1,8 @@
 extends Node2D
 class_name GameController
 
+@onready var ui_controller: UIController = $"UI Controller"
+
 @export var enemy_prefab: PackedScene
 @export var player: PlayerController
 @export var enemies_per_wave_level = 30
@@ -12,16 +14,23 @@ var wave_enemy_spawn_limit: int
 var spawned_enemies_count: int
 var wave_active: bool = false
 var wave_start_time: float
+var dead_enemies_count: int
 
 func _ready():
 	start_wave()
 
 func start_wave():
 	spawned_enemies_count = 0
+	dead_enemies_count = 0
 	wave_enemy_spawn_limit = enemies_per_wave_level * wave_counter
 	wave_start_time = Time.get_ticks_msec()
 	wave_active	= true
-	
+
+func end_wave():
+	wave_counter += 1
+	wave_active = false
+	ui_controller.new_wave(wave_counter)
+
 func _process(delta):
 	if !wave_active:
 		return
@@ -42,3 +51,9 @@ func spawn_enemy():
 	add_child(enemy)
 	enemy.global_position = spawn_pos
 	spawned_enemies_count += 1
+	enemy.died.connect(on_enemy_died)
+
+func on_enemy_died():
+	dead_enemies_count += 1
+	if dead_enemies_count >= wave_enemy_spawn_limit:
+		end_wave()

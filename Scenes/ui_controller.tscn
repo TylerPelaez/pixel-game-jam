@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dos2g6h404rdh"]
+
+[ext_resource type="Script" path="res://Scripts/UI Controller.gd" id="1_p2v83"]
+[ext_resource type="FontFile" uid="uid://cfavqas7l0oja" path="res://acherusgrotesque-regular.otf" id="2_qt38b"]
+
+[node name="UI Controller" type="CanvasLayer"]
+script = ExtResource("1_p2v83")
+
+[node name="WaveLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.5
+offset_right = 26.5
+offset_bottom = 26.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_qt38b")
+text = "Wave 1"

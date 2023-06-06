@@ -6,7 +6,7 @@ extends Trap
 # Implement in children
 func attack() -> void:
 	super.attack()
-	animation_player.play(&"Attack")
+#	animation_player.play(&"Attack")
 
 func should_attack() -> bool:
 	if super.should_attack():
