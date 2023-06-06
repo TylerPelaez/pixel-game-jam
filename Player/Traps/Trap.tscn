@@ -30,4 +30,5 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavCollider"]
+visible = false
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)

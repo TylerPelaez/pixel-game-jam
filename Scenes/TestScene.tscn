@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://diohj4tqgqc7s"]
+[gd_scene load_steps=12 format=3 uid="uid://diohj4tqgqc7s"]
 
 [ext_resource type="Script" path="res://Scenes/GameController.gd" id="1_ja4hw"]
 [ext_resource type="PackedScene" uid="uid://dmhyo6tmrmtsh" path="res://Player/PlayerController.tscn" id="1_xlw7c"]
@@ -10,27 +10,25 @@
 [ext_resource type="PackedScene" uid="uid://dos2g6h404rdh" path="res://Scenes/ui_controller.tscn" id="7_epif2"]
 [ext_resource type="PackedScene" uid="uid://d1nu2tugkl7u8" path="res://Scenes/wall.tscn" id="8_q1nra"]
 [ext_resource type="Script" path="res://Scripts/NavController.gd" id="9_r7anm"]
-[ext_resource type="PackedScene" uid="uid://cngny766lomx0" path="res://Player/Traps/MeleeTrap.tscn" id="9_xun5q"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d0f8k"]
 vertices = PackedVector2Array(-260, -676, 252, -676, 252, -36, -260, -36)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-260, -676, 252, -676, 252, -36, -260, -36)])
 
-[node name="TestScene" type="Node2D" node_paths=PackedStringArray("player")]
+[node name="TestScene" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ja4hw")
 enemy_prefab = ExtResource("3_50qa3")
-player = NodePath("Player")
 enemy_spawn_distance = 200
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -1
 texture_repeat = 2
 texture = ExtResource("3_bacdg")
-offset = Vector2(0, -280)
+offset = Vector2(-4, -328)
 region_enabled = true
-region_rect = Rect2(-128, -240, 512, 960)
+region_rect = Rect2(0, 0, 1280, 1280)
 
 [node name="Player" parent="." instance=ExtResource("1_xlw7c")]
 position = Vector2(0, -300)
@@ -41,10 +39,9 @@ script = ExtResource("2_g67e5")
 player = NodePath("../Player")
 
 [node name="Core" parent="." instance=ExtResource("5_5uk77")]
-position = Vector2(-4, -388)
+position = Vector2(-4, -356)
 
 [node name="GridController" parent="." instance=ExtResource("6_fjncl")]
-GRID_SIZE_PIXELS = 16
 GRID_DIMENSIONS = Vector2i(64, 80)
 
 [node name="UI Controller" parent="." instance=ExtResource("7_epif2")]
@@ -68,35 +65,3 @@ y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_d0f8k")
 script = ExtResource("9_r7anm")
 grid_controller = NodePath("../GridController")
-
-[node name="MeleeTrap" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-y_sort_enabled = false
-position = Vector2(28, -324)
-
-[node name="MeleeTrap2" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-y_sort_enabled = false
-position = Vector2(60, -340)
-
-[node name="MeleeTrap4" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-y_sort_enabled = false
-position = Vector2(44, -340)
-
-[node name="MeleeTrap5" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-y_sort_enabled = false
-position = Vector2(44, -452)
-
-[node name="MeleeTrap6" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-y_sort_enabled = false
-position = Vector2(28, -452)
-
-[node name="MeleeTrap7" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-y_sort_enabled = false
-position = Vector2(-84, -404)
-
-[node name="MeleeTrap9" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-y_sort_enabled = false
-position = Vector2(-84, -388)
-
-[node name="MeleeTrap8" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-y_sort_enabled = false
-position = Vector2(12, -324)

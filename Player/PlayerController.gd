@@ -94,3 +94,9 @@ func _invincibility_started():
 func _on_stats_no_health():
 	emit_signal("died")
 	print("Died")
+
+func on_placement_started():
+	pass
+
+func on_placement_ended():
+	pass

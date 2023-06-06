@@ -61,8 +61,8 @@ func move_state(delta):
 	
 	if input_vector != Vector2.ZERO:
 		scratch_velocity = scratch_velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
-		animation_tree.set("parameters/Idle/blend_position", input_vector.x)
-		animation_tree.set("parameters/Attack/blend_position", input_vector.x)
+		animation_tree.set("parameters/Idle/blend_position", scratch_velocity.x)
+		animation_tree.set("parameters/Attack/blend_position", scratch_velocity.x)
 	else:
 		scratch_velocity = scratch_velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		

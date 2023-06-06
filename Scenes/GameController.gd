@@ -2,9 +2,11 @@ extends Node2D
 class_name GameController
 
 @onready var ui_controller: UIController = $"UI Controller"
+@onready var grid_controller: GridController = $GridController
+@onready var player: PlayerController = $Player
+@onready var nav_controller: NavController = $NavigationRegion2D
 
 @export var enemy_prefab: PackedScene
-@export var player: PlayerController
 @export var enemies_per_wave_level = 30
 @export var enemy_spawn_distance = 450
 @export var wave_spawn_time_seconds: float = 30.0
@@ -17,6 +19,9 @@ var wave_start_time: float
 var dead_enemies_count: int
 
 func _ready():
+	grid_controller.placement_started.connect(player.on_placement_started)
+	grid_controller.placement_ended.connect(player.on_placement_ended)
+	grid_controller.placed_trap.connect(func(trap: Trap): nav_controller.add_structure(trap, trap.nav_collision_polygon))
 	start_wave()
 
 func start_wave():

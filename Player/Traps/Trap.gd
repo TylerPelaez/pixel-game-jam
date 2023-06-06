@@ -3,7 +3,10 @@ class_name Trap
 
 @export var attack_capable: bool = true
 @export var attack_cooldown: float = 1.0
+
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
+@onready var nav_collision_polygon: CollisionPolygon2D = $NavCollider/CollisionPolygon2D
+
 
 var is_attacking := false
 

@@ -31,6 +31,7 @@ blend_point_0/node = SubResource("AnimationNodeAnimation_71duj")
 blend_point_0/pos = 1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_2f1v5")
 blend_point_1/pos = -1.0
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_406kr"]
 animation = &"IdleRight"
@@ -43,6 +44,7 @@ blend_point_0/node = SubResource("AnimationNodeAnimation_406kr")
 blend_point_0/pos = 1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_texs1")
 blend_point_1/pos = -1.0
+blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fv5lj"]
 advance_mode = 2

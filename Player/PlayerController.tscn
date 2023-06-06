@@ -94,6 +94,7 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_be5cc")
 blend_point_3/pos = Vector2(0, -1.1)
 min_space = Vector2(-1, -1.1)
 max_space = Vector2(1, 1.1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q85t1"]
 animation = &"IdleRight"
@@ -118,6 +119,7 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_c8p35")
 blend_point_3/pos = Vector2(0, -1.1)
 min_space = Vector2(-1, -1.1)
 max_space = Vector2(1, 1.1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d1vag"]
 animation = &"RunRight"
@@ -142,6 +144,7 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_v8p0q")
 blend_point_3/pos = Vector2(0, -1.1)
 min_space = Vector2(-1, -1.1)
 max_space = Vector2(1, 1.1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s4b5k"]
 
@@ -559,7 +562,8 @@ y_sort_enabled = true
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_utrqs")
-MAX_SPEED = 150
+ACCELERATION = 1000
+FRICTION = 1000
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_6bgjk")
@@ -601,7 +605,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_80s4j")
 parameters/Attack/blend_position = Vector2(0.098117, 0.0329342)
 parameters/Idle/blend_position = Vector2(0.098117, -0.00658679)
-parameters/Run/blend_position = Vector2(0.102081, 0.00658679)
+parameters/Run/blend_position = Vector2(0.0128913, 0.0197605)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"
