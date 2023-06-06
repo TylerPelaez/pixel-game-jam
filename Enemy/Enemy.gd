@@ -24,8 +24,8 @@ var scratch_velocity: Vector2 = Vector2.ZERO
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 
 # initialize as if it was being initialized in _ready
-#@onready var animationTree = $AnimationTree
-#@onready var animationState = animationTree.get("parameters/playback")
+@onready var animation_tree = $AnimationTree
+@onready var animation_state = animation_tree.get("parameters/playback")
 
 func _ready():
 	reset()
@@ -38,7 +38,7 @@ func reset():
 		return
 	target = cores[0]
 	
-#	animationTree.active = true
+	animation_tree.active = true
 	
 	scratch_velocity = Vector2.ZERO
 
@@ -56,8 +56,13 @@ func move_state(delta):
 	var next_path_pos = agent.get_next_path_position()
 	var input_vector = (next_path_pos - global_position).normalized()
 	
+	# TODO: Different Move/Idle animation?
+	animation_state.travel("Idle")
+	
 	if input_vector != Vector2.ZERO:
 		scratch_velocity = scratch_velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
+		animation_tree.set("parameters/Idle/blend_position", input_vector.x)
+		animation_tree.set("parameters/Attack/blend_position", input_vector.x)
 	else:
 		scratch_velocity = scratch_velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		

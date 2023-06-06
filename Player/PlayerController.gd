@@ -19,8 +19,8 @@ var scratch_velocity: Vector2 = Vector2.ZERO
 @onready var blink_animation_player: AnimationPlayer = $BlinkAnimationPlayer
 
 # initialize as if it was being initialized in _ready
-#@onready var animationTree = $AnimationTree
-#@onready var animationState = animationTree.get("parameters/playback")
+@onready var animation_tree = $AnimationTree
+@onready var animation_state = animation_tree.get("parameters/playback")
 
 func _ready():
 	reset()
@@ -28,7 +28,7 @@ func _ready():
 func reset():
 	state = State.MOVE
 	
-#	animationTree.active = true
+	animation_tree.active = true
 	
 	scratch_velocity = Vector2.ZERO
 
@@ -47,15 +47,14 @@ func move_state(delta):
 	input_vector = input_vector.normalized()
 	
 	if input_vector != Vector2.ZERO:
-#		animationTree.set("parameters/Idle/blend_position", input_vector)
-#		animationTree.set("parameters/Run/blend_position", input_vector)
-#		animationTree.set("parameters/Attack/blend_position", input_vector)
-#		animationTree.set("parameters/Roll/blend_position", input_vector)
-#		animationState.travel("Run")
+		animation_tree.set("parameters/Idle/blend_position", input_vector)
+		animation_tree.set("parameters/Run/blend_position", input_vector)
+		animation_tree.set("parameters/Attack/blend_position", input_vector)
+		animation_state.travel("Run")
 
 		scratch_velocity = scratch_velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
-#		animationState.travel("Idle")
+		animation_state.travel("Idle")
 		scratch_velocity = scratch_velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		
 	move()

@@ -1,33 +1,69 @@
-[gd_scene load_steps=10 format=3 uid="uid://clhjj6y2kg2ux"]
+[gd_scene load_steps=11 format=3 uid="uid://clhjj6y2kg2ux"]
 
 [ext_resource type="Script" path="res://Player/Core.gd" id="1_05bff"]
-[ext_resource type="Texture2D" uid="uid://cr0df0oy1wyrc" path="res://Textures/Test/White8.png" id="2_i11aw"]
+[ext_resource type="Texture2D" uid="uid://b3n25hx24s1x5" path="res://Textures/Environment/Pixel_Core_In_the_Ground-Sheet.png" id="2_4i60h"]
 [ext_resource type="PackedScene" uid="uid://cbibtl5k17ewk" path="res://Overlap/Hurtbox.tscn" id="2_lcxv0"]
 [ext_resource type="Script" path="res://Scripts/Stats/Stats.gd" id="4_ww6hr"]
-[ext_resource type="AnimationLibrary" uid="uid://dm5xt7fr45ifi" path="res://Animation/Blink.res" id="5_j1yul"]
 [ext_resource type="PackedScene" uid="uid://cvk3t6e3yov1" path="res://Overlap/Hitbox.tscn" id="6_mo1l7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrvun"]
-size = Vector2(8, 8)
+size = Vector2(96, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u77lf"]
-size = Vector2(8, 8)
+size = Vector2(96, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7h86i"]
-size = Vector2(8, 8)
+[sub_resource type="Animation" id="Animation_gkdpb"]
+resource_name = "Flash"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_tfyhc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_laxfy"]
+_data = {
+"Flash": SubResource("Animation_gkdpb"),
+"RESET": SubResource("Animation_tfyhc")
+}
 
 [node name="Core" type="Node2D" groups=["Core"]]
+y_sort_enabled = true
 script = ExtResource("1_05bff")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.486275, 1, 1, 1)
-texture = ExtResource("2_i11aw")
+texture = ExtResource("2_4i60h")
+offset = Vector2(3, 1)
+hframes = 4
 
 [node name="Hurtbox" parent="." instance=ExtResource("2_lcxv0")]
 collision_layer = 4
 collision_mask = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
+visible = false
 shape = SubResource("RectangleShape2D_lrvun")
 
 [node name="Stats" type="Node" parent="."]
@@ -38,14 +74,8 @@ max_health = 20
 collision_layer = 65
 collision_mask = 98
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_u77lf")
-
-[node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Blink/Stop"
-libraries = {
-"Blink": ExtResource("5_j1yul")
-}
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-47, -1, 0, -18, 47, -2, 0, 14)
 
 [node name="Hitbox" parent="." instance=ExtResource("6_mo1l7")]
 collision_layer = 128
@@ -53,7 +83,14 @@ collision_mask = 16
 damage = 999
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource("RectangleShape2D_7h86i")
+visible = false
+shape = SubResource("RectangleShape2D_u77lf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_laxfy")
+}
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]

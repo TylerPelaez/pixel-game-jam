@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://diohj4tqgqc7s"]
+[gd_scene load_steps=13 format=3 uid="uid://diohj4tqgqc7s"]
 
 [ext_resource type="Script" path="res://Scenes/GameController.gd" id="1_ja4hw"]
 [ext_resource type="PackedScene" uid="uid://dmhyo6tmrmtsh" path="res://Player/PlayerController.tscn" id="1_xlw7c"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="2_g67e5"]
 [ext_resource type="PackedScene" uid="uid://dc8c2m6m4pib0" path="res://Enemy/Enemy.tscn" id="3_50qa3"]
+[ext_resource type="Texture2D" uid="uid://cu8l1p3qgesde" path="res://Textures/Environment/Planet_Ground_Background.png" id="3_bacdg"]
 [ext_resource type="PackedScene" uid="uid://clhjj6y2kg2ux" path="res://Player/Core.tscn" id="5_5uk77"]
 [ext_resource type="PackedScene" uid="uid://bpc4qn3bix2nh" path="res://Scenes/GridController.tscn" id="6_fjncl"]
 [ext_resource type="PackedScene" uid="uid://dos2g6h404rdh" path="res://Scenes/ui_controller.tscn" id="7_epif2"]
@@ -11,30 +12,25 @@
 [ext_resource type="Script" path="res://Scripts/NavController.gd" id="9_r7anm"]
 [ext_resource type="PackedScene" uid="uid://cngny766lomx0" path="res://Player/Traps/MeleeTrap.tscn" id="9_xun5q"]
 
-[sub_resource type="Curve" id="Curve_hax16"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_lw88h"]
-width = 1920
-curve = SubResource("Curve_hax16")
-
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d0f8k"]
-vertices = PackedVector2Array(-256, -672, 256, -672, 256, -32, -256, -32)
+vertices = PackedVector2Array(-260, -676, 252, -676, 252, -36, -260, -36)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-256, -672, 256, -672, 256, -32, -256, -32)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-260, -676, 252, -676, 252, -36, -260, -36)])
 
 [node name="TestScene" type="Node2D" node_paths=PackedStringArray("player")]
+y_sort_enabled = true
 script = ExtResource("1_ja4hw")
 enemy_prefab = ExtResource("3_50qa3")
 player = NodePath("Player")
 enemy_spawn_distance = 200
 
 [node name="Background" type="Sprite2D" parent="."]
-modulate = Color(0.490196, 1, 0.709804, 1)
-position = Vector2(0, 178)
-scale = Vector2(1, 1080)
-texture = SubResource("CurveTexture_lw88h")
+z_index = -1
+texture_repeat = 2
+texture = ExtResource("3_bacdg")
+offset = Vector2(0, -280)
+region_enabled = true
+region_rect = Rect2(-128, -240, 512, 960)
 
 [node name="Player" parent="." instance=ExtResource("1_xlw7c")]
 position = Vector2(0, -300)
@@ -48,48 +44,59 @@ player = NodePath("../Player")
 position = Vector2(-4, -388)
 
 [node name="GridController" parent="." instance=ExtResource("6_fjncl")]
+GRID_SIZE_PIXELS = 16
 GRID_DIMENSIONS = Vector2i(64, 80)
 
 [node name="UI Controller" parent="." instance=ExtResource("7_epif2")]
 
 [node name="Wall" parent="." instance=ExtResource("8_q1nra")]
+position = Vector2(-4, 28)
 
 [node name="Wall3" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(0, -704)
+position = Vector2(-4, -676)
 
 [node name="Wall2" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(288, -352)
+position = Vector2(252, -356)
 rotation = 1.57079
 
 [node name="Wall4" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(-288, -352)
+position = Vector2(-324, -356)
 rotation = 1.57079
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." node_paths=PackedStringArray("grid_controller")]
+y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_d0f8k")
 script = ExtResource("9_r7anm")
 grid_controller = NodePath("../GridController")
 
 [node name="MeleeTrap" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-position = Vector2(-4, -380)
+y_sort_enabled = false
+position = Vector2(28, -324)
 
 [node name="MeleeTrap2" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-position = Vector2(4, -380)
+y_sort_enabled = false
+position = Vector2(60, -340)
 
 [node name="MeleeTrap4" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-position = Vector2(4, -396)
+y_sort_enabled = false
+position = Vector2(44, -340)
 
 [node name="MeleeTrap5" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-position = Vector2(-4, -396)
+y_sort_enabled = false
+position = Vector2(44, -452)
 
 [node name="MeleeTrap6" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-position = Vector2(-20, -396)
+y_sort_enabled = false
+position = Vector2(28, -452)
 
 [node name="MeleeTrap7" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-position = Vector2(-20, -388)
+y_sort_enabled = false
+position = Vector2(-84, -404)
 
 [node name="MeleeTrap9" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-position = Vector2(-20, -372)
+y_sort_enabled = false
+position = Vector2(-84, -388)
 
 [node name="MeleeTrap8" parent="NavigationRegion2D" instance=ExtResource("9_xun5q")]
-position = Vector2(-12, -372)
+y_sort_enabled = false
+position = Vector2(12, -324)

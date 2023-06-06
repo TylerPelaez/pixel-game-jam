@@ -4,13 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://cr0df0oy1wyrc" path="res://Textures/Test/White8.png" id="2_k0gc5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mfor1"]
-size = Vector2(6, 6)
+size = Vector2(16, 16)
 
 [node name="Trap" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_1mc55")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.811765, 0.482353, 1)
+scale = Vector2(2, 2)
 texture = ExtResource("2_k0gc5")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -28,4 +30,4 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavCollider"]
-polygon = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)

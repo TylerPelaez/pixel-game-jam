@@ -6,11 +6,14 @@
 size = Vector2(640, 64)
 
 [node name="Wall" type="StaticBody2D"]
+y_sort_enabled = true
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -32)
 shape = SubResource("RectangleShape2D_t6w6c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(10, 1)
 texture = ExtResource("1_84bma")
+offset = Vector2(0, -32)

@@ -3,7 +3,7 @@ class_name Core
 
 @onready var hurtbox: Hurtbox = $Hurtbox
 @onready var stats: Stats = $Stats
-@onready var blink_animation_player: AnimationPlayer = $BlinkAnimationPlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _on_stats_no_health():
 	print("Core Dead!")
@@ -20,7 +20,7 @@ func got_hit(damage):
 	hurtbox.create_hit_effect()
 
 func _on_Hurtbox_invincibility_ended():
-	blink_animation_player.play("Blink/Stop")
+	animation_player.play("RESET")
 
 func _invincibility_started():
-	blink_animation_player.play("Blink/Start")
+	animation_player.play("Flash")
