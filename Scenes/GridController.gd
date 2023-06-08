@@ -52,6 +52,8 @@ func start_placing(trap_placement_prefab: PackedScene):
 	
 	trap_placement_instance = trap_placement_prefab.instantiate()
 	get_tree().root.add_child.call_deferred(trap_placement_instance)
+	
+	placement_started.emit()
 
 func can_place(current_trap: TrapStandin, pos: Vector2):
 	if shape_cast.shape is RectangleShape2D:
@@ -88,3 +90,5 @@ func place_trap(current_trap: TrapStandin, pos: Vector2):
 	placed_trap.emit(new_trap)
 	trap_placement_instance.queue_free()
 	state = State.DEFAULT
+	placement_ended.emit()
+	

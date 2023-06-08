@@ -8,7 +8,9 @@ signal died
 @export var FRICTION := 500
 
 enum State {
-	MOVE
+	MOVE,
+	PLACEMENT,
+	ATTACK
 }
 
 var state: State = State.MOVE
@@ -21,6 +23,8 @@ var scratch_velocity: Vector2 = Vector2.ZERO
 # initialize as if it was being initialized in _ready
 @onready var animation_tree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
+
+var final_placement_animation_playing := false
 
 func _ready():
 	reset()
@@ -37,9 +41,27 @@ func reset():
 # Update
 func _physics_process(delta):
 	match state:
+		State.PLACEMENT:
+			placement_state(delta)
+		State.ATTACK:
+			attack_state(delta)
 		State.MOVE:
 			move_state(delta)
+
+func placement_state(delta):
+	scratch_velocity = scratch_velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
+	var mouse_direction_x = (get_global_mouse_position() - global_position).normalized().x
+	animation_tree.set("parameters/PlacementOngoing/blend_position", mouse_direction_x)
+	if !final_placement_animation_playing:
+		animation_tree.set("parameters/PlacementComplete/blend_position", mouse_direction_x)
+	
+	move()
+
+func attack_state(delta):
+	scratch_velocity = scratch_velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+	move()
+
 func move_state(delta):
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -58,6 +80,9 @@ func move_state(delta):
 		scratch_velocity = scratch_velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		
 	move()
+	
+	if Input.is_action_just_pressed("PlayerAttack"):
+		start_attack()
 
 func move():
 	set_velocity(scratch_velocity)
@@ -96,7 +121,26 @@ func _on_stats_no_health():
 	print("Died")
 
 func on_placement_started():
-	pass
-
+	state = State.PLACEMENT
+	final_placement_animation_playing = false
+	animation_state.travel("PlacementOngoing")
+	
 func on_placement_ended():
-	pass
+	final_placement_animation_playing = true
+	animation_state.travel("PlacementComplete")
+
+func on_placement_animation_complete():
+	state = State.MOVE
+
+func start_attack():
+	state = State.ATTACK
+	animation_state.travel("KnockBack")
+
+func on_attack_animation_complete():
+	state = State.MOVE
+	animation_state.travel("Idle")
+
+
+func _on_knockback_area_entered(area: Node2D):
+	if area.get_parent() is Enemy:
+		area.get_parent().knockback(stats.knockback_strength, global_position)

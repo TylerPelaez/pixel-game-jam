@@ -4,6 +4,8 @@ class_name Stats
 @export var max_health: int = 1: set = set_max_health
 var health = max_health: set = set_health
 
+@export var knockback_strength: float = 1.0
+
 @export var hit_invincibility_time_seconds: float = 0.6
 
 signal no_health

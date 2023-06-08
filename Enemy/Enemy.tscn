@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dc8c2m6m4pib0"]
+[gd_scene load_steps=34 format=3 uid="uid://dc8c2m6m4pib0"]
 
 [ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_ffyyh"]
 [ext_resource type="Texture2D" uid="uid://djh3avk8oa4ff" path="res://Textures/Enemy/EnemyCombined.png" id="2_wy6hc"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dra8whow2jomb" path="res://Overlap/SoftCollision.tscn" id="6_o3krd"]
 [ext_resource type="AnimationLibrary" uid="uid://dm5xt7fr45ifi" path="res://Animation/Blink.res" id="6_t53d6"]
 [ext_resource type="Texture2D" uid="uid://bb7tg0fl7hai" path="res://Textures/Enemy/AttackHands.png" id="7_fento"]
+[ext_resource type="PackedScene" uid="uid://bx56f6muq82tr" path="res://UI/HealthBar.tscn" id="9_jep8a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lwlm7"]
 radius = 4.0
@@ -581,8 +582,17 @@ damage = 2
 shape = SubResource("CircleShape2D_olowl")
 disabled = true
 
+[node name="HealthBar" parent="." instance=ExtResource("9_jep8a")]
+offset_left = -10.0
+offset_top = -34.0
+offset_right = -10.0
+offset_bottom = -34.0
+size_flags_horizontal = 4
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
+[connection signal="health_changed" from="Stats" to="." method="_on_stats_health_changed" flags=3]
+[connection signal="max_health_changed" from="Stats" to="." method="_on_stats_max_health_changed" flags=3]
 [connection signal="no_health" from="Stats" to="." method="_on_stats_no_health"]
 
 [editable path="Hurtbox"]

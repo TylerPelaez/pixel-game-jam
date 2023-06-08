@@ -36,6 +36,8 @@ var scratch_velocity: Vector2 = Vector2.ZERO
 @onready var attack_raycast: RayCast2D = $RayCast2D
 @onready var hands: Node2D = $Hands
 
+@onready var health_bar: HealthBar = $HealthBar
+
 var attacking_core: bool = false
 
 func _ready():
@@ -131,6 +133,13 @@ func got_hit(damage):
 	_invincibility_started()
 	hurtbox.create_hit_effect()
 
+func knockback(strength: float, source_pos: Vector2):
+	var direction = (global_position - source_pos).normalized()
+	var distance = global_position.distance_to(source_pos)
+	var offset = (direction * strength)
+	scratch_velocity += offset
+	velocity += offset
+
 func _on_Hurtbox_invincibility_ended():
 	blink_animation_player.play("Blink/Stop")
 
@@ -143,3 +152,10 @@ func _on_stats_no_health():
 func die():
 	died.emit()
 	queue_free()
+
+func _on_stats_health_changed(value):
+	health_bar.update(stats.health, stats.max_health)
+
+func _on_stats_max_health_changed(value):
+	health_bar.update(stats.health, stats.max_health)
+
