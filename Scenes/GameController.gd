@@ -5,6 +5,7 @@ class_name GameController
 @onready var grid_controller: GridController = $GridController
 @onready var player: PlayerController = $Player
 @onready var nav_controller: NavController = $NavigationRegion2D
+@onready var spawners: Node2D = $Spawners
 
 @export var enemy_prefab: PackedScene
 @export var enemies_per_wave_level = 30
@@ -22,7 +23,6 @@ func _ready():
 	grid_controller.placement_started.connect(player.on_placement_started)
 	grid_controller.placement_ended.connect(player.on_placement_ended)
 	grid_controller.placed_trap.connect(func(trap: Trap): nav_controller.add_structure(trap, trap.nav_collision_polygon))
-	start_wave()
 
 func start_wave():
 	spawned_enemies_count = 0
@@ -38,9 +38,9 @@ func end_wave():
 
 func _process(delta):
 	if !wave_active:
-		return
-	
-	if spawned_enemies_count < wave_enemy_spawn_limit:
+		if Input.is_action_just_pressed("Start Wave"):
+			start_wave()
+	elif spawned_enemies_count < wave_enemy_spawn_limit:
 		var now = Time.get_ticks_msec()
 		var wave_time_progress = float(now - wave_start_time) / float(wave_spawn_time_seconds * 1000.0)
 		var wave_spawn_progress = float(spawned_enemies_count) / float(wave_enemy_spawn_limit)
@@ -49,9 +49,10 @@ func _process(delta):
 	
 func spawn_enemy():
 	var player_pos = player.global_position
+	var spawn_pos = spawners.get_child(randi_range(0, spawners.get_child_count() - 1)).global_position
 	
-	var theta = randf() * TAU # angle to place enemy at
-	var spawn_pos = player_pos + enemy_spawn_distance * Vector2(cos(theta), sin(theta))
+#	var theta = randf() * TAU # angle to place enemy at
+#	var spawn_pos = player_pos + enemy_spawn_distance * Vector2(cos(theta), sin(theta))
 	var enemy = enemy_prefab.instantiate()
 	add_child(enemy)
 	enemy.global_position = spawn_pos

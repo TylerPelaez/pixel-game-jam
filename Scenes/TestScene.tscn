@@ -12,9 +12,9 @@
 [ext_resource type="Script" path="res://Scripts/NavController.gd" id="9_r7anm"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d0f8k"]
-vertices = PackedVector2Array(-260, -676, 252, -676, 252, -36, -260, -36)
+vertices = PackedVector2Array(-308, -540, 300, -540, 300, -204, -308, -204)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-260, -676, 252, -676, 252, -36, -260, -36)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-308, -540, 300, -540, 300, -204, -308, -204)])
 
 [node name="TestScene" type="Node2D"]
 y_sort_enabled = true
@@ -34,6 +34,7 @@ region_rect = Rect2(0, 0, 1280, 1280)
 position = Vector2(0, -300)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(-4, -372)
 position_smoothing_speed = 10.0
 script = ExtResource("2_g67e5")
 player = NodePath("../Player")
@@ -47,21 +48,194 @@ GRID_DIMENSIONS = Vector2i(64, 80)
 [node name="UI Controller" parent="." instance=ExtResource("7_epif2")]
 
 [node name="Wall" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(-4, 28)
+position = Vector2(-4, -140)
 
 [node name="Wall3" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(-4, -676)
+position = Vector2(-4, -540)
+scale = Vector2(1.2, 1)
 
 [node name="Wall2" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(252, -356)
+position = Vector2(300, -356)
 rotation = 1.57079
+scale = Vector2(0.7, 1)
 
 [node name="Wall4" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(-324, -356)
+position = Vector2(-372, -356)
 rotation = 1.57079
+scale = Vector2(0.6, 1)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." node_paths=PackedStringArray("grid_controller")]
 y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_d0f8k")
 script = ExtResource("9_r7anm")
 grid_controller = NodePath("../GridController")
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Spawners"]
+position = Vector2(284, -228)
+
+[node name="Marker2D2" type="Marker2D" parent="Spawners"]
+position = Vector2(284, -260)
+
+[node name="Marker2D3" type="Marker2D" parent="Spawners"]
+position = Vector2(284, -292)
+
+[node name="Marker2D4" type="Marker2D" parent="Spawners"]
+position = Vector2(284, -324)
+
+[node name="Marker2D5" type="Marker2D" parent="Spawners"]
+position = Vector2(284, -356)
+
+[node name="Marker2D6" type="Marker2D" parent="Spawners"]
+position = Vector2(284, -388)
+
+[node name="Marker2D7" type="Marker2D" parent="Spawners"]
+position = Vector2(284, -452)
+
+[node name="Marker2D9" type="Marker2D" parent="Spawners"]
+position = Vector2(284, -484)
+
+[node name="Marker2D10" type="Marker2D" parent="Spawners"]
+position = Vector2(284, -516)
+
+[node name="Marker2D8" type="Marker2D" parent="Spawners"]
+position = Vector2(284, -420)
+
+[node name="Marker2D11" type="Marker2D" parent="Spawners"]
+position = Vector2(-292, -228)
+
+[node name="Marker2D12" type="Marker2D" parent="Spawners"]
+position = Vector2(-292, -260)
+
+[node name="Marker2D13" type="Marker2D" parent="Spawners"]
+position = Vector2(-292, -292)
+
+[node name="Marker2D14" type="Marker2D" parent="Spawners"]
+position = Vector2(-292, -324)
+
+[node name="Marker2D15" type="Marker2D" parent="Spawners"]
+position = Vector2(-292, -356)
+
+[node name="Marker2D16" type="Marker2D" parent="Spawners"]
+position = Vector2(-292, -388)
+
+[node name="Marker2D17" type="Marker2D" parent="Spawners"]
+position = Vector2(-292, -452)
+
+[node name="Marker2D18" type="Marker2D" parent="Spawners"]
+position = Vector2(-292, -484)
+
+[node name="Marker2D19" type="Marker2D" parent="Spawners"]
+position = Vector2(-292, -516)
+
+[node name="Marker2D21" type="Marker2D" parent="Spawners"]
+position = Vector2(-276, -532)
+
+[node name="Marker2D22" type="Marker2D" parent="Spawners"]
+position = Vector2(-244, -532)
+
+[node name="Marker2D23" type="Marker2D" parent="Spawners"]
+position = Vector2(-212, -532)
+
+[node name="Marker2D24" type="Marker2D" parent="Spawners"]
+position = Vector2(-180, -532)
+
+[node name="Marker2D25" type="Marker2D" parent="Spawners"]
+position = Vector2(-148, -532)
+
+[node name="Marker2D26" type="Marker2D" parent="Spawners"]
+position = Vector2(-116, -532)
+
+[node name="Marker2D27" type="Marker2D" parent="Spawners"]
+position = Vector2(-84, -532)
+
+[node name="Marker2D28" type="Marker2D" parent="Spawners"]
+position = Vector2(-52, -532)
+
+[node name="Marker2D29" type="Marker2D" parent="Spawners"]
+position = Vector2(-20, -532)
+
+[node name="Marker2D30" type="Marker2D" parent="Spawners"]
+position = Vector2(12, -532)
+
+[node name="Marker2D31" type="Marker2D" parent="Spawners"]
+position = Vector2(44, -532)
+
+[node name="Marker2D32" type="Marker2D" parent="Spawners"]
+position = Vector2(76, -532)
+
+[node name="Marker2D33" type="Marker2D" parent="Spawners"]
+position = Vector2(108, -532)
+
+[node name="Marker2D34" type="Marker2D" parent="Spawners"]
+position = Vector2(140, -532)
+
+[node name="Marker2D35" type="Marker2D" parent="Spawners"]
+position = Vector2(172, -532)
+
+[node name="Marker2D36" type="Marker2D" parent="Spawners"]
+position = Vector2(204, -532)
+
+[node name="Marker2D37" type="Marker2D" parent="Spawners"]
+position = Vector2(236, -532)
+
+[node name="Marker2D38" type="Marker2D" parent="Spawners"]
+position = Vector2(268, -532)
+
+[node name="Marker2D39" type="Marker2D" parent="Spawners"]
+position = Vector2(-276, -216)
+
+[node name="Marker2D40" type="Marker2D" parent="Spawners"]
+position = Vector2(-244, -216)
+
+[node name="Marker2D41" type="Marker2D" parent="Spawners"]
+position = Vector2(-212, -216)
+
+[node name="Marker2D42" type="Marker2D" parent="Spawners"]
+position = Vector2(-180, -216)
+
+[node name="Marker2D43" type="Marker2D" parent="Spawners"]
+position = Vector2(-148, -216)
+
+[node name="Marker2D44" type="Marker2D" parent="Spawners"]
+position = Vector2(-116, -216)
+
+[node name="Marker2D45" type="Marker2D" parent="Spawners"]
+position = Vector2(-84, -216)
+
+[node name="Marker2D46" type="Marker2D" parent="Spawners"]
+position = Vector2(-52, -216)
+
+[node name="Marker2D47" type="Marker2D" parent="Spawners"]
+position = Vector2(-20, -216)
+
+[node name="Marker2D48" type="Marker2D" parent="Spawners"]
+position = Vector2(12, -216)
+
+[node name="Marker2D49" type="Marker2D" parent="Spawners"]
+position = Vector2(44, -216)
+
+[node name="Marker2D50" type="Marker2D" parent="Spawners"]
+position = Vector2(76, -216)
+
+[node name="Marker2D51" type="Marker2D" parent="Spawners"]
+position = Vector2(108, -216)
+
+[node name="Marker2D52" type="Marker2D" parent="Spawners"]
+position = Vector2(140, -216)
+
+[node name="Marker2D53" type="Marker2D" parent="Spawners"]
+position = Vector2(172, -216)
+
+[node name="Marker2D54" type="Marker2D" parent="Spawners"]
+position = Vector2(204, -216)
+
+[node name="Marker2D55" type="Marker2D" parent="Spawners"]
+position = Vector2(236, -216)
+
+[node name="Marker2D56" type="Marker2D" parent="Spawners"]
+position = Vector2(268, -216)
+
+[node name="Marker2D20" type="Marker2D" parent="Spawners"]
+position = Vector2(-292, -420)

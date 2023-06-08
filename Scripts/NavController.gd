@@ -11,6 +11,14 @@ var outline_count = 0
 var outlines_to_grids = {}
 
 func _ready():
+	visible = true
+	reset()
+
+func reset():
+	outlines = {}
+	outline_count = 0
+	outlines_to_grids = {}
+	grid_to_outline = []
 	for i in grid_controller.GRID_DIMENSIONS.x:
 		var col = []
 		for j in grid_controller.GRID_DIMENSIONS.y:
@@ -18,7 +26,6 @@ func _ready():
 		grid_to_outline.append(col)
 	parse_2d_collisionshapes(self)
 	rebuild_polygon_from_outlines()
-
 
 func rebuild_polygon_from_outlines():
 	var new_navigation_polygon = original_navigation_polygon.duplicate()
@@ -65,10 +72,6 @@ func merge(current_outline_key: int, adjacent_outline_key: int):
 	var current_outline = outlines[current_outline_key]
 	var adjacent_outline = outlines[adjacent_outline_key]
 	var merge_result = Geometry2D.merge_polygons(adjacent_outline, current_outline)
-	if merge_result.size() != 1:
-		push_error("Merge Result != 1!!")
-		return
-	
 	outlines[current_outline_key] = merge_result[0]
 	
 	for grid_pos in outlines_to_grids[adjacent_outline_key]:
@@ -95,14 +98,20 @@ func _add_structure(collider: CollisionPolygon2D):
 	outline_count += 1
 	
 	
-func add_structure(node: Node2D, collider: CollisionPolygon2D):
+func add_structure(node: Trap, collider: CollisionPolygon2D):
+	node.get_parent().remove_child(node)
+	add_child(node)
 	var grid_pos = grid_controller.world_pos_to_grid_coords(collider.global_position)
 	if grid_to_outline[grid_pos.x][grid_pos.y] != -1:
 		push_error("Attempting to place structure on existing structure!")
 		return
+	
+	node.on_death.connect(destroy_structure, Object.ConnectFlags.CONNECT_DEFERRED)
 	
 	# Add the outline, then we're just gonna rebuild our whole thing
 	_add_structure(collider)
 	# If this becomes very slow, then do this smarter. For now though, sue me I'm gonna rebuild it all!
 	rebuild_polygon_from_outlines()
 
+func destroy_structure(node: Trap):
+	reset() # Too hard to figure out rn

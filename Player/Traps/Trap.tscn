@@ -1,9 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwr11fohp87hh"]
+[gd_scene load_steps=8 format=3 uid="uid://bwr11fohp87hh"]
 
 [ext_resource type="Script" path="res://Player/Traps/Trap.gd" id="1_1mc55"]
 [ext_resource type="Texture2D" uid="uid://cr0df0oy1wyrc" path="res://Textures/Test/White8.png" id="2_k0gc5"]
+[ext_resource type="Script" path="res://Scripts/Stats/Stats.gd" id="3_h0gjx"]
+[ext_resource type="PackedScene" uid="uid://cbibtl5k17ewk" path="res://Overlap/Hurtbox.tscn" id="4_csj2m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mfor1"]
+size = Vector2(16, 16)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_x31p8"]
+vertices = PackedVector2Array(-7, -7, 7, -7, 7, 7, -7, 7)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-7, -7, 7, -7, 7, 7, -7, 7)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7s3l"]
 size = Vector2(16, 16)
 
 [node name="Trap" type="Node2D"]
@@ -16,7 +26,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_k0gc5")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 65
+collision_layer = 321
 collision_mask = 98
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="StaticBody2D"]
@@ -32,3 +42,25 @@ collision_mask = 0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavCollider"]
 visible = false
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_x31p8")
+navigation_layers = 2
+travel_cost = 2.0
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("3_h0gjx")
+hit_invincibility_time_seconds = 0.0
+
+[node name="Hurtbox" parent="." instance=ExtResource("4_csj2m")]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("RectangleShape2D_h7s3l")
+
+[connection signal="no_health" from="Stats" to="." method="_on_stats_no_health"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="Hurtbox"]

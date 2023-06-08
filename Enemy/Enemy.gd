@@ -9,17 +9,23 @@ signal died
 @export var PUSH_STRENGTH := 2000
 
 enum State {
-	MOVE
+	MOVE,
+	SPAWN,
+	ATTACK
 }
 
 var target: Node2D
 var state: State = State.MOVE
 var scratch_velocity: Vector2 = Vector2.ZERO
 
+@export var attack_check_distance = 24
+
 @onready var stats: Stats = $Stats
 @onready var hurtbox = $Hurtbox
 @onready var blink_animation_player = $BlinkAnimationPlayer
 @onready var soft_collision = $SoftCollision
+#@onready var hitbox = $Hands/Hitbox
+#@onready var hitbox_collider = $Hands/Hitbox/CollisionShape2D
 
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 
@@ -27,11 +33,16 @@ var scratch_velocity: Vector2 = Vector2.ZERO
 @onready var animation_tree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
 
+@onready var attack_raycast: RayCast2D = $RayCast2D
+@onready var hands: Node2D = $Hands
+
+var attacking_core: bool = false
+
 func _ready():
 	reset()
 
 func reset():
-	state = State.MOVE
+	state = State.SPAWN
 	var cores = get_tree().get_nodes_in_group(&"Core")
 	if cores.size() != 1:
 		push_error("Found Non-1 number of cores!")
@@ -51,9 +62,24 @@ func _physics_process(delta):
 	match state:
 		State.MOVE:
 			move_state(delta)
-	
+		State.ATTACK:
+			attack_state(delta)
+
+func _on_spawn_finished():
+	state = State.MOVE
+
 func move_state(delta):
 	var next_path_pos = agent.get_next_path_position()
+	if global_position.distance_to(next_path_pos) < attack_check_distance:
+		var target_pos = next_path_pos - global_position
+		attack_raycast.target_position = target_pos.normalized() * (target_pos.length() + 1)
+		attack_raycast.force_raycast_update()
+		if attack_raycast.is_colliding():
+			var layer = attack_raycast.get_collider().collision_layer
+			var is_core = (layer & 0b10_00000000) > 0; # Core layer is # 10
+			start_attack(attack_raycast.get_collider().global_position, is_core)
+			return
+	
 	var input_vector = (next_path_pos - global_position).normalized()
 	
 	# TODO: Different Move/Idle animation?
@@ -70,6 +96,25 @@ func move_state(delta):
 		scratch_velocity += soft_collision.get_push_vector() * delta * PUSH_STRENGTH
 	
 	move()
+
+func start_attack(attack_target_pos: Vector2, is_core_attack: bool):
+	state = State.ATTACK
+	hands.global_position = attack_target_pos
+	animation_tree.set("parameters/Attack/blend_position", (agent.get_next_path_position() - global_position).normalized().x)
+	animation_state.travel("Attack")
+	attacking_core = is_core_attack
+
+	
+func attack_state(delta):
+	scratch_velocity = scratch_velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+	move()
+
+func _on_attack_complete():
+	if attacking_core:
+		die()
+		return
+	state = State.MOVE
+	animation_state.travel("Idle")
 
 func move():
 	set_velocity(scratch_velocity)
@@ -93,5 +138,8 @@ func _invincibility_started():
 	blink_animation_player.play("Blink/Start")
 
 func _on_stats_no_health():
+	die()
+
+func die():
 	died.emit()
 	queue_free()

@@ -17,10 +17,10 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=256
-window/size/viewport_height=240
-window/size/window_width_override=1024
-window/size/window_height_override=960
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 
 [input]
@@ -63,6 +63,11 @@ ui_down={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":50,"key_label":0,"unicode":50,"echo":false,"script":null)
 ]
 }
+"Start Wave"={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -76,9 +81,12 @@ ui_down={
 2d_physics/layer_6="Enemy"
 2d_physics/layer_7="SoftCollision"
 2d_physics/layer_8="PlayerHitbox"
+2d_physics/layer_9="Trap"
+2d_physics/layer_10="Core"
 
 [navigation]
 
+2d/default_edge_connection_margin=3
 3d/layer_2=""
 
 [rendering]

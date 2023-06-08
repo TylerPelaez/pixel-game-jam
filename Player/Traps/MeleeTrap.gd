@@ -1,5 +1,6 @@
 extends Trap
 
+
 @onready var shape_cast: ShapeCast2D = $ShapeCast2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
