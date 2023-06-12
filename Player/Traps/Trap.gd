@@ -3,13 +3,13 @@ class_name Trap
 
 signal on_death(trap: Node2D)
 
+@export var id: TrapData.TrapId
 @export var attack_capable: bool = true
 @export var attack_cooldown: float = 1.0
 
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 @onready var nav_collision_polygon: CollisionPolygon2D = $NavCollider/CollisionPolygon2D
 @onready var stats: Stats = $Stats
-
 
 
 var is_attacking := false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://diohj4tqgqc7s"]
+[gd_scene load_steps=24 format=3 uid="uid://diohj4tqgqc7s"]
 
 [ext_resource type="Script" path="res://Scenes/GameController.gd" id="1_ja4hw"]
 [ext_resource type="PackedScene" uid="uid://dmhyo6tmrmtsh" path="res://Player/PlayerController.tscn" id="1_xlw7c"]
@@ -10,23 +10,381 @@
 [ext_resource type="PackedScene" uid="uid://dos2g6h404rdh" path="res://Scenes/ui_controller.tscn" id="7_epif2"]
 [ext_resource type="PackedScene" uid="uid://d1nu2tugkl7u8" path="res://Scenes/wall.tscn" id="8_q1nra"]
 [ext_resource type="Script" path="res://Scripts/NavController.gd" id="9_r7anm"]
+[ext_resource type="PackedScene" uid="uid://c206v4c4ft2mf" path="res://Scenes/Inventory.tscn" id="11_v0peg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d0f8k"]
-vertices = PackedVector2Array(-308, -540, 300, -540, 300, -204, -308, -204)
+vertices = PackedVector2Array(-304, -544, 304, -544, 304, -208, -304, -208)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-308, -540, 300, -540, 300, -204, -308, -204)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-304, -544, 304, -544, 304, -208, -304, -208)])
+
+[sub_resource type="Animation" id="Animation_85tdi"]
+resource_name = "BlinkDown"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.662745), Color(1, 0, 0, 0), Color(1, 0, 0, 0.662745)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 336)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, 608)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_gji1m"]
+resource_name = "BlinkLeft"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.662745), Color(1, 0, 0, 0), Color(1, 0, 0, 0.662745)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, 336)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_7v5lm"]
+resource_name = "BlinkRight"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.662745), Color(1, 0, 0, 0), Color(1, 0, 0, 0.662745)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(576, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, 336)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_mljxb"]
+resource_name = "BlinkUp"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.662745), Color(1, 0, 0, 0), Color(1, 0, 0, 0.662745)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 32)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, 608)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_vcqso"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.662745)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, 336)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_euv70"]
+_data = {
+"BlinkDown": SubResource("Animation_85tdi"),
+"BlinkLeft": SubResource("Animation_gji1m"),
+"BlinkRight": SubResource("Animation_7v5lm"),
+"BlinkUp": SubResource("Animation_mljxb"),
+"RESET": SubResource("Animation_vcqso")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pt0ae"]
+animation = &"BlinkDown"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3pthm"]
+animation = &"BlinkUp"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_486eo"]
+animation = &"BlinkRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7xxue"]
+animation = &"BlinkLeft"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_mgc3k"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_pt0ae")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_3pthm")
+blend_point_1/pos = Vector2(0, -1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_486eo")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_7xxue")
+blend_point_3/pos = Vector2(-1, 0)
+blend_mode = 1
 
 [node name="TestScene" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ja4hw")
 enemy_prefab = ExtResource("3_50qa3")
+enemies_per_wave_level = 10
 enemy_spawn_distance = 200
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -1
 texture_repeat = 2
+position = Vector2(0, -16)
 texture = ExtResource("3_bacdg")
-offset = Vector2(-4, -328)
+offset = Vector2(0, -324)
 region_enabled = true
 region_rect = Rect2(0, 0, 1280, 1280)
 
@@ -34,33 +392,34 @@ region_rect = Rect2(0, 0, 1280, 1280)
 position = Vector2(0, -300)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
-position = Vector2(-4, -372)
+position = Vector2(0, -376)
 position_smoothing_speed = 10.0
 script = ExtResource("2_g67e5")
 player = NodePath("../Player")
 
 [node name="Core" parent="." instance=ExtResource("5_5uk77")]
-position = Vector2(-4, -356)
+position = Vector2(0, -368)
 
-[node name="GridController" parent="." instance=ExtResource("6_fjncl")]
+[node name="GridController" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("6_fjncl")]
 GRID_DIMENSIONS = Vector2i(64, 80)
+inventory = NodePath("../Inventory")
 
 [node name="UI Controller" parent="." instance=ExtResource("7_epif2")]
 
 [node name="Wall" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(-4, -140)
+position = Vector2(-4, -144)
 
 [node name="Wall3" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(-4, -540)
+position = Vector2(-4, -544)
 scale = Vector2(1.2, 1)
 
 [node name="Wall2" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(300, -356)
+position = Vector2(304, -352)
 rotation = 1.57079
 scale = Vector2(0.7, 1)
 
 [node name="Wall4" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(-372, -356)
+position = Vector2(-368, -352)
 rotation = 1.57079
 scale = Vector2(0.6, 1)
 
@@ -71,171 +430,205 @@ script = ExtResource("9_r7anm")
 grid_controller = NodePath("../GridController")
 
 [node name="Spawners" type="Node2D" parent="."]
+position = Vector2(0, -384)
 
-[node name="Marker2D" type="Marker2D" parent="Spawners"]
-position = Vector2(284, -228)
+[node name="Left" type="Node2D" parent="Spawners"]
+position = Vector2(-288, 16)
 
-[node name="Marker2D2" type="Marker2D" parent="Spawners"]
-position = Vector2(284, -260)
+[node name="Marker2D12" type="Marker2D" parent="Spawners/Left"]
+position = Vector2(0, 112)
 
-[node name="Marker2D3" type="Marker2D" parent="Spawners"]
-position = Vector2(284, -292)
+[node name="Marker2D13" type="Marker2D" parent="Spawners/Left"]
+position = Vector2(0, 80)
 
-[node name="Marker2D4" type="Marker2D" parent="Spawners"]
-position = Vector2(284, -324)
+[node name="Marker2D14" type="Marker2D" parent="Spawners/Left"]
+position = Vector2(0, 48)
 
-[node name="Marker2D5" type="Marker2D" parent="Spawners"]
-position = Vector2(284, -356)
+[node name="Marker2D15" type="Marker2D" parent="Spawners/Left"]
+position = Vector2(0, 16)
 
-[node name="Marker2D6" type="Marker2D" parent="Spawners"]
-position = Vector2(284, -388)
+[node name="Marker2D16" type="Marker2D" parent="Spawners/Left"]
+position = Vector2(0, -16)
 
-[node name="Marker2D7" type="Marker2D" parent="Spawners"]
-position = Vector2(284, -452)
+[node name="Marker2D17" type="Marker2D" parent="Spawners/Left"]
+position = Vector2(0, -80)
 
-[node name="Marker2D9" type="Marker2D" parent="Spawners"]
-position = Vector2(284, -484)
+[node name="Marker2D18" type="Marker2D" parent="Spawners/Left"]
+position = Vector2(0, -112)
 
-[node name="Marker2D10" type="Marker2D" parent="Spawners"]
-position = Vector2(284, -516)
+[node name="Marker2D19" type="Marker2D" parent="Spawners/Left"]
+position = Vector2(0, -144)
 
-[node name="Marker2D8" type="Marker2D" parent="Spawners"]
-position = Vector2(284, -420)
+[node name="Marker2D20" type="Marker2D" parent="Spawners/Left"]
+position = Vector2(0, -48)
 
-[node name="Marker2D11" type="Marker2D" parent="Spawners"]
-position = Vector2(-292, -228)
+[node name="Up" type="Node2D" parent="Spawners"]
+position = Vector2(0, -144)
 
-[node name="Marker2D12" type="Marker2D" parent="Spawners"]
-position = Vector2(-292, -260)
+[node name="Marker2D21" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(-272, 0)
 
-[node name="Marker2D13" type="Marker2D" parent="Spawners"]
-position = Vector2(-292, -292)
+[node name="Marker2D22" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(-240, 0)
 
-[node name="Marker2D14" type="Marker2D" parent="Spawners"]
-position = Vector2(-292, -324)
+[node name="Marker2D23" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(-208, 0)
 
-[node name="Marker2D15" type="Marker2D" parent="Spawners"]
-position = Vector2(-292, -356)
+[node name="Marker2D24" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(-176, 0)
 
-[node name="Marker2D16" type="Marker2D" parent="Spawners"]
-position = Vector2(-292, -388)
+[node name="Marker2D25" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(-144, 0)
 
-[node name="Marker2D17" type="Marker2D" parent="Spawners"]
-position = Vector2(-292, -452)
+[node name="Marker2D26" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(-112, 0)
 
-[node name="Marker2D18" type="Marker2D" parent="Spawners"]
-position = Vector2(-292, -484)
+[node name="Marker2D27" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(-80, 0)
 
-[node name="Marker2D19" type="Marker2D" parent="Spawners"]
-position = Vector2(-292, -516)
+[node name="Marker2D28" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(-48, 0)
 
-[node name="Marker2D21" type="Marker2D" parent="Spawners"]
-position = Vector2(-276, -532)
+[node name="Marker2D29" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(-16, 0)
 
-[node name="Marker2D22" type="Marker2D" parent="Spawners"]
-position = Vector2(-244, -532)
+[node name="Marker2D30" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(16, 0)
 
-[node name="Marker2D23" type="Marker2D" parent="Spawners"]
-position = Vector2(-212, -532)
+[node name="Marker2D31" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(48, 0)
 
-[node name="Marker2D24" type="Marker2D" parent="Spawners"]
-position = Vector2(-180, -532)
+[node name="Marker2D32" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(80, 0)
 
-[node name="Marker2D25" type="Marker2D" parent="Spawners"]
-position = Vector2(-148, -532)
+[node name="Marker2D33" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(112, 0)
 
-[node name="Marker2D26" type="Marker2D" parent="Spawners"]
-position = Vector2(-116, -532)
+[node name="Marker2D34" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(144, 0)
 
-[node name="Marker2D27" type="Marker2D" parent="Spawners"]
-position = Vector2(-84, -532)
+[node name="Marker2D35" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(176, 0)
 
-[node name="Marker2D28" type="Marker2D" parent="Spawners"]
-position = Vector2(-52, -532)
+[node name="Marker2D36" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(208, 0)
 
-[node name="Marker2D29" type="Marker2D" parent="Spawners"]
-position = Vector2(-20, -532)
+[node name="Marker2D37" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(240, 0)
 
-[node name="Marker2D30" type="Marker2D" parent="Spawners"]
-position = Vector2(12, -532)
+[node name="Marker2D38" type="Marker2D" parent="Spawners/Up"]
+position = Vector2(272, 0)
 
-[node name="Marker2D31" type="Marker2D" parent="Spawners"]
-position = Vector2(44, -532)
+[node name="Right" type="Node2D" parent="Spawners"]
+position = Vector2(288, 0)
 
-[node name="Marker2D32" type="Marker2D" parent="Spawners"]
-position = Vector2(76, -532)
+[node name="Marker2D2" type="Marker2D" parent="Spawners/Right"]
+position = Vector2(0, 128)
 
-[node name="Marker2D33" type="Marker2D" parent="Spawners"]
-position = Vector2(108, -532)
+[node name="Marker2D3" type="Marker2D" parent="Spawners/Right"]
+position = Vector2(0, 96)
 
-[node name="Marker2D34" type="Marker2D" parent="Spawners"]
-position = Vector2(140, -532)
+[node name="Marker2D4" type="Marker2D" parent="Spawners/Right"]
+position = Vector2(0, 64)
 
-[node name="Marker2D35" type="Marker2D" parent="Spawners"]
-position = Vector2(172, -532)
+[node name="Marker2D5" type="Marker2D" parent="Spawners/Right"]
+position = Vector2(0, 32)
 
-[node name="Marker2D36" type="Marker2D" parent="Spawners"]
-position = Vector2(204, -532)
+[node name="Marker2D6" type="Marker2D" parent="Spawners/Right"]
 
-[node name="Marker2D37" type="Marker2D" parent="Spawners"]
-position = Vector2(236, -532)
+[node name="Marker2D7" type="Marker2D" parent="Spawners/Right"]
+position = Vector2(0, -64)
 
-[node name="Marker2D38" type="Marker2D" parent="Spawners"]
-position = Vector2(268, -532)
+[node name="Marker2D9" type="Marker2D" parent="Spawners/Right"]
+position = Vector2(0, -96)
 
-[node name="Marker2D39" type="Marker2D" parent="Spawners"]
-position = Vector2(-276, -216)
+[node name="Marker2D10" type="Marker2D" parent="Spawners/Right"]
+position = Vector2(0, -128)
 
-[node name="Marker2D40" type="Marker2D" parent="Spawners"]
-position = Vector2(-244, -216)
+[node name="Marker2D8" type="Marker2D" parent="Spawners/Right"]
+position = Vector2(0, -32)
 
-[node name="Marker2D41" type="Marker2D" parent="Spawners"]
-position = Vector2(-212, -216)
+[node name="Down" type="Node2D" parent="Spawners"]
+position = Vector2(0, 160)
 
-[node name="Marker2D42" type="Marker2D" parent="Spawners"]
-position = Vector2(-180, -216)
+[node name="Marker2D39" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(-272, 0)
 
-[node name="Marker2D43" type="Marker2D" parent="Spawners"]
-position = Vector2(-148, -216)
+[node name="Marker2D40" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(-240, 0)
 
-[node name="Marker2D44" type="Marker2D" parent="Spawners"]
-position = Vector2(-116, -216)
+[node name="Marker2D41" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(-208, 0)
 
-[node name="Marker2D45" type="Marker2D" parent="Spawners"]
-position = Vector2(-84, -216)
+[node name="Marker2D42" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(-176, 0)
 
-[node name="Marker2D46" type="Marker2D" parent="Spawners"]
-position = Vector2(-52, -216)
+[node name="Marker2D43" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(-144, 0)
 
-[node name="Marker2D47" type="Marker2D" parent="Spawners"]
-position = Vector2(-20, -216)
+[node name="Marker2D44" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(-112, 0)
 
-[node name="Marker2D48" type="Marker2D" parent="Spawners"]
-position = Vector2(12, -216)
+[node name="Marker2D45" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(-80, 0)
 
-[node name="Marker2D49" type="Marker2D" parent="Spawners"]
-position = Vector2(44, -216)
+[node name="Marker2D46" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(-48, 0)
 
-[node name="Marker2D50" type="Marker2D" parent="Spawners"]
-position = Vector2(76, -216)
+[node name="Marker2D47" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(-16, 0)
 
-[node name="Marker2D51" type="Marker2D" parent="Spawners"]
-position = Vector2(108, -216)
+[node name="Marker2D48" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(16, 0)
 
-[node name="Marker2D52" type="Marker2D" parent="Spawners"]
-position = Vector2(140, -216)
+[node name="Marker2D49" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(48, 0)
 
-[node name="Marker2D53" type="Marker2D" parent="Spawners"]
-position = Vector2(172, -216)
+[node name="Marker2D50" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(80, 0)
 
-[node name="Marker2D54" type="Marker2D" parent="Spawners"]
-position = Vector2(204, -216)
+[node name="Marker2D51" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(112, 0)
 
-[node name="Marker2D55" type="Marker2D" parent="Spawners"]
-position = Vector2(236, -216)
+[node name="Marker2D52" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(144, 0)
 
-[node name="Marker2D56" type="Marker2D" parent="Spawners"]
-position = Vector2(268, -216)
+[node name="Marker2D53" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(176, 0)
 
-[node name="Marker2D20" type="Marker2D" parent="Spawners"]
-position = Vector2(-292, -420)
+[node name="Marker2D54" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(208, 0)
+
+[node name="Marker2D55" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(240, 0)
+
+[node name="Marker2D56" type="Marker2D" parent="Spawners/Down"]
+position = Vector2(272, 0)
+
+[node name="SpawnerVisuals" type="Node2D" parent="."]
+position = Vector2(-304, -544)
+
+[node name="ColorRect" type="ColorRect" parent="SpawnerVisuals"]
+visible = false
+offset_right = 32.0
+offset_bottom = 336.0
+color = Color(1, 0, 0, 0.662745)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpawnerVisuals"]
+libraries = {
+"": SubResource("AnimationLibrary_euv70")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="SpawnerVisuals"]
+tree_root = SubResource("AnimationNodeBlendSpace2D_mgc3k")
+anim_player = NodePath("../AnimationPlayer")
+parameters/blend_position = Vector2(0, 0)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2048
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-272, -512, 272, -512, 272, -240, -272, -240)
+
+[node name="Inventory" parent="." instance=ExtResource("11_v0peg")]

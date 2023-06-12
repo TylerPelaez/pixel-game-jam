@@ -1,10 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dos2g6h404rdh"]
+[gd_scene load_steps=5 format=3 uid="uid://dos2g6h404rdh"]
 
 [ext_resource type="Script" path="res://Scripts/UI Controller.gd" id="1_p2v83"]
 [ext_resource type="FontFile" uid="uid://cfavqas7l0oja" path="res://acherusgrotesque-regular.otf" id="2_qt38b"]
+[ext_resource type="PackedScene" uid="uid://dxt6u2amn8l16" path="res://UI/ui_trap_box.tscn" id="3_r6e56"]
 
-[node name="UI Controller" type="CanvasLayer"]
+[sub_resource type="Theme" id="Theme_qhu1p"]
+default_font = ExtResource("2_qt38b")
+
+[node name="UI Controller" type="CanvasLayer" node_paths=PackedStringArray("barricade_trap_box", "melee_trap_box")]
 script = ExtResource("1_p2v83")
+barricade_trap_box = NodePath("Control/HBoxContainer/UITrapBox")
+melee_trap_box = NodePath("Control/HBoxContainer/UITrapBox2")
 
 [node name="WaveLabel" type="Label" parent="."]
 anchors_preset = 5
@@ -17,3 +23,36 @@ grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_qt38b")
 text = "Wave 1"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -134.0
+offset_top = -64.0
+offset_right = 134.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_qhu1p")
+alignment = 1
+
+[node name="UITrapBox" parent="Control/HBoxContainer" instance=ExtResource("3_r6e56")]
+layout_mode = 2
+
+[node name="UITrapBox2" parent="Control/HBoxContainer" instance=ExtResource("3_r6e56")]
+layout_mode = 2

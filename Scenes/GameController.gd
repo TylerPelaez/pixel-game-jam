@@ -7,6 +7,10 @@ class_name GameController
 @onready var nav_controller: NavController = $NavigationRegion2D
 @onready var spawners: Node2D = $Spawners
 
+@onready var spawner_visuals_animation_tree: AnimationTree = $SpawnerVisuals/AnimationTree
+
+@onready var inventory: Inventory = $Inventory
+
 @export var enemy_prefab: PackedScene
 @export var enemies_per_wave_level = 30
 @export var enemy_spawn_distance = 450
@@ -18,11 +22,22 @@ var spawned_enemies_count: int
 var wave_active: bool = false
 var wave_start_time: float
 var dead_enemies_count: int
+var active_spawner_parent: Node2D
 
 func _ready():
 	grid_controller.placement_started.connect(player.on_placement_started)
 	grid_controller.placement_ended.connect(player.on_placement_ended)
 	grid_controller.placed_trap.connect(func(trap: Trap): nav_controller.add_structure(trap, trap.nav_collision_polygon))
+	
+	spawner_visuals_animation_tree.active = true
+	inventory.updated.connect(ui_controller.on_inventory_updated)
+	ui_controller.on_inventory_updated(inventory)
+	pre_wave()
+
+func pre_wave():
+	active_spawner_parent = spawners.get_child(randi_range(0, spawners.get_child_count() - 1))
+	var direction = (active_spawner_parent.global_position - spawners.global_position).normalized()
+	spawner_visuals_animation_tree.set("parameters/blend_position", direction)
 
 func start_wave():
 	spawned_enemies_count = 0
@@ -31,10 +46,12 @@ func start_wave():
 	wave_start_time = Time.get_ticks_msec()
 	wave_active	= true
 
+
 func end_wave():
 	wave_counter += 1
 	wave_active = false
 	ui_controller.new_wave(wave_counter)
+	pre_wave()
 
 func _process(delta):
 	if !wave_active:
@@ -49,10 +66,8 @@ func _process(delta):
 	
 func spawn_enemy():
 	var player_pos = player.global_position
-	var spawn_pos = spawners.get_child(randi_range(0, spawners.get_child_count() - 1)).global_position
+	var spawn_pos = active_spawner_parent.get_child(randi_range(0, active_spawner_parent.get_child_count() - 1)).global_position
 	
-#	var theta = randf() * TAU # angle to place enemy at
-#	var spawn_pos = player_pos + enemy_spawn_distance * Vector2(cos(theta), sin(theta))
 	var enemy = enemy_prefab.instantiate()
 	add_child(enemy)
 	enemy.global_position = spawn_pos

@@ -89,6 +89,7 @@ radius = 24.0
 
 [node name="MeleeTrap" instance=ExtResource("1_3u2ys")]
 script = ExtResource("2_252ls")
+id = "Melee"
 
 [node name="Sprite2D" parent="." index="0"]
 modulate = Color(1, 1, 1, 1)
@@ -118,7 +119,8 @@ shape = SubResource("CircleShape2D_44vhq")
 disabled = true
 
 [node name="NavigationRegion2D" parent="." index="7"]
-travel_cost = 1.5
+enter_cost = 100.0
+travel_cost = 1.0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 visible = false

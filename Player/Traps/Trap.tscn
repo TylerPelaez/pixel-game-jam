@@ -19,6 +19,7 @@ size = Vector2(16, 16)
 [node name="Trap" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_1mc55")
+id = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.811765, 0.482353, 1)

@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxt6u2amn8l16"]
+
+[ext_resource type="Texture2D" uid="uid://dr5228tjnp5yx" path="res://Textures/Test/White32.png" id="1_nbay7"]
+[ext_resource type="Script" path="res://Scenes/UITrapBox.gd" id="2_kyvoa"]
+[ext_resource type="FontFile" uid="uid://cfavqas7l0oja" path="res://acherusgrotesque-regular.otf" id="3_ue8go"]
+
+[node name="UITrapBox" type="TextureRect"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_nbay7")
+script = ExtResource("2_kyvoa")
+
+[node name="ControlLabel" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ue8go")
+text = "1
+"
+
+[node name="AmountLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ue8go")
+theme_override_font_sizes/font_size = 10
+text = "4"
+horizontal_alignment = 2
+vertical_alignment = 2

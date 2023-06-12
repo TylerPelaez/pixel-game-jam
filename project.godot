@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/TestScene.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalTrapData="*res://Scripts/TrapData.gd"
+
 [display]
 
 window/size/viewport_width=640
@@ -89,6 +93,7 @@ PlayerAttack={
 2d_physics/layer_9="Trap"
 2d_physics/layer_10="Core"
 2d_physics/layer_11="KnockBack"
+2d_physics/layer_12="PlaceableArea"
 2d_physics/default_edge_connection_margin=3
 
 [navigation]
