@@ -81,6 +81,7 @@ func on_enemy_died(enemy: Enemy):
 	energy.global_position = enemy.global_position
 	energy.collected.connect(_on_energy_collected)
 	call_deferred("add_child", energy)
+	energy.call_deferred("set_flipped", enemy.is_flipped())
 	
 	dead_enemies_count += 1
 	if dead_enemies_count >= wave_enemy_spawn_limit:

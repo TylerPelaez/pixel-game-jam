@@ -11,7 +11,8 @@ signal died(enemy: Enemy)
 enum State {
 	MOVE,
 	SPAWN,
-	ATTACK
+	ATTACK,
+	DYING
 }
 
 var target: Node2D
@@ -24,8 +25,8 @@ var scratch_velocity: Vector2 = Vector2.ZERO
 @onready var hurtbox = $Hurtbox
 @onready var blink_animation_player = $BlinkAnimationPlayer
 @onready var soft_collision = $SoftCollision
-#@onready var hitbox = $Hands/Hitbox
-#@onready var hitbox_collider = $Hands/Hitbox/CollisionShape2D
+
+@onready var sprite: Sprite2D = $Sprite2D
 
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 
@@ -150,8 +151,8 @@ func _on_stats_no_health():
 	die()
 
 func die():
-	died.emit(self)
-	queue_free()
+	state = State.DYING
+	animation_state.travel("Death")
 
 func _on_stats_health_changed(value):
 	health_bar.update(stats.health, stats.max_health)
@@ -159,3 +160,9 @@ func _on_stats_health_changed(value):
 func _on_stats_max_health_changed(value):
 	health_bar.update(stats.health, stats.max_health)
 
+func _on_death_animation_finished():
+	died.emit(self)
+	queue_free()
+
+func is_flipped():
+	return sprite.flip_h

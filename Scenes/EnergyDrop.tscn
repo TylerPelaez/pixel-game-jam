@@ -1,23 +1,72 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsbs2o7a6yjsa"]
+[gd_scene load_steps=7 format=3 uid="uid://dsbs2o7a6yjsa"]
 
-[ext_resource type="Texture2D" uid="uid://b5ohs5orx6duk" path="res://Textures/Test/White6.png" id="1_3dnne"]
 [ext_resource type="Script" path="res://Scenes/EnergyDrop.gd" id="1_41fke"]
+[ext_resource type="Texture2D" uid="uid://djh3avk8oa4ff" path="res://Textures/Enemy/EnemyCombined.png" id="2_ttlgy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ba7m"]
-size = Vector2(6, 6)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i88jc"]
+radius = 6.0
+height = 24.0
+
+[sub_resource type="Animation" id="Animation_fu3ve"]
+resource_name = "Hover"
+length = 2.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -16), Vector2(0, -18), Vector2(0, -16), Vector2(0, -14)]
+}
+
+[sub_resource type="Animation" id="Animation_dovcw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -18)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ddoxg"]
+_data = {
+"Hover": SubResource("Animation_fu3ve"),
+"RESET": SubResource("Animation_dovcw")
+}
 
 [node name="EnergyDrop" type="Node2D"]
 script = ExtResource("1_41fke")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_3dnne")
+texture = ExtResource("2_ttlgy")
+offset = Vector2(0, -18)
+hframes = 23
+frame = 22
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4096
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_0ba7m")
+position = Vector2(0, -10)
+shape = SubResource("CapsuleShape2D_i88jc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Hover"
+libraries = {
+"": SubResource("AnimationLibrary_ddoxg")
+}
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
