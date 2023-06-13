@@ -12,7 +12,8 @@ enum State {
 	MOVE,
 	SPAWN,
 	ATTACK,
-	DYING
+	DYING,
+	WAITING_TO_ATTACK
 }
 
 var target: Node2D
@@ -40,6 +41,13 @@ var scratch_velocity: Vector2 = Vector2.ZERO
 @onready var health_bar: HealthBar = $HealthBar
 
 var attacking_core: bool = false
+var attack_target_pos: Vector2
+
+var last_attack_start: float 
+var waiting_to_attack_target_pos: Vector2
+var waiting_to_attack_core: bool
+
+var attack_damage_started: bool
 
 func _ready():
 	reset()
@@ -63,6 +71,8 @@ func reset():
 # Update
 func _physics_process(delta):
 	match state:
+		State.WAITING_TO_ATTACK:
+			waiting_to_attack_state(delta)
 		State.MOVE:
 			move_state(delta)
 		State.ATTACK:
@@ -70,6 +80,18 @@ func _physics_process(delta):
 
 func _on_spawn_finished():
 	state = State.MOVE
+
+func waiting_to_attack_state(delta):
+	scratch_velocity = scratch_velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+	move()
+	
+	# Check if enemy has been knocked back out of attack range
+	if global_position.distance_to(waiting_to_attack_target_pos) > attack_check_distance:
+		state = State.MOVE
+		waiting_to_attack_core = false
+		return
+	if !is_attack_on_cooldown():
+		start_attack(waiting_to_attack_target_pos, waiting_to_attack_core)
 
 func move_state(delta):
 	var next_path_pos = agent.get_next_path_position()
@@ -80,7 +102,17 @@ func move_state(delta):
 		if attack_raycast.is_colliding():
 			var layer = attack_raycast.get_collider().collision_layer
 			var is_core = (layer & 0b10_00000000) > 0; # Core layer is # 10
-			start_attack(attack_raycast.get_collider().global_position, is_core)
+			
+			var attack_target_pos = attack_raycast.get_collider().global_position
+			
+			if is_attack_on_cooldown():
+				state = State.WAITING_TO_ATTACK
+				waiting_to_attack_target_pos = attack_target_pos
+				waiting_to_attack_core = is_core
+				return
+				
+
+			start_attack(attack_target_pos, is_core)
 			return
 	
 	var input_vector = (next_path_pos - global_position).normalized()
@@ -100,17 +132,21 @@ func move_state(delta):
 	
 	move()
 
-func start_attack(attack_target_pos: Vector2, is_core_attack: bool):
+func is_attack_on_cooldown():
+	return Time.get_ticks_msec() - last_attack_start < (stats.attack_cooldown_seconds * 1000)
+
+func start_attack(_attack_target_pos: Vector2, is_core_attack: bool):
 	state = State.ATTACK
-	hands.global_position = attack_target_pos
+	attack_target_pos = _attack_target_pos
+	hands.global_position = _attack_target_pos
 	animation_tree.set("parameters/Attack/blend_position", (agent.get_next_path_position() - global_position).normalized().x)
 	animation_state.travel("Attack")
 	attacking_core = is_core_attack
-
+	last_attack_start = Time.get_ticks_msec()
+	attack_damage_started = false
 	
 func attack_state(delta):
-	scratch_velocity = scratch_velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-	move()
+	hands.global_position = attack_target_pos
 
 func _on_attack_complete():
 	if attacking_core:
@@ -123,9 +159,9 @@ func move():
 	set_velocity(scratch_velocity)
 	move_and_slide()
 	scratch_velocity = velocity
-	
+
 func _on_Hurtbox_area_entered(area: Area2D):
-	if area is Hitbox && !hurtbox.invincible:
+	if area is Hitbox && !hurtbox.invincible && state != State.DYING:
 		got_hit(area.damage)
 
 func got_hit(damage):
@@ -140,6 +176,11 @@ func knockback(strength: float, source_pos: Vector2):
 	var offset = (direction * strength)
 	scratch_velocity += offset
 	velocity += offset
+	
+	if state == State.ATTACK && !attack_damage_started:
+		state = State.MOVE
+		animation_state.travel("Idle")
+		attacking_core = false
 
 func _on_Hurtbox_invincibility_ended():
 	blink_animation_player.play("Blink/Stop")
@@ -166,3 +207,6 @@ func _on_death_animation_finished():
 
 func is_flipped():
 	return sprite.flip_h
+
+func set_attack_damage_started():
+	attack_damage_started = true
