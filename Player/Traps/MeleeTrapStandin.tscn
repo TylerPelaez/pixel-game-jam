@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://gvo1yvogxxak"]
-
-[ext_resource type="PackedScene" uid="uid://bcruqu6j56sxy" path="res://Player/Traps/TrapStandin.tscn" id="1_vol7i"]
-
-[node name="MeleeTrapStandin" instance=ExtResource("1_vol7i")]
-id = 0
-
-[node name="Sprite2D" parent="." index="0"]
-modulate = Color(1, 1, 1, 0.498039)

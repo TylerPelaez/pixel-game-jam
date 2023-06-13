@@ -1,11 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwr11fohp87hh"]
+[gd_scene load_steps=9 format=3 uid="uid://bwr11fohp87hh"]
 
 [ext_resource type="Script" path="res://Player/Traps/Trap.gd" id="1_1mc55"]
-[ext_resource type="Texture2D" uid="uid://cr0df0oy1wyrc" path="res://Textures/Test/White8.png" id="2_k0gc5"]
+[ext_resource type="Texture2D" uid="uid://bk3x2b2lstbcf" path="res://Textures/Player/Traps/Landmine.png" id="2_b3ye4"]
 [ext_resource type="Script" path="res://Scripts/Stats/Stats.gd" id="3_h0gjx"]
 [ext_resource type="PackedScene" uid="uid://cbibtl5k17ewk" path="res://Overlap/Hurtbox.tscn" id="4_csj2m"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfor1"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4be0o"]
+radius = 3.0
+height = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8cq2"]
 size = Vector2(16, 16)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x31p8"]
@@ -22,16 +26,27 @@ script = ExtResource("1_1mc55")
 id = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.811765, 0.482353, 1)
-scale = Vector2(2, 2)
-texture = ExtResource("2_k0gc5")
+texture = ExtResource("2_b3ye4")
+hframes = 9
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 321
+collision_layer = 65
 collision_mask = 98
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_mfor1")
+position = Vector2(0, 5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_4be0o")
+
+[node name="PlacementBlockingBody" type="StaticBody2D" parent="."]
+position = Vector2(0, -10)
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="PlacementBlockingBody"]
+position = Vector2(0, 10)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_j8cq2")
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
 one_shot = true
@@ -48,7 +63,7 @@ polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_x31p8")
 navigation_layers = 2
-travel_cost = 2.0
+travel_cost = 3.0
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("3_h0gjx")
@@ -60,6 +75,10 @@ collision_mask = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("RectangleShape2D_h7s3l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
 
 [connection signal="no_health" from="Stats" to="." method="_on_stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

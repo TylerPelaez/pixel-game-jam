@@ -10,6 +10,8 @@ signal placed_trap(trap: Trap)
 @export var GRID_DIMENSIONS: Vector2i = Vector2.ZERO
 @export var inventory: Inventory
 
+@export var trap_placement_prefab: PackedScene
+
 @onready var shape_cast: ShapeCast2D = $ShapeCast2D
 
 enum State {
@@ -38,26 +40,25 @@ func _process(delta):
 
 func _input(event):
 	if state == State.DEFAULT and event.is_action_pressed("Place Trap 1"):
-		if inventory.has_trap_count(TrapData.TrapId.Barricade, 1):
-			start_placing(TrapData.TrapId.Barricade)
-	elif state == State.DEFAULT and event.is_action_pressed("Place Trap 2"):
-		if inventory.has_trap_count(TrapData.TrapId.Melee, 1):
-			start_placing(TrapData.TrapId.Melee)
-	elif state == State.DEFAULT and event.is_action_pressed("Place Trap 3"):
 		if inventory.has_trap_count(TrapData.TrapId.AOE, 1):
 			start_placing(TrapData.TrapId.AOE)
+	elif state == State.DEFAULT and event.is_action_pressed("Place Trap 2"):
+		if inventory.has_trap_count(TrapData.TrapId.Laser, 1):
+			start_placing(TrapData.TrapId.Laser)
+	elif state == State.DEFAULT and event.is_action_pressed("Place Trap 3"):
+		if inventory.has_trap_count(TrapData.TrapId.Knockback, 1):
+			start_placing(TrapData.TrapId.Knockback)
 	
 	if state == State.PLACING and event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			place_trap(trap_placement_instance, snap_to_grid(get_global_mouse_position()))
 
 func start_placing(trap_placement_id: TrapData.TrapId):
-	var trap_placement_prefab = GlobalTrapData.get_stand_in_for_id(trap_placement_id)
 	state = State.PLACING
 	
 	trap_placement_instance = trap_placement_prefab.instantiate()
 	get_tree().root.add_child.call_deferred(trap_placement_instance)
-	
+	trap_placement_instance.call_deferred("init", trap_placement_id)
 	placement_started.emit()
 
 func can_place(current_trap: TrapStandin, pos: Vector2):

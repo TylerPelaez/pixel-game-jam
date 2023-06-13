@@ -1,9 +1,5 @@
 extends Trap
 
-
-@onready var shape_cast: ShapeCast2D = $ShapeCast2D
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-
 # Implement in children
 func attack() -> void:
 	super.attack()
@@ -16,3 +12,7 @@ func should_attack() -> bool:
 		return shape_cast.is_colliding()
 	else:
 		return false
+
+func _on_knockback_area_entered(area):
+	if area.get_parent() is Enemy:
+		area.get_parent().knockback(stats.knockback_strength, global_position)

@@ -10,12 +10,23 @@ signal on_death(trap: Node2D)
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 @onready var nav_collision_polygon: CollisionPolygon2D = $NavCollider/CollisionPolygon2D
 @onready var stats: Stats = $Stats
+@onready var shape_cast: ShapeCast2D = $ShapeCast2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+var deployed = false
+
+func _ready():
+	animation_player.play("Deploy")
 
 var is_attacking := false
 
+func _on_deploy_complete():
+	deployed = true
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if !deployed: 
+		return
 	if should_attack():
 		attack()
 

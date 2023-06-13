@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://diohj4tqgqc7s"]
+[gd_scene load_steps=26 format=3 uid="uid://diohj4tqgqc7s"]
 
 [ext_resource type="Script" path="res://Scenes/GameController.gd" id="1_ja4hw"]
 [ext_resource type="PackedScene" uid="uid://dmhyo6tmrmtsh" path="res://Player/PlayerController.tscn" id="1_xlw7c"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dos2g6h404rdh" path="res://Scenes/ui_controller.tscn" id="7_epif2"]
 [ext_resource type="PackedScene" uid="uid://d1nu2tugkl7u8" path="res://Scenes/wall.tscn" id="8_q1nra"]
 [ext_resource type="Script" path="res://Scripts/NavController.gd" id="9_r7anm"]
+[ext_resource type="PackedScene" uid="uid://bcruqu6j56sxy" path="res://Player/Traps/TrapStandin.tscn" id="9_v4ruk"]
 [ext_resource type="PackedScene" uid="uid://c206v4c4ft2mf" path="res://Scenes/Inventory.tscn" id="11_v0peg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d0f8k"]
@@ -405,6 +406,7 @@ position = Vector2(0, -368)
 [node name="GridController" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("6_fjncl")]
 GRID_DIMENSIONS = Vector2i(64, 80)
 inventory = NodePath("../Inventory")
+trap_placement_prefab = ExtResource("9_v4ruk")
 
 [node name="UI Controller" parent="." instance=ExtResource("7_epif2")]
 

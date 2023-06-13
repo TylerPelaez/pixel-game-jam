@@ -7,9 +7,9 @@ var trap_inventory := {}
 var energy := 0 : set = _set_energy
 
 func _ready():
-	trap_inventory[TrapData.TrapId.Melee] = 1
-	trap_inventory[TrapData.TrapId.Barricade] = 5
-	trap_inventory[TrapData.TrapId.AOE] = 10
+	trap_inventory[TrapData.TrapId.Knockback] = 3
+	trap_inventory[TrapData.TrapId.Laser] = 3
+	trap_inventory[TrapData.TrapId.AOE] = 3
 
 func add_trap(trap_id: TrapData.TrapId, count: int):
 	if !trap_inventory.has(trap_id):

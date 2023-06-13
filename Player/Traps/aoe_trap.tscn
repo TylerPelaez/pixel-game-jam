@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://p2p5lkv5hhql"]
+[gd_scene load_steps=12 format=3 uid="uid://p2p5lkv5hhql"]
 
 [ext_resource type="PackedScene" uid="uid://bwr11fohp87hh" path="res://Player/Traps/Trap.tscn" id="1_svjpt"]
 [ext_resource type="Script" path="res://Player/Traps/AOETrap.gd" id="2_xo1b3"]
@@ -7,28 +7,73 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_w44by"]
 radius = 8.0
 
-[sub_resource type="Animation" id="Animation_buy70"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_wnv7f"]
+radius = 60.0
+
+[sub_resource type="Animation" id="Animation_2qy7u"]
+resource_name = "Deploy"
+length = 0.6
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_deploy_complete"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_0dj1s"]
 resource_name = "Attack"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [4]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".")
+tracks/1/path = NodePath("Hitbox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -37,42 +82,73 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_gadr5"]
+[sub_resource type="Animation" id="Animation_pgukt"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
 "values": [true]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1wkow"]
-_data = {
-"Attack": SubResource("Animation_buy70"),
-"RESET": SubResource("Animation_gadr5")
+[sub_resource type="Animation" id="Animation_r1wtk"]
+resource_name = "Proximity"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [6, 7, 8]
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wnv7f"]
-radius = 60.0
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yx87h"]
+_data = {
+"Attack": SubResource("Animation_0dj1s"),
+"Deploy": SubResource("Animation_2qy7u"),
+"Proximity": SubResource("Animation_r1wtk"),
+"RESET": SubResource("Animation_pgukt")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x58fh"]
+radius = 8.0
 
 [node name="AOETrap" instance=ExtResource("1_svjpt")]
 script = ExtResource("2_xo1b3")
 id = 0
 
 [node name="Sprite2D" parent="." index="0"]
-modulate = Color(1, 1, 1, 1)
+frame = 5
 
 [node name="CollisionPolygon2D" parent="StaticBody2D" index="0"]
-shape = null
+visible = false
 disabled = true
 
-[node name="NavigationRegion2D" parent="." index="4"]
+[node name="NavigationRegion2D" parent="." index="5"]
 travel_cost = 1.0
 
 [node name="AttackCast" type="ShapeCast2D" parent="." index="7"]
@@ -82,11 +158,6 @@ collision_mask = 16
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
-libraries = {
-"": SubResource("AnimationLibrary_1wkow")
-}
-
 [node name="Hitbox" parent="." index="9" instance=ExtResource("3_jl0jh")]
 collision_layer = 128
 collision_mask = 16
@@ -95,6 +166,19 @@ damage = 3
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource("CircleShape2D_wnv7f")
 disabled = true
+
+[node name="AnimationPlayer" parent="." index="10"]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_yx87h")
+}
+
+[node name="ShapeCast2D" parent="." index="11"]
+shape = SubResource("CircleShape2D_x58fh")
+target_position = Vector2(0, 0)
+collision_mask = 16
+collide_with_areas = true
+collide_with_bodies = false
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]

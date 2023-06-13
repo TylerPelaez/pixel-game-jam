@@ -2,46 +2,33 @@ extends Node
 class_name TrapData
 
 enum TrapId {
-	Melee,
-	Barricade,
 	AOE,
 	Laser,
 	Knockback
 }
 
 var db = {
-	TrapId.Melee: {
-		"stand_in": preload("res://Player/Traps/MeleeTrapStandin.tscn"),
-		"trap": preload("res://Player/Traps/MeleeTrap.tscn"),
-		"ui_icon": preload("res://Textures/Test/White32.png")
-	},
-	TrapId.Barricade: {
-		"stand_in": preload("res://Player/Traps/TrapStandin.tscn"),
-		"trap": preload("res://Player/Traps/Trap.tscn"),
-		"ui_icon": preload("res://Textures/Test/White32.png")
+	TrapId.Knockback: {
+		"trap": preload("res://Player/Traps/KnockbackTrap.tscn"),
+		"ui_icon": preload("res://Textures/Player/Traps/KnockbackIcon.png"),
+		"placement_offset": Vector2(0, -12)
 	},
 	TrapId.AOE: {
-		"stand_in": preload("res://Player/Traps/aoe_trap_standin.tscn"),
 		"trap": preload("res://Player/Traps/aoe_trap.tscn"),
-		"ui_icon": preload("res://Textures/Test/White32.png")
+		"ui_icon": preload("res://Textures/Player/Traps/LandmineIcon.png"),
+		"placement_offset": Vector2(0, 4)
 	},
 	TrapId.Laser: {
-		"stand_in": preload("res://Player/Traps/aoe_trap_standin.tscn"),
-		"trap": preload("res://Player/Traps/aoe_trap.tscn"),
-		"ui_icon": preload("res://Textures/Test/White32.png")
-	},
-	TrapId.Knockback: {
-		"stand_in": preload("res://Player/Traps/TrapStandin.tscn"),
-		"trap": preload("res://Player/Traps/Trap.tscn"),
-		"ui_icon": preload("res://Textures/Test/White32.png")
+		"trap": preload("res://Player/Traps/laser_trap.tscn"),
+		"ui_icon": preload("res://Textures/Player/Traps/LaserIcon.png")
 	}
 }
 
-func get_trap_for_id(id: TrapId):
+func get_trap_for_id(id: TrapId) -> PackedScene:
 	return db[id]["trap"]
 
-func get_stand_in_for_id(id: TrapId):
-	return db[id]["stand_in"]
-
-func get_ui_icon_for_id(id: TrapId):
+func get_ui_icon_for_id(id: TrapId) -> Texture2D:
 	return db[id]["ui_icon"]
+
+func get_ui_icon_placement_offset(id: TrapId) -> Vector2:
+	return db[id]["placement_offset"] if db[id].has("placement_offset") else Vector2.ZERO

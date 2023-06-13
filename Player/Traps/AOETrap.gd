@@ -1,8 +1,5 @@
 extends Trap
 
-@onready var shape_cast: ShapeCast2D = $AttackCast
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-
 # Implement in children
 func attack() -> void:
 	super.attack()
