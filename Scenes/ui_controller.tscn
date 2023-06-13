@@ -7,10 +7,11 @@
 [sub_resource type="Theme" id="Theme_qhu1p"]
 default_font = ExtResource("2_qt38b")
 
-[node name="UI Controller" type="CanvasLayer" node_paths=PackedStringArray("barricade_trap_box", "melee_trap_box")]
+[node name="UI Controller" type="CanvasLayer" node_paths=PackedStringArray("trap_box_container", "energy_label")]
 script = ExtResource("1_p2v83")
-barricade_trap_box = NodePath("Control/HBoxContainer/UITrapBox")
-melee_trap_box = NodePath("Control/HBoxContainer/UITrapBox2")
+trap_box_prefab = ExtResource("3_r6e56")
+trap_box_container = NodePath("Control/HBoxContainer")
+energy_label = NodePath("EnergyLabel")
 
 [node name="WaveLabel" type="Label" parent="."]
 anchors_preset = 5
@@ -51,8 +52,8 @@ size_flags_vertical = 4
 theme = SubResource("Theme_qhu1p")
 alignment = 1
 
-[node name="UITrapBox" parent="Control/HBoxContainer" instance=ExtResource("3_r6e56")]
-layout_mode = 2
-
-[node name="UITrapBox2" parent="Control/HBoxContainer" instance=ExtResource("3_r6e56")]
-layout_mode = 2
+[node name="EnergyLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "$100"

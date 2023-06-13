@@ -15,6 +15,7 @@ class_name GameController
 @export var enemies_per_wave_level = 30
 @export var enemy_spawn_distance = 450
 @export var wave_spawn_time_seconds: float = 30.0
+@export var energy_drop_prefab: PackedScene
 
 var wave_counter: int = 1
 var wave_enemy_spawn_limit: int
@@ -74,7 +75,16 @@ func spawn_enemy():
 	spawned_enemies_count += 1
 	enemy.died.connect(on_enemy_died)
 
-func on_enemy_died():
+func on_enemy_died(enemy: Enemy):
+	
+	var energy = energy_drop_prefab.instantiate()
+	energy.global_position = enemy.global_position
+	energy.collected.connect(_on_energy_collected)
+	call_deferred("add_child", energy)
+	
 	dead_enemies_count += 1
 	if dead_enemies_count >= wave_enemy_spawn_limit:
 		end_wave()
+	
+func _on_energy_collected(amount: int):
+	inventory.energy += amount

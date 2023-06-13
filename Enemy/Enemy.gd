@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Enemy
 
-signal died
+signal died(enemy: Enemy)
 
 @export var ACCELERATION := 500
 @export var MAX_SPEED := 100
@@ -150,7 +150,7 @@ func _on_stats_no_health():
 	die()
 
 func die():
-	died.emit()
+	died.emit(self)
 	queue_free()
 
 func _on_stats_health_changed(value):

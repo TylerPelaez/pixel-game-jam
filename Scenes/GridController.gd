@@ -43,6 +43,9 @@ func _input(event):
 	elif state == State.DEFAULT and event.is_action_pressed("Place Trap 2"):
 		if inventory.has_trap_count(TrapData.TrapId.Melee, 1):
 			start_placing(TrapData.TrapId.Melee)
+	elif state == State.DEFAULT and event.is_action_pressed("Place Trap 3"):
+		if inventory.has_trap_count(TrapData.TrapId.AOE, 1):
+			start_placing(TrapData.TrapId.AOE)
 	
 	if state == State.PLACING and event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:

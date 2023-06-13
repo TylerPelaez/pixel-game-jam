@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsbs2o7a6yjsa"]
+
+[ext_resource type="Texture2D" uid="uid://b5ohs5orx6duk" path="res://Textures/Test/White6.png" id="1_3dnne"]
+[ext_resource type="Script" path="res://Scenes/EnergyDrop.gd" id="1_41fke"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ba7m"]
+size = Vector2(6, 6)
+
+[node name="EnergyDrop" type="Node2D"]
+script = ExtResource("1_41fke")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3dnne")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4096
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_0ba7m")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

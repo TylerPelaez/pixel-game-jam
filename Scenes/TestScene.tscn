@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://diohj4tqgqc7s"]
+[gd_scene load_steps=25 format=3 uid="uid://diohj4tqgqc7s"]
 
 [ext_resource type="Script" path="res://Scenes/GameController.gd" id="1_ja4hw"]
 [ext_resource type="PackedScene" uid="uid://dmhyo6tmrmtsh" path="res://Player/PlayerController.tscn" id="1_xlw7c"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="2_g67e5"]
 [ext_resource type="PackedScene" uid="uid://dc8c2m6m4pib0" path="res://Enemy/Enemy.tscn" id="3_50qa3"]
 [ext_resource type="Texture2D" uid="uid://cu8l1p3qgesde" path="res://Textures/Environment/Planet_Ground_Background.png" id="3_bacdg"]
+[ext_resource type="PackedScene" uid="uid://dsbs2o7a6yjsa" path="res://Scenes/EnergyDrop.tscn" id="3_oj0a5"]
 [ext_resource type="PackedScene" uid="uid://clhjj6y2kg2ux" path="res://Player/Core.tscn" id="5_5uk77"]
 [ext_resource type="PackedScene" uid="uid://bpc4qn3bix2nh" path="res://Scenes/GridController.tscn" id="6_fjncl"]
 [ext_resource type="PackedScene" uid="uid://dos2g6h404rdh" path="res://Scenes/ui_controller.tscn" id="7_epif2"]
@@ -378,6 +379,7 @@ script = ExtResource("1_ja4hw")
 enemy_prefab = ExtResource("3_50qa3")
 enemies_per_wave_level = 10
 enemy_spawn_distance = 200
+energy_drop_prefab = ExtResource("3_oj0a5")
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -1
