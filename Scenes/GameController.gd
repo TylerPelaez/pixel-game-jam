@@ -46,8 +46,8 @@ func _ready():
 
 func pre_wave():
 	active_spawner_parent = spawners.get_child(randi_range(0, spawners.get_child_count() - 1))
-	var direction = (active_spawner_parent.global_position - spawners.global_position).normalized()
-	spawner_visuals_animation_tree.set("parameters/blend_position", direction)
+#	var direction = (active_spawner_parent.global_position - spawners.global_position).normalized()
+#	spawner_visuals_animation_tree.set("parameters/blend_position", direction)
 
 func start_wave():
 	spawned_enemies_count = 0
@@ -55,7 +55,6 @@ func start_wave():
 	wave_enemy_spawn_limit = enemies_per_wave_level * wave_counter
 	wave_start_time = Time.get_ticks_msec()
 	wave_active	= true
-
 
 func end_wave():
 	wave_counter += 1
@@ -82,7 +81,12 @@ func _input(event):
 
 func spawn_enemy():
 	var player_pos = player.global_position
-	var spawn_pos = active_spawner_parent.get_child(randi_range(0, active_spawner_parent.get_child_count() - 1)).global_position
+	var pos_a: Vector2 = active_spawner_parent.get_child(0).global_position
+	var pos_b: Vector2 = active_spawner_parent.get_child(1).global_position
+	var r = randf()
+	var r2 = randf()
+	
+	var spawn_pos = pos_a + Vector2((pos_b.x - pos_a.x) * r, (pos_b.y - pos_a.y)  * r2)
 	
 	var enemy = enemy_prefab.instantiate()
 	add_child(enemy)
