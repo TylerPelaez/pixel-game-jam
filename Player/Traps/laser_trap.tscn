@@ -1,8 +1,97 @@
-[gd_scene load_steps=9 format=3 uid="uid://3bqfu01dt05n"]
+[gd_scene load_steps=13 format=3 uid="uid://3bqfu01dt05n"]
 
 [ext_resource type="PackedScene" uid="uid://bwr11fohp87hh" path="res://Player/Traps/Trap.tscn" id="1_r6fbg"]
 [ext_resource type="Texture2D" uid="uid://cp185pq0g4sct" path="res://Textures/Player/Traps/LaserTrap.png" id="2_2iaal"]
 [ext_resource type="Script" path="res://Player/Traps/laser_trap.gd" id="2_21mnl"]
+[ext_resource type="Material" uid="uid://ch8kaoi4s8wen" path="res://Player/Traps/laser_trap.tres" id="3_hfxw6"]
+[ext_resource type="Texture2D" uid="uid://c2srf8v288l1s" path="res://Textures/Player/Traps/LaserBase.png" id="4_na1kp"]
+[ext_resource type="Texture2D" uid="uid://d1cqppiduqfeq" path="res://Textures/Test/Circle6.png" id="4_ykkhc"]
+[ext_resource type="Texture2D" uid="uid://c2ehaqvxlcomj" path="res://Textures/Player/Traps/LaserBeam.png" id="5_jtpp7"]
+
+[sub_resource type="Animation" id="Animation_88kid"]
+resource_name = "Attack"
+length = 0.8
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"do_damage"
+}, {
+"args": [],
+"method": &"do_damage"
+}, {
+"args": [],
+"method": &"on_attack_finished"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LaserSource:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LaserPivot/LaserBase:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LaserPivot/LaserBase:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.65, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 4, 2, 1, 0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("LaserPivot/LaserBase/LaserBeam:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.65, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 4, 2, 1, 0]
+}
 
 [sub_resource type="Animation" id="Animation_2gtjb"]
 resource_name = "Deploy"
@@ -34,24 +123,6 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_88kid"]
-resource_name = "Attack"
-length = 0.5
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"on_attack_finished"
-}]
-}
-
 [sub_resource type="Animation" id="Animation_4yy2l"]
 length = 0.001
 tracks/0/type = "value"
@@ -65,6 +136,54 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LaserSource:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LaserPivot/LaserBase:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LaserPivot/LaserBase:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LaserPivot/LaserBase/LaserBeam:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ufpv0"]
@@ -86,7 +205,17 @@ texture = ExtResource("2_2iaal")
 hframes = 11
 frame = 10
 
+[node name="CollisionPolygon2D" parent="StaticBody2D" index="0"]
+visible = false
+
+[node name="CollisionPolygon2D" parent="PlacementBlockingBody" index="0"]
+visible = false
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+visible = false
+
 [node name="AnimationPlayer" parent="." index="8"]
+autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_ufpv0")
 }
@@ -98,5 +227,33 @@ target_position = Vector2(0, 0)
 collision_mask = 16
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="LaserSource" type="Sprite2D" parent="." index="10"]
+visible = false
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -12)
+texture = ExtResource("4_ykkhc")
+
+[node name="LaserPivot" type="Node2D" parent="." index="11"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -12)
+
+[node name="LaserBase" type="Sprite2D" parent="LaserPivot" index="0"]
+visible = false
+material = ExtResource("3_hfxw6")
+rotation = 1.5708
+texture = ExtResource("4_na1kp")
+hframes = 6
+region_rect = Rect2(8, 0, 0, 0)
+
+[node name="LaserBeam" type="Sprite2D" parent="LaserPivot/LaserBase" index="0"]
+use_parent_material = true
+position = Vector2(0, -4)
+texture = ExtResource("5_jtpp7")
+offset = Vector2(0, -12)
+hframes = 6
+region_rect = Rect2(0, 0, 48, 200)
 
 [editable path="Hurtbox"]
