@@ -7,9 +7,7 @@ var trap_inventory := {}
 var energy := 0 : set = _set_energy
 
 func _ready():
-	trap_inventory[TrapData.TrapId.Knockback] = 3
-	trap_inventory[TrapData.TrapId.Laser] = 3
-	trap_inventory[TrapData.TrapId.AOE] = 3
+	energy = 200
 
 func add_trap(trap_id: TrapData.TrapId, count: int):
 	if !trap_inventory.has(trap_id):
@@ -31,3 +29,6 @@ func get_count(trap_id: TrapData.TrapId):
 func _set_energy(amount: int):
 	energy = amount
 	updated.emit(self)
+
+func can_afford(id: TrapData.TrapId):
+	return energy > GlobalTrapData.get_cost(id)

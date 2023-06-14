@@ -6,6 +6,8 @@ class_name GameController
 @onready var player: PlayerController = $Player
 @onready var nav_controller: NavController = $NavigationRegion2D
 @onready var spawners: Node2D = $Spawners
+@onready var radial_menu_follow = $RadialMenuObjects/RadialMenuFollow
+@onready var radial_menu: RadialMenu = $RadialMenuObjects/RadialMenuFollow/RadialMenu
 
 @onready var spawner_visuals_animation_tree: AnimationTree = $SpawnerVisuals/AnimationTree
 
@@ -26,9 +28,16 @@ var dead_enemies_count: int
 var active_spawner_parent: Node2D
 
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	grid_controller.placement_started.connect(player.on_placement_started)
+	grid_controller.placement_started.connect(radial_menu_follow.start_follow_mouse)
 	grid_controller.placement_ended.connect(player.on_placement_ended)
+	grid_controller.placement_ended.connect(radial_menu_follow.begin_stop_follow_mouse)
 	grid_controller.placed_trap.connect(func(trap: Trap): nav_controller.add_structure(trap, trap.nav_collision_polygon))
+	grid_controller.placed_trap.connect(func(trap): player.on_placement())
+	
+	radial_menu.opened.connect(on_radial_menu_opened)
+	radial_menu.closed.connect(on_radial_menu_closed)
 	
 	spawner_visuals_animation_tree.active = true
 	inventory.updated.connect(ui_controller.on_inventory_updated)
@@ -64,7 +73,13 @@ func _process(delta):
 		var wave_spawn_progress = float(spawned_enemies_count) / float(wave_enemy_spawn_limit)
 		if wave_time_progress > wave_spawn_progress:
 			spawn_enemy()
-	
+
+func _input(event):
+	if event.is_action_pressed("Open Radial Menu"):
+		radial_menu.set_open(true)
+	elif event.is_action_released("Open Radial Menu"):
+		radial_menu.set_open(false)
+
 func spawn_enemy():
 	var player_pos = player.global_position
 	var spawn_pos = active_spawner_parent.get_child(randi_range(0, active_spawner_parent.get_child_count() - 1)).global_position
@@ -76,7 +91,6 @@ func spawn_enemy():
 	enemy.died.connect(on_enemy_died)
 
 func on_enemy_died(enemy: Enemy):
-	
 	var energy = energy_drop_prefab.instantiate()
 	energy.global_position = enemy.global_position
 	energy.collected.connect(_on_energy_collected)
@@ -89,3 +103,15 @@ func on_enemy_died(enemy: Enemy):
 	
 func _on_energy_collected(amount: int):
 	inventory.energy += amount
+
+func on_radial_menu_opened():
+	radial_menu_follow.menu_open = true
+	grid_controller.on_radial_menu_opened()
+	if radial_menu_follow.follow_mouse:
+		radial_menu_follow.start_follow_mouse()
+
+func on_radial_menu_closed():
+	radial_menu_follow.menu_open = false
+	var current_trap = radial_menu.get_currently_selected_trap()
+	if current_trap != null:
+		grid_controller.start_placing(current_trap)

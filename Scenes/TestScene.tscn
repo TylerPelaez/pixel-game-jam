@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://diohj4tqgqc7s"]
+[gd_scene load_steps=28 format=3 uid="uid://diohj4tqgqc7s"]
 
 [ext_resource type="Script" path="res://Scenes/GameController.gd" id="1_ja4hw"]
 [ext_resource type="PackedScene" uid="uid://dmhyo6tmrmtsh" path="res://Player/PlayerController.tscn" id="1_xlw7c"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" path="res://Scripts/NavController.gd" id="9_r7anm"]
 [ext_resource type="PackedScene" uid="uid://bcruqu6j56sxy" path="res://Player/Traps/TrapStandin.tscn" id="9_v4ruk"]
 [ext_resource type="PackedScene" uid="uid://c206v4c4ft2mf" path="res://Scenes/Inventory.tscn" id="11_v0peg"]
+[ext_resource type="Script" path="res://Scripts/RadialMenuFollow.gd" id="14_k1f3b"]
+[ext_resource type="PackedScene" uid="uid://c4p6sq8o3f2h5" path="res://UI/radial_menu.tscn" id="15_nq4b4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d0f8k"]
 vertices = PackedVector2Array(-304, -544, 304, -544, 304, -208, -304, -208)
@@ -636,3 +638,38 @@ collision_mask = 0
 polygon = PackedVector2Array(-272, -512, 272, -512, 272, -240, -272, -240)
 
 [node name="Inventory" parent="." instance=ExtResource("11_v0peg")]
+
+[node name="RadialMenuObjects" type="Node" parent="."]
+
+[node name="RadialMenuFollow" type="Node2D" parent="RadialMenuObjects" node_paths=PackedStringArray("player", "top_left_bound", "bottom_right_bound")]
+script = ExtResource("14_k1f3b")
+player = NodePath("../../Player")
+top_left_bound = NodePath("../RadialMenuTopLeftBounds")
+bottom_right_bound = NodePath("../RadialMenuBottomRightBounds")
+offset = Vector2(18, 4)
+
+[node name="RadialMenu" parent="RadialMenuObjects/RadialMenuFollow" instance=ExtResource("15_nq4b4")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResetTimer" type="Timer" parent="RadialMenuObjects/RadialMenuFollow"]
+wait_time = 0.01
+one_shot = true
+
+[node name="RadialMenuTopLeftBounds" type="Marker2D" parent="RadialMenuObjects"]
+position = Vector2(-272, -512)
+
+[node name="RadialMenuBottomRightBounds" type="Marker2D" parent="RadialMenuObjects"]
+position = Vector2(272, -240)
+
+[connection signal="timeout" from="RadialMenuObjects/RadialMenuFollow/ResetTimer" to="RadialMenuObjects/RadialMenuFollow" method="_on_reset_timer_timeout"]

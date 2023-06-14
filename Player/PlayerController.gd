@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name PlayerController
 
 signal died
+signal store_opened
 
 @export var ACCELERATION := 500
 @export var MAX_SPEED := 100
@@ -26,6 +27,8 @@ var scratch_velocity: Vector2 = Vector2.ZERO
 
 var final_placement_animation_playing := false
 
+var in_core_range: bool = false
+
 func _ready():
 	reset()
 
@@ -48,15 +51,13 @@ func _physics_process(delta):
 		State.MOVE:
 			move_state(delta)
 
-func placement_state(delta):
-	scratch_velocity = scratch_velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-	
+func placement_state(delta):	
 	var mouse_direction_x = (get_global_mouse_position() - global_position).normalized().x
 	animation_tree.set("parameters/PlacementOngoing/blend_position", mouse_direction_x)
 	if !final_placement_animation_playing:
 		animation_tree.set("parameters/PlacementComplete/blend_position", mouse_direction_x)
 	
-	move()
+	move_state(delta)
 
 func attack_state(delta):
 	scratch_velocity = scratch_velocity.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -76,7 +77,10 @@ func move_state(delta):
 
 		scratch_velocity = scratch_velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
-		animation_state.travel("Idle")
+		if state == State.PLACEMENT:
+			animation_state.travel("PlacementOngoing" if !final_placement_animation_playing else "PlacementComplete")
+		else:
+			animation_state.travel("Idle")
 		scratch_velocity = scratch_velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		
 	move()
@@ -123,14 +127,16 @@ func _on_stats_no_health():
 func on_placement_started():
 	state = State.PLACEMENT
 	final_placement_animation_playing = false
-	animation_state.travel("PlacementOngoing")
 	
-func on_placement_ended():
+func on_placement():
 	final_placement_animation_playing = true
-	animation_state.travel("PlacementComplete")
 
 func on_placement_animation_complete():
+	final_placement_animation_playing = false
+
+func on_placement_ended():
 	state = State.MOVE
+	final_placement_animation_playing = false
 
 func start_attack():
 	state = State.ATTACK
@@ -140,7 +146,12 @@ func on_attack_animation_complete():
 	state = State.MOVE
 	animation_state.travel("Idle")
 
-
 func _on_knockback_area_entered(area: Node2D):
 	if area.get_parent() is Enemy:
 		area.get_parent().knockback(stats.knockback_strength, global_position)
+
+func _on_core_range_detector_area_entered(area):
+	in_core_range = true
+
+func _on_core_range_detector_area_exited(area):
+	in_core_range = false

@@ -39,19 +39,11 @@ func _process(delta):
 			trap_placement_instance.modulate = Color.WHITE if can_place(trap_placement_instance, grid_pos) else Color.RED
 
 func _input(event):
-	if state == State.DEFAULT and event.is_action_pressed("Place Trap 1"):
-		if inventory.has_trap_count(TrapData.TrapId.AOE, 1):
-			start_placing(TrapData.TrapId.AOE)
-	elif state == State.DEFAULT and event.is_action_pressed("Place Trap 2"):
-		if inventory.has_trap_count(TrapData.TrapId.Laser, 1):
-			start_placing(TrapData.TrapId.Laser)
-	elif state == State.DEFAULT and event.is_action_pressed("Place Trap 3"):
-		if inventory.has_trap_count(TrapData.TrapId.Knockback, 1):
-			start_placing(TrapData.TrapId.Knockback)
-	
 	if state == State.PLACING and event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			place_trap(trap_placement_instance, snap_to_grid(get_global_mouse_position()))
+		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed: 
+			finish_placement()
 
 func start_placing(trap_placement_id: TrapData.TrapId):
 	state = State.PLACING
@@ -59,10 +51,11 @@ func start_placing(trap_placement_id: TrapData.TrapId):
 	trap_placement_instance = trap_placement_prefab.instantiate()
 	get_tree().root.add_child.call_deferred(trap_placement_instance)
 	trap_placement_instance.call_deferred("init", trap_placement_id)
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 	placement_started.emit()
 
 func can_place(current_trap: TrapStandin, pos: Vector2):
-	if !inventory.has_trap_count(current_trap.id, 1):
+	if !inventory.can_afford(current_trap.id):
 		return false
 	
 	if shape_cast.shape is RectangleShape2D:
@@ -112,8 +105,17 @@ func place_trap(current_trap: TrapStandin, pos: Vector2):
 	get_parent().add_child(new_trap)
 	new_trap.position = pos
 	placed_trap.emit(new_trap)
-	inventory.remove_trap(current_trap.id, 1)
+	inventory.energy -= GlobalTrapData.get_cost(current_trap.id)
+	
+	if !inventory.can_afford(current_trap.id):
+		finish_placement()
+
+func finish_placement():
 	trap_placement_instance.queue_free()
 	state = State.DEFAULT
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	placement_ended.emit()
-	
+
+func on_radial_menu_opened():
+	if state == State.PLACING:
+		finish_placement()
