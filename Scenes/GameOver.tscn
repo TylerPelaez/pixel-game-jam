@@ -21,6 +21,7 @@
 frames = 13
 pause = true
 one_shot = true
+speed_scale = 1.5
 frame_0/texture = ExtResource("2_c87te")
 frame_1/texture = ExtResource("3_mat03")
 frame_1/duration = 1.0
@@ -46,6 +47,36 @@ frame_11/texture = ExtResource("5_4tke3")
 frame_11/duration = 1.0
 frame_12/texture = ExtResource("11_fqilr")
 frame_12/duration = 1.0
+
+[sub_resource type="Animation" id="Animation_ft8rh"]
+resource_name = "FadeIn"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_fade_in_complete"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_0a7jh"]
 length = 0.001
@@ -254,36 +285,6 @@ tracks/4/keys = {
 "values": [0.0, 0.0, 1.0]
 }
 
-[sub_resource type="Animation" id="Animation_ft8rh"]
-resource_name = "FadeIn"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(1, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"on_fade_in_complete"
-}]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qg38h"]
 _data = {
 "FadeIn": SubResource("Animation_ft8rh"),
@@ -328,8 +329,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -465.0
-offset_bottom = 450.0
+offset_left = 815.0
+offset_top = 720.0
+offset_right = 1280.0
+offset_bottom = 1170.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = SubResource("AnimatedTexture_3ue4c")

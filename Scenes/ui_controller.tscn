@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dos2g6h404rdh"]
+[gd_scene load_steps=5 format=3 uid="uid://dos2g6h404rdh"]
 
 [ext_resource type="Script" path="res://Scripts/UI Controller.gd" id="1_p2v83"]
 [ext_resource type="FontFile" uid="uid://cfavqas7l0oja" path="res://acherusgrotesque-regular.otf" id="2_qt38b"]
 [ext_resource type="PackedScene" uid="uid://diohj4tqgqc7s" path="res://Scenes/TestScene.tscn" id="3_4ahno"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_odpvc"]
 
 [node name="UI Controller" type="CanvasLayer"]
 script = ExtResource("1_p2v83")
@@ -26,6 +28,9 @@ size = Vector2i(640, 360)
 render_target_update_mode = 4
 
 [node name="TestScene" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_4ahno")]
+
+[node name="AnimationTree" parent="SubViewportContainer/SubViewport/TestScene/Player" index="6"]
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_odpvc")
 
 [node name="WaveLabel" type="Label" parent="."]
 anchors_preset = 5
@@ -52,5 +57,9 @@ text = "$100"
 [connection signal="new_wave" from="SubViewportContainer/SubViewport/TestScene" to="." method="new_wave" flags=3]
 
 [editable path="SubViewportContainer/SubViewport/TestScene"]
+[editable path="SubViewportContainer/SubViewport/TestScene/Player"]
+[editable path="SubViewportContainer/SubViewport/TestScene/Player/Hurtbox"]
+[editable path="SubViewportContainer/SubViewport/TestScene/Player/SoftCollision"]
+[editable path="SubViewportContainer/SubViewport/TestScene/Player/Hitbox"]
 [editable path="SubViewportContainer/SubViewport/TestScene/Wall3"]
 [editable path="SubViewportContainer/SubViewport/TestScene/Wall2"]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="CombatEngineer"
-run/main_scene="res://Scenes/ui_controller.tscn"
+run/main_scene="res://Scenes/Title Screen.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
 
