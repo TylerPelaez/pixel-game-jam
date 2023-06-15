@@ -165,7 +165,6 @@ disabled = true
 [node name="NavigationRegion2D" parent="." index="5"]
 visible = true
 enabled = false
-travel_cost = 1.0
 
 [node name="AttackCast" type="ShapeCast2D" parent="." index="7"]
 shape = SubResource("CircleShape2D_w44by")

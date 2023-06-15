@@ -395,7 +395,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+"values": [Color(0.639216, 0.619608, 0.619608, 1), Color(0, 0, 0, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -494,7 +494,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(0.639216, 0.619608, 0.619608, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -605,6 +605,9 @@ trap_placement_prefab = ExtResource("9_v4ruk")
 [node name="Wall3" parent="." instance=ExtResource("8_q1nra")]
 position = Vector2(0, -544)
 scale = Vector2(1.2, 1)
+
+[node name="Sprite2D" parent="Wall3" index="1"]
+modulate = Color(0.639216, 0.619608, 0.619608, 1)
 
 [node name="Wall5" parent="." instance=ExtResource("8_q1nra")]
 position = Vector2(0, -112)

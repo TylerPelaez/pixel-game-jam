@@ -3,6 +3,8 @@ class_name PlayerController
 
 signal died
 signal store_opened
+signal moved
+signal attacked
 
 @export var ACCELERATION := 500
 @export var MAX_SPEED := 100
@@ -21,6 +23,7 @@ var scratch_velocity: Vector2 = Vector2.ZERO
 @onready var stats: Stats = $Stats
 @onready var hurtbox = $Hurtbox
 @onready var blink_animation_player: AnimationPlayer = $BlinkAnimationPlayer
+@onready var healthbar: HealthBar = $HealthBar
 
 # initialize as if it was being initialized in _ready
 @onready var animation_tree = $AnimationTree
@@ -31,6 +34,7 @@ var final_placement_animation_playing := false
 var in_core_range: bool = false
 
 func _ready():
+	stats.health_changed.connect(_on_stats_health_changed)
 	reset()
 
 func reset():
@@ -77,6 +81,8 @@ func move_state(delta):
 		animation_state.travel("Run")
 
 		scratch_velocity = scratch_velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
+		
+		moved.emit()
 	else:
 		if state == State.PLACEMENT:
 			animation_state.travel("PlacementOngoing" if !final_placement_animation_playing else "PlacementComplete")
@@ -103,6 +109,7 @@ func _on_Hurtbox_area_entered(area: Area2D):
 
 func got_hit(damage: int):
 	stats.health -= damage
+	
 	hurtbox.start_invincibility(stats.hit_invincibility_time_seconds)
 	_invincibility_started()
 	hurtbox.create_hit_effect()
@@ -145,6 +152,7 @@ func on_placement_ended():
 func start_attack():
 	state = State.ATTACK
 	animation_state.travel("KnockBack")
+	attacked.emit()
 
 func on_attack_animation_complete():
 	state = State.MOVE
@@ -159,3 +167,6 @@ func _on_core_range_detector_area_entered(area):
 
 func _on_core_range_detector_area_exited(area):
 	in_core_range = false
+
+func _on_stats_health_changed(value):
+	healthbar.update(stats.health, stats.max_health)

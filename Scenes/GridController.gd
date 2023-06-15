@@ -46,6 +46,9 @@ func _input(event):
 			finish_placement()
 
 func start_placing(trap_placement_id: TrapData.TrapId):
+	if state == State.PLACING:
+		finish_placement()
+	
 	state = State.PLACING
 	trap_placement_instance = trap_placement_prefab.instantiate()
 	
@@ -114,8 +117,8 @@ func finish_placement():
 	if state == State.PLACING:
 		trap_placement_instance.queue_free()
 		state = State.DEFAULT
-		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 		placement_ended.emit()
+		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
 func on_radial_menu_opened():
 	if state == State.PLACING:

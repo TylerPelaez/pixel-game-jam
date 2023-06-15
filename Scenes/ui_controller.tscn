@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dos2g6h404rdh"]
+[gd_scene load_steps=6 format=3 uid="uid://dos2g6h404rdh"]
 
 [ext_resource type="Script" path="res://Scripts/UI Controller.gd" id="1_p2v83"]
-[ext_resource type="FontFile" uid="uid://cfavqas7l0oja" path="res://acherusgrotesque-regular.otf" id="2_qt38b"]
 [ext_resource type="PackedScene" uid="uid://diohj4tqgqc7s" path="res://Scenes/TestScene.tscn" id="3_4ahno"]
+[ext_resource type="Theme" uid="uid://b4dxdcfcr0qbl" path="res://theme.tres" id="3_60t4w"]
+[ext_resource type="Texture2D" uid="uid://clv3unxis3w5g" path="res://Textures/UI/SmallEnergyIcon.png" id="4_psq8p"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_odpvc"]
 
@@ -32,25 +33,70 @@ render_target_update_mode = 4
 [node name="AnimationTree" parent="SubViewportContainer/SubViewport/TestScene/Player" index="6"]
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_odpvc")
 
-[node name="WaveLabel" type="Label" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -58.0
-offset_right = 58.0
-offset_bottom = 54.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_qt38b")
-theme_override_font_sizes/font_size = 72
-text = "Wave 1"
+[node name="Sprite2D" parent="SubViewportContainer/SubViewport/TestScene/Wall3" index="1"]
+modulate = Color(0.639216, 0.619608, 0.619608, 1)
 
-[node name="EnergyLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 26.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 72
-text = "$100"
+[node name="WaveLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -192.0
+offset_bottom = 68.0
+grow_horizontal = 0
+theme = ExtResource("3_60t4w")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 64
+text = "Wave 1"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+clip_contents = true
+offset_left = 10.0
+offset_right = 130.0
+offset_bottom = 68.0
+theme_override_constants/separation = 5
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_psq8p")
+stretch_mode = 5
+
+[node name="EnergyLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("3_60t4w")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 64
+text = "100"
+vertical_alignment = 1
+
+[node name="TutorialText" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.0
+offset_top = 263.0
+offset_right = 161.0
+offset_bottom = 299.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_60t4w")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 3
+text = "WASD To Move"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="game_lost" from="SubViewportContainer/SubViewport/TestScene" to="." method="on_game_lost"]
 [connection signal="inventory_updated" from="SubViewportContainer/SubViewport/TestScene" to="." method="on_inventory_updated" flags=3]

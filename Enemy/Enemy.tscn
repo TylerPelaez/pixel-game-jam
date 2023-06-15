@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dc8c2m6m4pib0"]
+[gd_scene load_steps=38 format=3 uid="uid://dc8c2m6m4pib0"]
 
 [ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_ffyyh"]
 [ext_resource type="Texture2D" uid="uid://djh3avk8oa4ff" path="res://Textures/Enemy/EnemyCombined.png" id="2_wy6hc"]
@@ -308,6 +308,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_wugyl"]
 resource_name = "IdleLeft"
@@ -501,6 +513,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_27klo"]
 resource_name = "Spawn"
@@ -581,6 +605,10 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_olowl"]
 radius = 6.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0ymti"]
+radius = 3.0
+height = 18.0
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 y_sort_enabled = true
@@ -686,6 +714,14 @@ offset_right = -10.0
 offset_bottom = -34.0
 size_flags_horizontal = 4
 
+[node name="Hitbox" parent="." instance=ExtResource("4_hjfwo")]
+collision_layer = 16384
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(0, -9)
+shape = SubResource("CapsuleShape2D_0ymti")
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="health_changed" from="Stats" to="." method="_on_stats_health_changed" flags=3]
@@ -695,3 +731,4 @@ size_flags_horizontal = 4
 [editable path="Hurtbox"]
 [editable path="SoftCollision"]
 [editable path="Hands/Hitbox"]
+[editable path="Hitbox"]

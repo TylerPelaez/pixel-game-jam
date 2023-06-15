@@ -20,7 +20,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-7, -7, 7, -7, 7, 7, -7
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7s3l"]
 size = Vector2(16, 16)
 
-[node name="Trap" type="Node2D"]
+[node name="Trap" type="Node2D" groups=["Trap"]]
 y_sort_enabled = true
 script = ExtResource("1_1mc55")
 id = 1
