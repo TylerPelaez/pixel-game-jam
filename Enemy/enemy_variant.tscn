@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7rkomb64vkk5"]
+
+[ext_resource type="PackedScene" uid="uid://dc8c2m6m4pib0" path="res://Enemy/Enemy.tscn" id="1_82o7d"]
+[ext_resource type="Texture2D" uid="uid://csyf6w64a2yn" path="res://Textures/Enemy/EnemyVariantCombined.png" id="2_x151c"]
+[ext_resource type="Texture2D" uid="uid://s8rap3i2mjhq" path="res://Textures/Enemy/VariantHands.png" id="3_86yss"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_3cs0d"]
+
+[node name="EnemyVariant" instance=ExtResource("1_82o7d")]
+MAX_SPEED = 25
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_x151c")
+
+[node name="Stats" parent="." index="3"]
+max_health = 5
+
+[node name="AnimationTree" parent="." index="7"]
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_3cs0d")
+
+[node name="Sprite2D" parent="Hands" index="0"]
+texture = ExtResource("3_86yss")
+
+[editable path="Hurtbox"]
+[editable path="SoftCollision"]
+[editable path="Hands/Hitbox"]

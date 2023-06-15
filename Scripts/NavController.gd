@@ -36,10 +36,12 @@ func rebuild_polygon_from_outlines():
 
 func parse_2d_collisionshapes(root_node: Node):
 	for node in root_node.get_children():
+		if node is Trap and node.is_dying:
+			continue
 		if node.get_child_count() > 0:
 			parse_2d_collisionshapes(node)
 	
-		if node is CollisionPolygon2D:
+		if node is CollisionPolygon2D and should_create_outline(node):
 			_add_structure(node)
 
 func merge_outlines(navigation_polygon: NavigationPolygon):
@@ -80,9 +82,14 @@ func merge(current_outline_key: int, adjacent_outline_key: int):
 	
 	outlines.erase(adjacent_outline_key)
 	outlines_to_grids.erase(adjacent_outline_key)
-	
+
+func should_create_outline(collider: CollisionPolygon2D):
+	return !collider.disabled and collider.is_in_group("ImpedesNavigation")
 
 func _add_structure(collider: CollisionPolygon2D):
+	if !should_create_outline(collider):
+		return
+	
 	var grid_pos = grid_controller.world_pos_to_grid_coords(collider.global_position)
 	var collisionpolygon_transform: Transform2D = collider.get_global_transform()
 	var collisionpolygon: PackedVector2Array = collider.polygon
@@ -113,5 +120,5 @@ func add_structure(node: Trap, collider: CollisionPolygon2D):
 	# If this becomes very slow, then do this smarter. For now though, sue me I'm gonna rebuild it all!
 	rebuild_polygon_from_outlines()
 
-func destroy_structure(node: Trap):
+func destroy_structure():
 	reset() # Too hard to figure out rn

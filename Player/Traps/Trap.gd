@@ -1,7 +1,7 @@
 extends Node2D
 class_name Trap
 
-signal on_death(trap: Node2D)
+signal on_death
 
 @export var id: TrapData.TrapId
 @export var attack_capable: bool = true
@@ -14,6 +14,7 @@ signal on_death(trap: Node2D)
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var deployed = false
+var is_dying: bool = false
 
 func _ready():
 	animation_player.play("Deploy")
@@ -42,8 +43,10 @@ func on_attack_finished():
 	is_attacking = false
 
 func _on_stats_no_health():
-	on_death.emit(self)
+	is_dying = true
 	queue_free()
+	on_death.emit()
+
 
 func _on_hurtbox_area_entered(area):
 	if area is Hitbox:

@@ -14,10 +14,12 @@ class_name GameController
 @onready var inventory: Inventory = $Inventory
 
 @export var enemy_prefab: PackedScene
+@export var enemy_variant_prefab: PackedScene
 @export var enemies_per_wave_level = 30
 @export var enemy_spawn_distance = 450
 @export var wave_spawn_time_seconds: float = 30.0
 @export var energy_drop_prefab: PackedScene
+@export_range(0, 1) var variant_percentage: float = 0.5
 
 var wave_counter: int = 1
 var wave_enemy_spawn_limit: int
@@ -46,8 +48,8 @@ func _ready():
 
 func pre_wave():
 	active_spawner_parent = spawners.get_child(randi_range(0, spawners.get_child_count() - 1))
-#	var direction = (active_spawner_parent.global_position - spawners.global_position).normalized()
-#	spawner_visuals_animation_tree.set("parameters/blend_position", direction)
+	var direction = (active_spawner_parent.global_position - spawners.global_position).normalized()
+	spawner_visuals_animation_tree.set("parameters/blend_position", direction)
 
 func start_wave():
 	spawned_enemies_count = 0
@@ -88,7 +90,9 @@ func spawn_enemy():
 	
 	var spawn_pos = pos_a + Vector2((pos_b.x - pos_a.x) * r, (pos_b.y - pos_a.y)  * r2)
 	
-	var enemy = enemy_prefab.instantiate()
+	
+	
+	var enemy = (enemy_variant_prefab if randf() < variant_percentage else enemy_prefab).instantiate()
 	add_child(enemy)
 	enemy.global_position = spawn_pos
 	spawned_enemies_count += 1

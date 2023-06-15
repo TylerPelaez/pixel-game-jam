@@ -55,7 +55,7 @@ one_shot = true
 collision_layer = 0
 collision_mask = 0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavCollider"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavCollider" groups=["ImpedesNavigation"]]
 visible = false
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 
@@ -63,7 +63,6 @@ polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_x31p8")
 navigation_layers = 2
-travel_cost = 3.0
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("3_h0gjx")

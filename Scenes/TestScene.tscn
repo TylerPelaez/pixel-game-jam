@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://diohj4tqgqc7s"]
+[gd_scene load_steps=35 format=3 uid="uid://diohj4tqgqc7s"]
 
 [ext_resource type="Script" path="res://Scenes/GameController.gd" id="1_ja4hw"]
 [ext_resource type="PackedScene" uid="uid://dmhyo6tmrmtsh" path="res://Player/PlayerController.tscn" id="1_xlw7c"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dc8c2m6m4pib0" path="res://Enemy/Enemy.tscn" id="3_50qa3"]
 [ext_resource type="Texture2D" uid="uid://cu8l1p3qgesde" path="res://Textures/Environment/Planet_Ground_Background.png" id="3_bacdg"]
 [ext_resource type="PackedScene" uid="uid://dsbs2o7a6yjsa" path="res://Scenes/EnergyDrop.tscn" id="3_oj0a5"]
+[ext_resource type="PackedScene" uid="uid://c7rkomb64vkk5" path="res://Enemy/enemy_variant.tscn" id="3_paoe5"]
 [ext_resource type="PackedScene" uid="uid://clhjj6y2kg2ux" path="res://Player/Core.tscn" id="5_5uk77"]
 [ext_resource type="PackedScene" uid="uid://bpc4qn3bix2nh" path="res://Scenes/GridController.tscn" id="6_fjncl"]
 [ext_resource type="PackedScene" uid="uid://dos2g6h404rdh" path="res://Scenes/ui_controller.tscn" id="7_epif2"]
@@ -20,9 +21,17 @@
 [ext_resource type="Texture2D" uid="uid://dp7mkerkmtnul" path="res://Textures/Environment/Wire.png" id="18_50f07"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d0f8k"]
-vertices = PackedVector2Array(-336, -192, -336, -544, -89, -544, -89, -519, 304, -192, 89, -519, 304, -544, 89, -544)
+vertices = PackedVector2Array(-336, -176, -336, -544, -89, -544, -89, -519, 320, -176, 89, -519, 320, -544, 89, -544)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(6, 4, 5, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-336, -544, -89, -544, -89, -519, 89, -519, 89, -544, 304, -544, 304, -192, -336, -192)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-336, -544, -89, -544, -89, -519, 89, -519, 89, -544, 320, -544, 320, -176, -336, -176)])
+
+[sub_resource type="Gradient" id="Gradient_kvgfw"]
+offsets = PackedFloat32Array(0, 0.972826)
+colors = PackedColorArray(0.313726, 0.403922, 0.964706, 0.580392, 0.313726, 0.403922, 0.964706, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wunfe"]
+gradient = SubResource("Gradient_kvgfw")
+width = 32
 
 [sub_resource type="Animation" id="Animation_85tdi"]
 resource_name = "BlinkDown"
@@ -43,50 +52,50 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:color")
+tracks/1/path = NodePath("ColorRect:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 0, 0, 0.662745), Color(1, 0, 0, 0), Color(1, 0, 0, 0.662745)]
+"values": [Vector2(-16, 348)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect:position")
+tracks/2/path = NodePath("ColorRect:size")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 336)]
+"values": [Vector2(28, 640)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ColorRect:size")
+tracks/3/path = NodePath("ColorRect:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(32, 608)]
+"values": [-1.5708]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("ColorRect:rotation")
+tracks/4/path = NodePath("ColorRect:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [-1.5708]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_gji1m"]
@@ -108,50 +117,50 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:color")
+tracks/1/path = NodePath("ColorRect:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 0, 0, 0.662745), Color(1, 0, 0, 0), Color(1, 0, 0, 0.662745)]
+"values": [Vector2(-16, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect:position")
+tracks/2/path = NodePath("ColorRect:size")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(32, 348)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ColorRect:size")
+tracks/3/path = NodePath("ColorRect:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(32, 336)]
+"values": [0.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("ColorRect:rotation")
+tracks/4/path = NodePath("ColorRect:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_7v5lm"]
@@ -173,50 +182,50 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:color")
+tracks/1/path = NodePath("ColorRect:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 0, 0, 0.662745), Color(1, 0, 0, 0), Color(1, 0, 0, 0.662745)]
+"values": [Vector2(624, 348)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect:position")
+tracks/2/path = NodePath("ColorRect:size")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(576, 0)]
+"values": [Vector2(32, 348)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ColorRect:size")
+tracks/3/path = NodePath("ColorRect:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(32, 336)]
+"values": [-3.14159]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("ColorRect:rotation")
+tracks/4/path = NodePath("ColorRect:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_mljxb"]
@@ -298,54 +307,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 0, 0, 0.662745)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ColorRect:size")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(32, 336)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("ColorRect:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_euv70"]
 _data = {
@@ -386,6 +347,7 @@ size = Vector2(178, 32)
 y_sort_enabled = true
 script = ExtResource("1_ja4hw")
 enemy_prefab = ExtResource("3_50qa3")
+enemy_variant_prefab = ExtResource("3_paoe5")
 enemies_per_wave_level = 10
 enemy_spawn_distance = 200
 energy_drop_prefab = ExtResource("3_oj0a5")
@@ -403,13 +365,13 @@ region_rect = Rect2(0, 0, 1280, 1280)
 position = Vector2(0, -300)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
-position = Vector2(5, -376)
+position = Vector2(0, -376)
 position_smoothing_speed = 10.0
 script = ExtResource("2_g67e5")
 player = NodePath("../Player")
 
 [node name="Core" parent="." instance=ExtResource("5_5uk77")]
-position = Vector2(96, -400)
+position = Vector2(0, -384)
 
 [node name="GridController" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("6_fjncl")]
 GRID_DIMENSIONS = Vector2i(64, 80)
@@ -418,11 +380,12 @@ trap_placement_prefab = ExtResource("9_v4ruk")
 
 [node name="UI Controller" parent="." instance=ExtResource("7_epif2")]
 
-[node name="Wall" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(-4, -112)
-
 [node name="Wall3" parent="." instance=ExtResource("8_q1nra")]
 position = Vector2(0, -544)
+scale = Vector2(1.2, 1)
+
+[node name="Wall5" parent="." instance=ExtResource("8_q1nra")]
+position = Vector2(0, -112)
 scale = Vector2(1.2, 1)
 
 [node name="Wall2" parent="." instance=ExtResource("8_q1nra")]
@@ -430,11 +393,14 @@ position = Vector2(304, -352)
 rotation = 1.57079
 scale = Vector2(0.7, 1)
 
+[node name="CollisionShape2D" parent="Wall2" index="0"]
+position = Vector2(0.000427246, -48)
+
 [node name="Sprite2D" parent="Wall2" index="1"]
 visible = false
 
 [node name="Wall4" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(-416, -352)
+position = Vector2(-400, -352)
 rotation = 1.57079
 scale = Vector2(0.6, 1)
 
@@ -444,36 +410,74 @@ navigation_polygon = SubResource("NavigationPolygon_d0f8k")
 script = ExtResource("9_r7anm")
 grid_controller = NodePath("../GridController")
 
+[node name="Satellite6" type="Sprite2D" parent="NavigationRegion2D"]
+y_sort_enabled = true
+position = Vector2(256, -352)
+texture = ExtResource("17_hkrs0")
+offset = Vector2(0, -46)
+flip_h = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/Satellite6"]
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/Satellite6/StaticBody2D" groups=["ImpedesNavigation"]]
+polygon = PackedVector2Array(-38, 0, -31, -17, 18, -17, 26, 0)
+
+[node name="Satellite7" type="Sprite2D" parent="NavigationRegion2D"]
+y_sort_enabled = true
+position = Vector2(-256, -352)
+texture = ExtResource("17_hkrs0")
+offset = Vector2(0, -46)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/Satellite7"]
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/Satellite7/StaticBody2D" groups=["ImpedesNavigation"]]
+position = Vector2(11, 0)
+polygon = PackedVector2Array(-38, 0, -31, -17, 18, -17, 26, 0)
+
 [node name="Spawners" type="Node2D" parent="."]
 position = Vector2(0, -384)
 
 [node name="Left" type="Node2D" parent="Spawners"]
-position = Vector2(-288, 16)
+position = Vector2(-302, 16)
 
 [node name="Marker2D12" type="Marker2D" parent="Spawners/Left"]
-position = Vector2(16, 192)
+position = Vector2(14, 144)
 
 [node name="Marker2D19" type="Marker2D" parent="Spawners/Left"]
-position = Vector2(-48, -144)
+position = Vector2(-34, -144)
 
 [node name="Down" type="Node2D" parent="Spawners"]
-position = Vector2(0, 160)
+position = Vector2(0, 174)
 
 [node name="Marker2D39" type="Marker2D" parent="Spawners/Down"]
-position = Vector2(-336, -16)
+position = Vector2(-288, -14)
 
 [node name="Marker2D56" type="Marker2D" parent="Spawners/Down"]
-position = Vector2(272, 48)
+position = Vector2(288, 34)
+
+[node name="Right" type="Node2D" parent="Spawners"]
+position = Vector2(304, 32)
+
+[node name="Marker2D39" type="Marker2D" parent="Spawners/Right"]
+position = Vector2(-16, -160)
+
+[node name="Marker2D56" type="Marker2D" parent="Spawners/Right"]
+position = Vector2(16, 128)
 
 [node name="SpawnerVisuals" type="Node2D" parent="."]
-visible = false
 position = Vector2(-304, -544)
 
-[node name="ColorRect" type="ColorRect" parent="SpawnerVisuals"]
+[node name="ColorRect" type="TextureRect" parent="SpawnerVisuals"]
 visible = false
-offset_right = 32.0
-offset_bottom = 336.0
-color = Color(1, 0, 0, 0.662745)
+offset_left = -16.0
+offset_top = 348.0
+offset_right = 12.0
+offset_bottom = 988.0
+rotation = -1.5708
+texture = SubResource("GradientTexture1D_wunfe")
+expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SpawnerVisuals"]
 libraries = {
@@ -490,7 +494,7 @@ collision_layer = 2048
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(-272, -528, -112, -528, -112, -512, 112, -512, 112, -528, 288, -528, 288, -240, -272, -240)
+polygon = PackedVector2Array(-288, -528, -112, -528, -112, -512, 112, -512, 112, -528, 288, -528, 288, -368, 224, -368, 224, -352, 288, -352, 288, -224, -288, -224, -288, -352, -224, -352, -224, -368, -288, -368)
 
 [node name="Inventory" parent="." instance=ExtResource("11_v0peg")]
 
@@ -543,52 +547,10 @@ position = Vector2(0, -25)
 position = Vector2(0, 9.5)
 shape = SubResource("RectangleShape2D_mkk04")
 
-[node name="Satellite" type="Sprite2D" parent="Background2"]
-y_sort_enabled = true
-position = Vector2(320, -192)
-texture = ExtResource("17_hkrs0")
-offset = Vector2(0, -46)
-
-[node name="Satellite2" type="Sprite2D" parent="Background2"]
-y_sort_enabled = true
-position = Vector2(320, -240)
-texture = ExtResource("17_hkrs0")
-offset = Vector2(0, -46)
-
-[node name="Satellite3" type="Sprite2D" parent="Background2"]
-y_sort_enabled = true
-position = Vector2(320, -288)
-texture = ExtResource("17_hkrs0")
-offset = Vector2(0, -46)
-
-[node name="Satellite4" type="Sprite2D" parent="Background2"]
-y_sort_enabled = true
-position = Vector2(320, -336)
-texture = ExtResource("17_hkrs0")
-offset = Vector2(0, -46)
-
-[node name="Satellite5" type="Sprite2D" parent="Background2"]
-y_sort_enabled = true
-position = Vector2(320, -384)
-texture = ExtResource("17_hkrs0")
-offset = Vector2(0, -46)
-
-[node name="Satellite6" type="Sprite2D" parent="Background2"]
-y_sort_enabled = true
-position = Vector2(320, -432)
-texture = ExtResource("17_hkrs0")
-offset = Vector2(0, -46)
-
-[node name="Satellite7" type="Sprite2D" parent="Background2"]
-y_sort_enabled = true
-position = Vector2(320, -480)
-texture = ExtResource("17_hkrs0")
-offset = Vector2(0, -46)
-
 [node name="Wire" type="Sprite2D" parent="Background2"]
 z_index = -1
 z_as_relative = false
-position = Vector2(80, -472)
+position = Vector2(36, -464)
 texture = ExtResource("18_50f07")
 
 [connection signal="timeout" from="RadialMenuObjects/RadialMenuFollow/ResetTimer" to="RadialMenuObjects/RadialMenuFollow" method="_on_reset_timer_timeout"]

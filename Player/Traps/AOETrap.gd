@@ -25,8 +25,9 @@ func should_attack() -> bool:
 		return false
 
 func on_attack_finished():
-	on_death.emit(self)
+	is_dying = true
 	queue_free()
+	on_death.emit()
 
 func _on_stats_no_health():
 	attack()
