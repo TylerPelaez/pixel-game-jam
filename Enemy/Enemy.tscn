@@ -582,7 +582,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_olowl"]
 radius = 6.0
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 y_sort_enabled = true
 collision_layer = 32
 motion_mode = 1
@@ -636,7 +636,6 @@ path_max_distance = 10.0
 navigation_layers = 3
 avoidance_enabled = true
 radius = 3.0
-debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 1, 1)
 
@@ -671,7 +670,7 @@ hframes = 7
 [node name="Hitbox" parent="Hands" instance=ExtResource("4_hjfwo")]
 collision_layer = 8
 collision_mask = 4
-damage = 2
+damage = 10
 
 [node name="CollisionShape2D" parent="Hands/Hitbox" index="0"]
 shape = SubResource("CircleShape2D_olowl")

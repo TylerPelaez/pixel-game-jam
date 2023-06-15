@@ -45,7 +45,7 @@ _data = {
 "RESET": SubResource("Animation_dovcw")
 }
 
-[node name="EnergyDrop" type="Node2D"]
+[node name="EnergyDrop" type="Node2D" groups=["Energy"]]
 script = ExtResource("1_41fke")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

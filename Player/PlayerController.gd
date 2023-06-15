@@ -11,7 +11,8 @@ signal store_opened
 enum State {
 	MOVE,
 	PLACEMENT,
-	ATTACK
+	ATTACK,
+	FROZEN
 }
 
 var state: State = State.MOVE
@@ -87,6 +88,9 @@ func move_state(delta):
 	
 	if Input.is_action_just_pressed("PlayerAttack"):
 		start_attack()
+
+func freeze():
+	state = State.FROZEN
 
 func move():
 	set_velocity(scratch_velocity)

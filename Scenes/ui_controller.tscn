@@ -1,35 +1,56 @@
-[gd_scene load_steps=3 format=3 uid="uid://dos2g6h404rdh"]
+[gd_scene load_steps=4 format=3 uid="uid://dos2g6h404rdh"]
 
 [ext_resource type="Script" path="res://Scripts/UI Controller.gd" id="1_p2v83"]
 [ext_resource type="FontFile" uid="uid://cfavqas7l0oja" path="res://acherusgrotesque-regular.otf" id="2_qt38b"]
+[ext_resource type="PackedScene" uid="uid://diohj4tqgqc7s" path="res://Scenes/TestScene.tscn" id="3_4ahno"]
 
 [node name="UI Controller" type="CanvasLayer"]
 script = ExtResource("1_p2v83")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 2
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" groups=["GameWorldViewport"]]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1280, 720)
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(640, 360)
 render_target_update_mode = 4
 
-[node name="WaveLabel" type="Label" parent="SubViewportContainer/SubViewport"]
+[node name="TestScene" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_4ahno")]
+
+[node name="WaveLabel" type="Label" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -346.5
-offset_right = -293.5
-offset_bottom = 26.0
+offset_left = -58.0
+offset_right = 58.0
+offset_bottom = 54.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_qt38b")
+theme_override_font_sizes/font_size = 72
 text = "Wave 1"
 
-[node name="EnergyLabel" type="Label" parent="SubViewportContainer/SubViewport"]
+[node name="EnergyLabel" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 26.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 72
 text = "$100"
+
+[connection signal="game_lost" from="SubViewportContainer/SubViewport/TestScene" to="." method="on_game_lost"]
+[connection signal="inventory_updated" from="SubViewportContainer/SubViewport/TestScene" to="." method="on_inventory_updated" flags=3]
+[connection signal="new_wave" from="SubViewportContainer/SubViewport/TestScene" to="." method="new_wave" flags=3]
+
+[editable path="SubViewportContainer/SubViewport/TestScene"]
+[editable path="SubViewportContainer/SubViewport/TestScene/Wall3"]
+[editable path="SubViewportContainer/SubViewport/TestScene/Wall2"]

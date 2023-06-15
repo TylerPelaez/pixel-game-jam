@@ -1,6 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://b4nw32m1ns878"]
+[gd_scene load_steps=23 format=3 uid="uid://b4nw32m1ns878"]
 
-[ext_resource type="Texture2D" uid="uid://bd2nawu2kq336" path="res://Textures/UI/Space_Background.png" id="1_x6451"]
+[ext_resource type="Script" path="res://UI/GameOver.gd" id="1_l1lgd"]
+[ext_resource type="Theme" uid="uid://b4dxdcfcr0qbl" path="res://theme.tres" id="1_ypkgk"]
+[ext_resource type="PackedScene" uid="uid://bdwt20sx0eqq5" path="res://UI/star_holder.tscn" id="2_4hglc"]
 [ext_resource type="Texture2D" uid="uid://cfr5cqgn026e7" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet1.png" id="2_c87te"]
 [ext_resource type="Texture2D" uid="uid://co7moudcbvmgl" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet2.png" id="3_mat03"]
 [ext_resource type="Texture2D" uid="uid://bwyevlx7in4es" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet11.png" id="4_0g67m"]
@@ -10,12 +12,15 @@
 [ext_resource type="Texture2D" uid="uid://dsffl6q7vs5oj" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet5.png" id="8_g1m2b"]
 [ext_resource type="Texture2D" uid="uid://dyenmyr11ka3s" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet6.png" id="9_7n6x2"]
 [ext_resource type="Texture2D" uid="uid://b57msarubnafn" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet7.png" id="10_sw5my"]
+[ext_resource type="Texture2D" uid="uid://deenni1otretm" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet13.png" id="11_fqilr"]
 [ext_resource type="Texture2D" uid="uid://cojjpp6pel72d" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet8.png" id="11_on8vp"]
 [ext_resource type="Texture2D" uid="uid://d0q54t4rjxpli" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet9.png" id="12_dbujv"]
 [ext_resource type="Texture2D" uid="uid://cro8mwy67oh55" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet10.png" id="13_lt8o4"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_3ue4c"]
-frames = 12
+frames = 13
+pause = true
+one_shot = true
 frame_0/texture = ExtResource("2_c87te")
 frame_1/texture = ExtResource("3_mat03")
 frame_1/duration = 1.0
@@ -39,23 +44,283 @@ frame_10/texture = ExtResource("4_0g67m")
 frame_10/duration = 1.0
 frame_11/texture = ExtResource("5_4tke3")
 frame_11/duration = 1.0
+frame_12/texture = ExtResource("11_fqilr")
+frame_12/duration = 1.0
+
+[sub_resource type="Animation" id="Animation_0a7jh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RocketPlanet:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(815, 720)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/MainLabel:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBoxContainer/Subtitle:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VBoxContainer2/TimeSurvivedLabel:visible_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("VBoxContainer2/WavesSurvivedLabel:visible_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HBoxContainer/Restart:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HBoxContainer/MainMenu:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ColorRect:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("ColorRect:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_tgofu"]
+resource_name = "Scroll"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RocketPlanet:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(0.34151, 1),
+"update": 0,
+"values": [Vector2(815, 720), Vector2(815, 270)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_scroll_complete"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_l7fvs"]
+resource_name = "ShowText"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/MainLabel:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/Subtitle:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_show_text_complete"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VBoxContainer2/TimeSurvivedLabel:visible_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("VBoxContainer2/WavesSurvivedLabel:visible_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_ft8rh"]
+resource_name = "FadeIn"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_fade_in_complete"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qg38h"]
+_data = {
+"FadeIn": SubResource("Animation_ft8rh"),
+"RESET": SubResource("Animation_0a7jh"),
+"Scroll": SubResource("Animation_tgofu"),
+"ShowText": SubResource("Animation_l7fvs")
+}
 
 [node name="GameOver" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ypkgk")
+script = ExtResource("1_l1lgd")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 2
-offset_right = 1280.0
-offset_bottom = 720.0
-texture = ExtResource("1_x6451")
-expand_mode = 1
-stretch_mode = 4
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="StarHolder" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_4hglc")]
 
 [node name="RocketPlanet" type="TextureRect" parent="."]
 layout_mode = 2
@@ -64,7 +329,121 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -465.0
-offset_top = -450.0
+offset_bottom = 450.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = SubResource("AnimatedTexture_3ue4c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qg38h")
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 100.0
+offset_bottom = 264.0
+grow_horizontal = 2
+
+[node name="MainLabel" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.627451, 0.67451, 0.94902, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "[center]PIXEL CORE DESTROYED[/center]"
+fit_content = true
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Subtitle" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.627451, 0.67451, 0.94902, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]You must leave this planet[/center]"
+fit_content = true
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 250.0
+offset_top = -420.0
+offset_right = 250.0
+offset_bottom = -220.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 18
+
+[node name="TimeSurvivedLabel" type="RichTextLabel" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.627451, 0.67451, 0.94902, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Time Survived: 00:00:00"
+fit_content = true
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="WavesSurvivedLabel" type="RichTextLabel" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.627451, 0.67451, 0.94902, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Waves Survived: 17"
+fit_content = true
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 246.0
+offset_top = -249.0
+offset_right = -634.0
+offset_bottom = -189.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 36
+alignment = 1
+
+[node name="Restart" type="Button" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Restart"
+
+[node name="MainMenu" type="Button" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Main Menu"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="HBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="HBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

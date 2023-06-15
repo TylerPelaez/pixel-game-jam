@@ -1,6 +1,9 @@
 extends Node2D
 class_name Core
 
+signal death_started
+signal died
+
 @export var no_damage_texture: Texture2D
 @export var light_damage_texture: Texture2D
 @export var medium_damage_texture: Texture2D
@@ -12,19 +15,26 @@ class_name Core
 @onready var healthbar: HealthBar = $HealthBar
 @onready var sprite: Sprite2D = $Sprite2D
 
+var dying = false
+
 func _on_stats_no_health():
-	print("Core Dead!")
-	queue_free()
+	death_started.emit()
+	dying = true
+
+func play_death_animation():
+	animation_player.play("Death")
 
 func _on_hurtbox_area_entered(area: Area2D):
-	if area is Hitbox and !hurtbox.invincible:
+	if area is Hitbox and !hurtbox.invincible and !dying:
 		got_hit(area.damage)
 
 func got_hit(damage):
 	stats.health -= damage
-	hurtbox.start_invincibility(stats.hit_invincibility_time_seconds)
-	_invincibility_started()
-	hurtbox.create_hit_effect()
+	if stats.health > 0:
+		hurtbox.start_invincibility(stats.hit_invincibility_time_seconds)
+		_invincibility_started()
+		hurtbox.create_hit_effect()
+	
 	healthbar.update(stats.health, stats.max_health)
 	
 	var health_pct = float(stats.health) / float(stats.max_health)
@@ -44,10 +54,9 @@ func got_hit(damage):
 func _on_Hurtbox_invincibility_ended():
 	animation_player.play("RESET")
 
-func _invincibility_started():
-	if stats.health <= 0:
-		# Play death anim
-		print_debug("DIED AND ANIMATION ATTEMPT")
-		return
-	
+func _invincibility_started():	
 	animation_player.play("Flash")
+
+func _on_death_animation_complete():
+	died.emit()
+	queue_free()

@@ -54,11 +54,11 @@ func _ready():
 
 func reset():
 	state = State.SPAWN
-	var cores = get_tree().get_nodes_in_group(&"Core")
-	if cores.size() != 1:
+	var core = get_tree().get_first_node_in_group(&"Core")
+	if core == null:
 		push_error("Found Non-1 number of cores!")
 		return
-	target = cores[0]
+	target = core
 	
 	animation_tree.active = true
 	

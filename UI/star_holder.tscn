@@ -1,0 +1,1665 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdwt20sx0eqq5"]
+
+[ext_resource type="Script" path="res://UI/star_holder.gd" id="1_6rxen"]
+[ext_resource type="Texture2D" uid="uid://bd2nawu2kq336" path="res://Textures/UI/Space_Background.png" id="1_8xuce"]
+[ext_resource type="Texture2D" uid="uid://d2t0c7cbja7sv" path="res://Textures/UI/Star1.png" id="2_52c2k"]
+[ext_resource type="Texture2D" uid="uid://dvfw7kur7yrlt" path="res://Textures/UI/Star2.png" id="3_v6mqg"]
+[ext_resource type="Texture2D" uid="uid://c8bnopkjisolx" path="res://Textures/UI/Star3.png" id="4_ml68r"]
+[ext_resource type="Texture2D" uid="uid://brnblh0205yu3" path="res://Textures/UI/Star4.png" id="5_kblf5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gqvtm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_52c2k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_v6mqg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ml68r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kblf5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ml68r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_v6mqg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="StarHolder" type="Node2D"]
+script = ExtResource("1_6rxen")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("1_8xuce")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1280, 1440)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="Stars" type="Node2D" parent="."]
+
+[node name="Star" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star2" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(78, 26)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star3" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(57, 115)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star4" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(132, 82)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star5" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(140, 134)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star6" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(233, 48)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star7" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(297, 41)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star8" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(293, 86)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star9" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(272, 120)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star10" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(289, 154)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star11" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(354, 52)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star12" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(377, 86)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star13" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(411, 130)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star14" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(415, 90)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star15" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(446, 30)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star16" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(542, 111)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star17" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(567, 60)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star18" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(546, 158)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star19" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(571, 138)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star20" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(632, 78)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star21" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(674, 138)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star22" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(723, 52)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star23" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(815, 215)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star24" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(846, 177)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star25" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(898, 181)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star26" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(850, 219)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star27" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(987, 270)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star28" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1022, 223)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star29" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1107, 227)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star30" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1111, 185)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star31" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1179, 119)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star112" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(515, 444)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star113" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(652, 495)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star114" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(687, 448)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star115" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(772, 452)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star194" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(600, 204)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star195" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(635, 157)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star196" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(720, 161)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star197" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(724, 119)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star198" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(792, 53)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star199" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(128, 378)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star200" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(265, 429)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star201" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(300, 382)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star202" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(385, 386)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star116" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(776, 410)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star117" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(844, 344)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star32" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1144, 82)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star33" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(991, 48)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star135" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(30, 273)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star136" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(98, 289)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star137" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(77, 378)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star138" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(152, 345)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star139" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(160, 397)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star140" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(253, 311)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star141" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(317, 304)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star142" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(313, 349)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star143" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(292, 383)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star144" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(309, 417)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star145" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(374, 315)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star146" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(397, 349)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star147" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(431, 393)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star148" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(435, 353)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star149" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(466, 293)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star150" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(562, 374)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star151" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(587, 323)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star152" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(566, 421)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star153" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(591, 401)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star154" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(652, 341)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star155" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(694, 401)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star156" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(743, 315)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star157" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(835, 478)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star158" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(866, 440)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star159" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(918, 444)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star160" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(870, 482)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star161" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1007, 533)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star162" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1042, 486)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star163" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1127, 490)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star164" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1131, 448)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star165" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1199, 382)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star166" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(535, 707)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star167" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(370, 152)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star168" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(707, 711)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star169" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(792, 715)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star170" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(796, 673)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star171" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(864, 607)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star172" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1164, 345)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star173" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1011, 311)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star34" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1115, 189)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star35" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1183, 231)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star36" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1220, 266)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star131" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(644, 228)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star132" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(237, 561)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star133" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(456, 157)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star134" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(685, 375)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star37" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1107, 274)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star38" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(995, 278)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star127" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(111, 479)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star128" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(330, 75)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star129" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(559, 293)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star130" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(334, 305)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star118" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(108, 365)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star119" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(391, 441)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star120" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(12, 326)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star121" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(204, 432)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star122" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(332, 412)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star123" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(508, 493)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star124" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(837, 393)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star125" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(649, 322)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star126" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(653, 552)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star39" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(854, 278)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star40" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(765, 282)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star41" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(731, 237)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star42" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(596, 241)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star43" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(550, 282)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star174" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(807, 496)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star175" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(695, 500)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star176" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(157, 308)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star177" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(30, 297)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star178" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(259, 515)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star179" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(34, 527)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star180" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(154, 194)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star181" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(91, 663)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star182" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(58, 155)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star183" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(250, 261)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star184" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(32, 634)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star185" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(208, 715)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star186" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(537, 615)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star187" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(349, 544)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star188" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(51, 168)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star189" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(554, 500)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star190" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(465, 504)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star191" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(431, 459)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star192" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(296, 463)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star193" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(250, 504)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star44" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(470, 234)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star45" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(342, 280)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star46" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(301, 230)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star47" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(301, 230)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star48" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(347, 200)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star49" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(263, 289)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star50" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(201, 277)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star51" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(230, 238)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star52" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(75, 283)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star53" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(98, 237)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star54" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(21, 330)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star55" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(23, 414)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star56" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(35, 485)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star57" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(80, 528)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star58" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(41, 574)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star59" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(103, 590)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star60" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(35, 617)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star61" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(90, 615)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star62" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(143, 597)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star63" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(239, 590)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star64" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(280, 576)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star65" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(338, 578)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star66" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(334, 532)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star67" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(289, 520)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star68" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(319, 467)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star69" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(260, 458)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star70" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(285, 437)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star71" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(360, 412)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star72" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(412, 367)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star73" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(442, 408)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star74" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(442, 433)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star75" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(465, 478)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star76" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(476, 547)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star77" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(423, 576)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star78" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(438, 543)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star79" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(536, 534)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star80" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(580, 512)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star81" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(625, 399)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star82" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(585, 359)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star83" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(524, 332)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star84" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(463, 330)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star85" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(416, 312)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star86" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(416, 312)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star87" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(515, 621)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star88" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(629, 662)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star89" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(655, 636)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star90" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(735, 666)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star91" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(757, 605)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star92" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(837, 674)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star93" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(837, 674)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star94" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(722, 687)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star95" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(314, 690)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star96" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(259, 658)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star97" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(136, 632)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star98" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(932, 323)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star99" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1219, 640)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star100" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1179, 629)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star101" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1109, 692)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star102" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1241, 692)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star103" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1206, 309)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star104" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1206, 309)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star105" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1119, 245)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star106" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1057, 308)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star107" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1001, 251)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star108" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(954, 162)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star109" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(928, 130)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star110" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(878, 78)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star111" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(850, 44)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star203" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(10, 723)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star204" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(78, 739)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star205" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(57, 828)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star206" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(132, 795)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star207" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(140, 847)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star208" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(233, 761)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star209" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(297, 754)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star210" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(293, 799)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star211" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(272, 833)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star212" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(289, 867)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star213" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(354, 765)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star214" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(377, 799)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star215" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(411, 843)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star216" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(415, 803)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star217" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(446, 743)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star218" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(542, 824)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star219" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(567, 773)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star220" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(546, 871)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star221" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(571, 851)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star222" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(632, 791)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star223" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(674, 851)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star224" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(723, 765)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star225" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(815, 928)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star226" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(846, 890)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star227" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(898, 894)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star228" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(850, 932)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star229" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(987, 983)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star230" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1022, 936)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star231" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1107, 940)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star232" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1111, 898)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star233" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1179, 832)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star234" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(515, 1157)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star235" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(652, 1208)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star236" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(687, 1161)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star237" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(772, 1165)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star238" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(600, 917)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star239" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(635, 870)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star240" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(720, 874)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star241" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(724, 832)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star242" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(792, 766)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star243" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(128, 1091)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star244" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(265, 1142)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star245" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(300, 1095)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star246" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(385, 1099)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star247" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(776, 1123)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star248" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(844, 1057)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star249" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1144, 795)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star250" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(991, 761)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star251" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(30, 986)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star252" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(98, 1002)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star253" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(77, 1091)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star254" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(152, 1058)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star255" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(160, 1110)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star256" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(253, 1024)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star257" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(317, 1017)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star258" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(313, 1062)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star259" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(292, 1096)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star260" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(309, 1130)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star261" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(374, 1028)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star262" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(397, 1062)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star263" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(431, 1106)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star264" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(435, 1066)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star265" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(466, 1006)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star266" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(562, 1087)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star267" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(587, 1036)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star268" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(566, 1134)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star269" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(591, 1114)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star270" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(652, 1054)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star271" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(694, 1114)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star272" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(743, 1028)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star273" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(835, 1191)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star274" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(866, 1153)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star275" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(918, 1157)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star276" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(870, 1195)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star277" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1007, 1246)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star278" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1042, 1199)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star279" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1127, 1203)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star280" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1131, 1161)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star281" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1199, 1095)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star282" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(535, 1420)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star283" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(370, 865)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star284" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(707, 1424)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star285" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(792, 1428)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star286" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(796, 1386)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star287" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(864, 1320)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star288" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1164, 1058)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star289" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1011, 1024)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star290" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1115, 902)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star291" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1183, 944)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star292" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1220, 979)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star293" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(644, 941)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star294" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(237, 1274)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star295" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(456, 870)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star296" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(685, 1088)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star297" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1107, 987)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star298" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(995, 991)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star299" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(111, 1192)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star300" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(330, 788)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star301" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(559, 1006)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star302" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(334, 1018)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star303" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(108, 1078)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star304" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(391, 1154)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star305" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(12, 1039)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star306" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(204, 1145)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star307" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(332, 1125)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star308" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(508, 1206)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star309" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(837, 1106)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star310" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(649, 1035)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star311" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(653, 1265)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star312" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(854, 991)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star313" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(765, 995)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star314" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(731, 950)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star315" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(596, 954)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star316" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(550, 995)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star317" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(807, 1209)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star318" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(695, 1213)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star319" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(157, 1021)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star320" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(30, 1010)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star321" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(259, 1228)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star322" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(34, 1240)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star323" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(154, 907)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star324" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(91, 1376)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star325" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(58, 868)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star326" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(250, 974)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star327" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(32, 1347)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star328" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(208, 1428)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star329" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(537, 1328)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star330" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(349, 1257)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star331" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(51, 881)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star332" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(554, 1213)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star333" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(465, 1217)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star334" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(431, 1172)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star335" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(296, 1176)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star336" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(250, 1217)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star337" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(470, 947)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star338" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(342, 993)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star339" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(301, 943)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star340" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(301, 943)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star341" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(347, 913)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star342" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(263, 1002)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star343" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(201, 990)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star344" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(230, 951)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star345" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(75, 996)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star346" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(98, 950)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star347" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(21, 1043)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star348" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(23, 1127)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star349" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(35, 1198)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star350" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(80, 1241)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star351" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(41, 1287)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star352" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(103, 1303)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star353" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(35, 1330)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star354" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(90, 1328)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star355" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(143, 1310)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star356" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(239, 1303)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star357" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(280, 1289)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star358" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(338, 1291)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star359" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(334, 1245)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star360" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(289, 1233)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star361" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(319, 1180)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star362" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(260, 1171)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star363" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(285, 1150)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star364" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(360, 1125)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star365" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(412, 1080)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star366" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(442, 1121)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star367" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(442, 1146)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star368" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(465, 1191)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star369" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(476, 1260)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star370" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(423, 1289)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star371" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(438, 1256)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star372" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(536, 1247)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star373" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(580, 1225)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star374" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(625, 1112)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star375" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(585, 1072)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star376" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(524, 1045)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star377" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(463, 1043)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star378" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(416, 1025)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star379" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(416, 1025)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star380" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(515, 1334)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star381" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(629, 1375)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star382" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(655, 1349)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star383" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(735, 1379)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star384" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(757, 1318)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star385" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(837, 1387)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star386" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(837, 1387)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star387" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(722, 1400)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star388" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(314, 1403)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star389" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(259, 1371)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star390" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(136, 1345)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star391" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(932, 1036)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star392" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1219, 1353)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star393" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1179, 1342)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star394" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1109, 1405)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star395" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1241, 1405)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star396" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1206, 1022)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star397" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1206, 1022)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star398" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1119, 958)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star399" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1057, 1021)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star400" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(1001, 964)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star401" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(954, 875)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star402" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(928, 843)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star403" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(878, 791)
+sprite_frames = SubResource("SpriteFrames_gqvtm")
+
+[node name="Star404" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(850, 757)
+sprite_frames = SubResource("SpriteFrames_gqvtm")

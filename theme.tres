@@ -1,0 +1,23 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://b4dxdcfcr0qbl"]
+
+[ext_resource type="FontFile" uid="uid://br3lmu4r0fnm8" path="res://chary___.ttf" id="1_4bmld"]
+[ext_resource type="StyleBox" uid="uid://bpgrgo1utk76d" path="res://hover_style.tres" id="1_58l86"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33uob"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.156863, 0.156863, 0.156863, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[resource]
+default_font = ExtResource("1_4bmld")
+default_font_size = 32
+Button/styles/hover = ExtResource("1_58l86")
+Button/styles/normal = SubResource("StyleBoxFlat_33uob")
+Button/styles/pressed = SubResource("StyleBoxFlat_33uob")

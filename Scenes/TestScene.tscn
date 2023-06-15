@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://diohj4tqgqc7s"]
+[gd_scene load_steps=38 format=3 uid="uid://diohj4tqgqc7s"]
 
 [ext_resource type="Script" path="res://Scenes/GameController.gd" id="1_ja4hw"]
 [ext_resource type="PackedScene" uid="uid://dmhyo6tmrmtsh" path="res://Player/PlayerController.tscn" id="1_xlw7c"]
@@ -9,17 +9,17 @@
 [ext_resource type="PackedScene" uid="uid://c7rkomb64vkk5" path="res://Enemy/enemy_variant.tscn" id="3_paoe5"]
 [ext_resource type="PackedScene" uid="uid://clhjj6y2kg2ux" path="res://Player/Core.tscn" id="5_5uk77"]
 [ext_resource type="PackedScene" uid="uid://bpc4qn3bix2nh" path="res://Scenes/GridController.tscn" id="6_fjncl"]
-[ext_resource type="PackedScene" uid="uid://dos2g6h404rdh" path="res://Scenes/ui_controller.tscn" id="7_epif2"]
 [ext_resource type="PackedScene" uid="uid://d1nu2tugkl7u8" path="res://Scenes/wall.tscn" id="8_q1nra"]
 [ext_resource type="Script" path="res://Scripts/NavController.gd" id="9_r7anm"]
 [ext_resource type="PackedScene" uid="uid://bcruqu6j56sxy" path="res://Player/Traps/TrapStandin.tscn" id="9_v4ruk"]
 [ext_resource type="PackedScene" uid="uid://c206v4c4ft2mf" path="res://Scenes/Inventory.tscn" id="11_v0peg"]
-[ext_resource type="PackedScene" uid="uid://b4nw32m1ns878" path="res://Scenes/GameOver.tscn" id="12_tgtse"]
 [ext_resource type="Script" path="res://Scripts/RadialMenuFollow.gd" id="14_k1f3b"]
 [ext_resource type="PackedScene" uid="uid://c4p6sq8o3f2h5" path="res://UI/radial_menu.tscn" id="15_nq4b4"]
 [ext_resource type="Texture2D" uid="uid://cw00scmuvh4xw" path="res://Textures/Environment/Base.png" id="16_dtrga"]
 [ext_resource type="Texture2D" uid="uid://3kck6rmy0gcr" path="res://Textures/Environment/Satellite.png" id="17_hkrs0"]
 [ext_resource type="Texture2D" uid="uid://dp7mkerkmtnul" path="res://Textures/Environment/Wire.png" id="18_50f07"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_fgtqn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d0f8k"]
 vertices = PackedVector2Array(-336, -176, -336, -544, -89, -544, -89, -519, 320, -176, 89, -519, 320, -544, 89, -544)
@@ -344,7 +344,226 @@ blend_mode = 1
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mkk04"]
 size = Vector2(178, 32)
 
-[node name="TestScene" type="Node2D"]
+[sub_resource type="Animation" id="Animation_aysnl"]
+resource_name = "Death"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpawnerVisuals:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_orchestrator_complete"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Wall3/Sprite2D:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NavigationRegion2D/Satellite6:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NavigationRegion2D/Satellite7:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Background2/Wire:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Background2/Base:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Player/Sprite2D:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_q5j2x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpawnerVisuals:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Wall3/Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NavigationRegion2D/Satellite6:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NavigationRegion2D/Satellite7:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Background2/Wire:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Background2/Base:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Player/Sprite2D:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_utle3"]
+_data = {
+"Death": SubResource("Animation_aysnl"),
+"RESET": SubResource("Animation_q5j2x")
+}
+
+[node name="TestScene" type="Node2D" groups=["scene_root"]]
 y_sort_enabled = true
 script = ExtResource("1_ja4hw")
 enemy_prefab = ExtResource("3_50qa3")
@@ -366,6 +585,9 @@ region_rect = Rect2(0, 0, 1280, 1280)
 [node name="Player" parent="." instance=ExtResource("1_xlw7c")]
 position = Vector2(0, -300)
 
+[node name="AnimationTree" parent="Player" index="6"]
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_fgtqn")
+
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(0, -376)
 position_smoothing_speed = 10.0
@@ -379,10 +601,6 @@ position = Vector2(0, -384)
 GRID_DIMENSIONS = Vector2i(64, 80)
 inventory = NodePath("../Inventory")
 trap_placement_prefab = ExtResource("9_v4ruk")
-
-[node name="UI Controller" parent="." instance=ExtResource("7_epif2")]
-
-[node name="GameOver" parent="UI Controller" instance=ExtResource("12_tgtse")]
 
 [node name="Wall3" parent="." instance=ExtResource("8_q1nra")]
 position = Vector2(0, -544)
@@ -556,6 +774,7 @@ position = Vector2(-272, -512)
 position = Vector2(272, -240)
 
 [node name="Background2" type="Node2D" parent="."]
+modulate = Color(0, 0, 0, 1)
 y_sort_enabled = true
 
 [node name="Base" type="Sprite2D" parent="Background2"]
@@ -577,6 +796,17 @@ z_as_relative = false
 position = Vector2(36, -464)
 texture = ExtResource("18_50f07")
 
+[node name="CoreDeathOrchestrator" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_utle3")
+}
+
 [connection signal="timeout" from="RadialMenuObjects/RadialMenuFollow/ResetTimer" to="RadialMenuObjects/RadialMenuFollow" method="_on_reset_timer_timeout"]
 
+[editable path="Player"]
+[editable path="Player/Hurtbox"]
+[editable path="Player/SoftCollision"]
+[editable path="Player/Hitbox"]
+[editable path="Wall3"]
 [editable path="Wall2"]

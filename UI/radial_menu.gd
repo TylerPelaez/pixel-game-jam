@@ -53,5 +53,5 @@ func _input(event):
 	highlighted_box.set_highlight(true)
 	current_selection = highlighted_box
 	
-func get_currently_selected_trap() -> TrapData.TrapId:
-	return current_selection.trap_id
+func get_currently_selected_trap():
+	return null if current_selection == null else current_selection.trap_id

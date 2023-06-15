@@ -43,6 +43,7 @@ func _physics_process(delta):
 		animation_player.play("RESET")
 
 func spawn_explosions():
+	var scene_root = get_tree().get_first_node_in_group("scene_root")
 	for i in explosion_count:
 		var theta = theta_constant * i
 		var r = sqrt(i)
@@ -50,5 +51,6 @@ func spawn_explosions():
 		var pos = global_position + Vector2.from_angle(theta) * r * explosion_size
 		
 		var instance = explosion.instantiate()
-		get_tree().root.add_child(instance)
+		
+		scene_root.add_child(instance)
 		instance.global_position =  pos

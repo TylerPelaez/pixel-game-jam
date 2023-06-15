@@ -1,13 +1,19 @@
 extends Node2D
 class_name GameController
 
-@onready var ui_controller: UIController = $"UI Controller"
+signal inventory_updated(inventory: Inventory)
+signal new_wave(wave_number: int)
+signal game_lost(wave_number: int, time_elapsed: int)
+
 @onready var grid_controller: GridController = $GridController
 @onready var player: PlayerController = $Player
 @onready var nav_controller: NavController = $NavigationRegion2D
 @onready var spawners: Node2D = $Spawners
 @onready var radial_menu_follow = $RadialMenuObjects/RadialMenuFollow
 @onready var radial_menu: RadialMenu = $RadialMenuObjects/RadialMenuFollow/RadialMenu
+
+@onready var core: Core = $Core
+@onready var core_death_orchestrator = $CoreDeathOrchestrator 
 
 @onready var spawner_visuals_animation_tree: AnimationTree = $SpawnerVisuals/AnimationTree
 
@@ -29,7 +35,12 @@ var wave_start_time: float
 var dead_enemies_count: int
 var active_spawner_parent: Node2D
 
+var start_time
+
+var loss_animation_started: bool = false
+
 func _ready():
+	start_time = Time.get_ticks_msec()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	grid_controller.placement_started.connect(player.on_placement_started)
 	grid_controller.placement_started.connect(radial_menu_follow.start_follow_mouse)
@@ -38,12 +49,15 @@ func _ready():
 	grid_controller.placed_trap.connect(func(trap: Trap): nav_controller.add_structure(trap, trap.nav_collision_polygon))
 	grid_controller.placed_trap.connect(func(trap): player.on_placement())
 	
+	core.death_started.connect(core_death_start)
+	core.died.connect(func(): game_lost.emit(wave_counter - 1, Time.get_ticks_msec() - start_time))
+	
 	radial_menu.opened.connect(on_radial_menu_opened)
 	radial_menu.closed.connect(on_radial_menu_closed)
 	
 	spawner_visuals_animation_tree.active = true
-	inventory.updated.connect(ui_controller.on_inventory_updated)
-	ui_controller.on_inventory_updated(inventory)
+	inventory.updated.connect(func(_val): inventory_updated.emit(inventory))
+	inventory_updated.emit(inventory)
 	pre_wave()
 
 func pre_wave():
@@ -61,10 +75,13 @@ func start_wave():
 func end_wave():
 	wave_counter += 1
 	wave_active = false
-	ui_controller.new_wave(wave_counter)
+	new_wave.emit(wave_counter)
 	pre_wave()
 
 func _process(delta):
+	if loss_animation_started:
+		get_tree().call_group("Energy", "queue_free")
+	
 	if !wave_active:
 		if Input.is_action_just_pressed("Start Wave"):
 			start_wave()
@@ -76,6 +93,8 @@ func _process(delta):
 			spawn_enemy()
 
 func _input(event):
+	if loss_animation_started:
+		return
 	if event.is_action_pressed("Open Radial Menu"):
 		radial_menu.set_open(true)
 	elif event.is_action_released("Open Radial Menu"):
@@ -121,3 +140,15 @@ func on_radial_menu_closed():
 	var current_trap = radial_menu.get_currently_selected_trap()
 	if current_trap != null:
 		grid_controller.start_placing(current_trap)
+
+func core_death_start():
+	loss_animation_started = true
+	grid_controller.finish_placement()
+	radial_menu.set_open(false)
+	wave_active = false
+	get_tree().call_group("Enemy", "die")
+
+	core_death_orchestrator.play("Death")
+	
+func on_orchestrator_complete():
+	core.play_death_animation()

@@ -47,9 +47,9 @@ func _input(event):
 
 func start_placing(trap_placement_id: TrapData.TrapId):
 	state = State.PLACING
-	
 	trap_placement_instance = trap_placement_prefab.instantiate()
-	get_tree().root.add_child.call_deferred(trap_placement_instance)
+	
+	get_parent().add_child.call_deferred(trap_placement_instance)
 	trap_placement_instance.call_deferred("init", trap_placement_id)
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 	placement_started.emit()
@@ -111,10 +111,11 @@ func place_trap(current_trap: TrapStandin, pos: Vector2):
 		finish_placement()
 
 func finish_placement():
-	trap_placement_instance.queue_free()
-	state = State.DEFAULT
-	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
-	placement_ended.emit()
+	if state == State.PLACING:
+		trap_placement_instance.queue_free()
+		state = State.DEFAULT
+		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+		placement_ended.emit()
 
 func on_radial_menu_opened():
 	if state == State.PLACING:

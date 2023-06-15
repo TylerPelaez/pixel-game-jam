@@ -8,6 +8,7 @@ script = ExtResource("1_dhhbf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="invincibility_ended" from="." to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="." to="." method="_on_Hurtbox_invincibility_started"]
