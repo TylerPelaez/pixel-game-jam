@@ -90,8 +90,6 @@ func spawn_enemy():
 	
 	var spawn_pos = pos_a + Vector2((pos_b.x - pos_a.x) * r, (pos_b.y - pos_a.y)  * r2)
 	
-	
-	
 	var enemy = (enemy_variant_prefab if randf() < variant_percentage else enemy_prefab).instantiate()
 	add_child(enemy)
 	enemy.global_position = spawn_pos

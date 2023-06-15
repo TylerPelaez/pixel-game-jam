@@ -1,9 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://clhjj6y2kg2ux"]
+[gd_scene load_steps=14 format=3 uid="uid://clhjj6y2kg2ux"]
 
 [ext_resource type="Script" path="res://Player/Core.gd" id="1_05bff"]
 [ext_resource type="Texture2D" uid="uid://b3n25hx24s1x5" path="res://Textures/Environment/Pixel_Core_In_the_Ground-Sheet.png" id="2_4i60h"]
 [ext_resource type="PackedScene" uid="uid://cbibtl5k17ewk" path="res://Overlap/Hurtbox.tscn" id="2_lcxv0"]
+[ext_resource type="Texture2D" uid="uid://1tuw8nsl6lig" path="res://Textures/Environment/Pixel_Core_Light_Damage_with_Small_Cracks-Sheet.png" id="3_pfclt"]
+[ext_resource type="Texture2D" uid="uid://ccm7x2y6pn7v2" path="res://Textures/Environment/Pixel_Core_Heavy_Damage_with_Large_Cracks-Sheet.png" id="4_lds4k"]
 [ext_resource type="Script" path="res://Scripts/Stats/Stats.gd" id="4_ww6hr"]
+[ext_resource type="Texture2D" uid="uid://bnc0c08lyuxd3" path="res://Textures/Environment/Pixel_Core_Too_Much_Damage_with_Dim_Light.png" id="5_hr3jf"]
+[ext_resource type="PackedScene" uid="uid://bx56f6muq82tr" path="res://UI/HealthBar.tscn" id="5_l0q6n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_achx4"]
 height = 85.0
@@ -52,6 +56,10 @@ height = 148.0
 [node name="Core" type="Node2D" groups=["Core"]]
 y_sort_enabled = true
 script = ExtResource("1_05bff")
+no_damage_texture = ExtResource("2_4i60h")
+light_damage_texture = ExtResource("3_pfclt")
+medium_damage_texture = ExtResource("4_lds4k")
+heavy_damage_texture = ExtResource("5_hr3jf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_4i60h")
@@ -92,6 +100,13 @@ collision_mask = 0
 position = Vector2(0, -5)
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_sg7dx")
+
+[node name="HealthBar" parent="." instance=ExtResource("5_l0q6n")]
+offset_left = -20.0
+offset_top = -40.0
+offset_right = -20.0
+offset_bottom = -40.0
+scale = Vector2(2, 1)
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
