@@ -133,8 +133,7 @@ visible = false
 visible = false
 
 [node name="NavigationRegion2D" parent="." index="5"]
-enter_cost = 100.0
-travel_cost = 1.0
+travel_cost = 2.0
 
 [node name="Stats" parent="." index="6"]
 knockback_strength = 500.0

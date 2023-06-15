@@ -351,6 +351,7 @@ enemy_variant_prefab = ExtResource("3_paoe5")
 enemies_per_wave_level = 10
 enemy_spawn_distance = 200
 energy_drop_prefab = ExtResource("3_oj0a5")
+variant_percentage = 0.25
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -2
@@ -418,10 +419,21 @@ offset = Vector2(0, -46)
 flip_h = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/Satellite6"]
+position = Vector2(-11, 0)
+collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/Satellite6/StaticBody2D" groups=["ImpedesNavigation"]]
-polygon = PackedVector2Array(-38, 0, -31, -17, 18, -17, 26, 0)
+position = Vector2(11, 0)
+polygon = PackedVector2Array(-41, -4, -36, -16, -33, -20, -29, -22, 17, -22, 21, -20, 24, -16, 29, -4, 28, 1, 25, 4, -38, 4, -40, 1)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="NavigationRegion2D/Satellite6"]
+position = Vector2(-11, 0)
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/Satellite6/StaticBody2D2"]
+position = Vector2(11, 0)
+polygon = PackedVector2Array(-37, -4, -31.567, -15.7715, -28, -18, 16, -18, 19, -16, 25, -4, 23, 0, -35, 0)
 
 [node name="Satellite7" type="Sprite2D" parent="NavigationRegion2D"]
 y_sort_enabled = true
@@ -430,11 +442,19 @@ texture = ExtResource("17_hkrs0")
 offset = Vector2(0, -46)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/Satellite7"]
+collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/Satellite7/StaticBody2D" groups=["ImpedesNavigation"]]
 position = Vector2(11, 0)
-polygon = PackedVector2Array(-38, 0, -31, -17, 18, -17, 26, 0)
+polygon = PackedVector2Array(-41, -4, -36, -16, -33, -20, -29, -22, 17, -22, 21, -20, 24, -16, 29, -4, 28, 1, 25, 4, -38, 4, -40, 1)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="NavigationRegion2D/Satellite7"]
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/Satellite7/StaticBody2D2"]
+position = Vector2(11, 0)
+polygon = PackedVector2Array(-37, -4, -31.567, -15.7715, -28, -18, 16, -18, 19, -16, 25, -4, 23, 0, -35, 0)
 
 [node name="Spawners" type="Node2D" parent="."]
 position = Vector2(0, -384)
@@ -490,6 +510,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/blend_position = Vector2(0, 0)
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 2048
 collision_mask = 0
 

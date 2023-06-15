@@ -598,7 +598,6 @@ hframes = 23
 frame = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_lwlm7")
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_vranu")]
@@ -637,6 +636,7 @@ path_max_distance = 10.0
 navigation_layers = 3
 avoidance_enabled = true
 radius = 3.0
+debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 1, 1)
 
