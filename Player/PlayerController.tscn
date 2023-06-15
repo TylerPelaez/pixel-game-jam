@@ -868,7 +868,6 @@ collision_layer = 1024
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Knockback"]
-position = Vector2(0, -10)
 shape = ExtResource("7_kjl6o")
 disabled = true
 

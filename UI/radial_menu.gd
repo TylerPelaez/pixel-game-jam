@@ -6,11 +6,15 @@ signal closed
 
 @onready var top_box: UITrapBox = $TopBox
 @onready var right_box: UITrapBox = $RightBox
-@onready var bottom_box: UITrapBox = $BottomBox
-@onready var left_box: UITrapBox = $LeftBox
-@onready var fill_order := [left_box, top_box, right_box, bottom_box]
 
-var current_radial_pos := Vector2.ZERO
+@onready var left_box: UITrapBox = $LeftBox
+@onready var fill_order := [left_box, top_box, right_box]
+@onready var indicator: Sprite2D = $Indicator
+
+@onready var name_label: Label = $InfoBox/VBoxContainer/Name
+@onready var cost_label: Label = $InfoBox/VBoxContainer/HBoxContainer/Cost
+
+var current_radial_pos := Vector2.RIGHT
 var current_selection : UITrapBox  
 
 func _ready():
@@ -19,6 +23,10 @@ func _ready():
 		var id = TrapData.TrapId.get(trap_id)
 		fill_order[i].set_trap(id)
 		i += 1
+
+
+func _process(delta):
+	indicator.rotation = Vector2.ZERO.angle_to_point(current_radial_pos)
 
 func energy_count_updated(new_amount):
 	var i = 0
@@ -35,8 +43,8 @@ func _input(event):
 	if !visible:
 		return
 	if event is InputEventMouseMotion:
-		current_radial_pos.x = clamp(current_radial_pos.x + (event.relative.x / 10.0), -1, 1)
-		current_radial_pos.y = clamp(current_radial_pos.y + (event.relative.y / 10.0), -1, 1)
+		current_radial_pos.x = clamp(current_radial_pos.x + (event.relative.x / 20.0), -1, 1)
+		current_radial_pos.y = clamp(current_radial_pos.y + (event.relative.y / 20.0), -1, 1)
 		current_radial_pos = current_radial_pos.normalized()
 		
 	
@@ -51,6 +59,8 @@ func _input(event):
 			highlighted_box = box
 	
 	highlighted_box.set_highlight(true)
+	name_label.text = GlobalTrapData.get_name_for_trap(highlighted_box.trap_id)
+	cost_label.text = str(GlobalTrapData.get_cost(highlighted_box.trap_id))
 	current_selection = highlighted_box
 	
 func get_currently_selected_trap():

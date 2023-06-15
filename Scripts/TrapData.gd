@@ -12,18 +12,21 @@ var db = {
 		"trap": preload("res://Player/Traps/KnockbackTrap.tscn"),
 		"ui_icon": preload("res://Textures/Player/Traps/KnockbackIcon.png"),
 		"placement_offset": Vector2(0, -12),
-		"cost": 10
+		"cost": 10,
+		"name": "Knockback"
 	},
 	TrapId.AOE: {
 		"trap": preload("res://Player/Traps/aoe_trap.tscn"),
 		"ui_icon": preload("res://Textures/Player/Traps/LandmineIcon.png"),
 		"placement_offset": Vector2(0, 4),
-		"cost": 10
+		"cost": 10,
+		"name": "Landmine"
 	},
 	TrapId.Laser: {
 		"trap": preload("res://Player/Traps/laser_trap.tscn"),
 		"ui_icon": preload("res://Textures/Player/Traps/LaserIcon.png"),
-		"cost": 20
+		"cost": 20,
+		"name": "Laser"
 	}
 }
 
@@ -38,3 +41,6 @@ func get_ui_icon_placement_offset(id: TrapId) -> Vector2:
 
 func get_cost(id: TrapId) -> int:
 	return db[id]["cost"]
+
+func get_name_for_trap(id: TrapId):
+	return db[id]["name"]
