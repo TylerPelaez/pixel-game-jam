@@ -670,7 +670,7 @@ hframes = 7
 [node name="Hitbox" parent="Hands" instance=ExtResource("4_hjfwo")]
 collision_layer = 8
 collision_mask = 4
-damage = 10
+damage = 2
 
 [node name="CollisionShape2D" parent="Hands/Hitbox" index="0"]
 shape = SubResource("CircleShape2D_olowl")
