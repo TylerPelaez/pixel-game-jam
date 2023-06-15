@@ -110,7 +110,6 @@ func move_state(delta):
 				waiting_to_attack_target_pos = attack_target_pos
 				waiting_to_attack_core = is_core
 				return
-				
 
 			start_attack(attack_target_pos, is_core)
 			return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://diohj4tqgqc7s"]
+[gd_scene load_steps=36 format=3 uid="uid://diohj4tqgqc7s"]
 
 [ext_resource type="Script" path="res://Scenes/GameController.gd" id="1_ja4hw"]
 [ext_resource type="PackedScene" uid="uid://dmhyo6tmrmtsh" path="res://Player/PlayerController.tscn" id="1_xlw7c"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Scripts/NavController.gd" id="9_r7anm"]
 [ext_resource type="PackedScene" uid="uid://bcruqu6j56sxy" path="res://Player/Traps/TrapStandin.tscn" id="9_v4ruk"]
 [ext_resource type="PackedScene" uid="uid://c206v4c4ft2mf" path="res://Scenes/Inventory.tscn" id="11_v0peg"]
+[ext_resource type="PackedScene" uid="uid://b4nw32m1ns878" path="res://Scenes/GameOver.tscn" id="12_tgtse"]
 [ext_resource type="Script" path="res://Scripts/RadialMenuFollow.gd" id="14_k1f3b"]
 [ext_resource type="PackedScene" uid="uid://c4p6sq8o3f2h5" path="res://UI/radial_menu.tscn" id="15_nq4b4"]
 [ext_resource type="Texture2D" uid="uid://cw00scmuvh4xw" path="res://Textures/Environment/Base.png" id="16_dtrga"]
@@ -380,6 +381,8 @@ inventory = NodePath("../Inventory")
 trap_placement_prefab = ExtResource("9_v4ruk")
 
 [node name="UI Controller" parent="." instance=ExtResource("7_epif2")]
+
+[node name="GameOver" parent="UI Controller" instance=ExtResource("12_tgtse")]
 
 [node name="Wall3" parent="." instance=ExtResource("8_q1nra")]
 position = Vector2(0, -544)

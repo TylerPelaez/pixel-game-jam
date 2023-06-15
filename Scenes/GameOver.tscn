@@ -1,0 +1,70 @@
+[gd_scene load_steps=15 format=3 uid="uid://b4nw32m1ns878"]
+
+[ext_resource type="Texture2D" uid="uid://bd2nawu2kq336" path="res://Textures/UI/Space_Background.png" id="1_x6451"]
+[ext_resource type="Texture2D" uid="uid://cfr5cqgn026e7" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet1.png" id="2_c87te"]
+[ext_resource type="Texture2D" uid="uid://co7moudcbvmgl" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet2.png" id="3_mat03"]
+[ext_resource type="Texture2D" uid="uid://bwyevlx7in4es" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet11.png" id="4_0g67m"]
+[ext_resource type="Texture2D" uid="uid://dbmjaucn665h3" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet12.png" id="5_4tke3"]
+[ext_resource type="Texture2D" uid="uid://dxwfatnuiw4q3" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet3.png" id="6_s4ekh"]
+[ext_resource type="Texture2D" uid="uid://0lg0o7gn827d" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet4.png" id="7_qwk0b"]
+[ext_resource type="Texture2D" uid="uid://dsffl6q7vs5oj" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet5.png" id="8_g1m2b"]
+[ext_resource type="Texture2D" uid="uid://dyenmyr11ka3s" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet6.png" id="9_7n6x2"]
+[ext_resource type="Texture2D" uid="uid://b57msarubnafn" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet7.png" id="10_sw5my"]
+[ext_resource type="Texture2D" uid="uid://cojjpp6pel72d" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet8.png" id="11_on8vp"]
+[ext_resource type="Texture2D" uid="uid://d0q54t4rjxpli" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet9.png" id="12_dbujv"]
+[ext_resource type="Texture2D" uid="uid://cro8mwy67oh55" path="res://Textures/UI/RocketAnim/Planet_and_Rocket_Background-Sheet10.png" id="13_lt8o4"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_3ue4c"]
+frames = 12
+frame_0/texture = ExtResource("2_c87te")
+frame_1/texture = ExtResource("3_mat03")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("6_s4ekh")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("7_qwk0b")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("8_g1m2b")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("9_7n6x2")
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("10_sw5my")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("11_on8vp")
+frame_7/duration = 1.0
+frame_8/texture = ExtResource("12_dbujv")
+frame_8/duration = 1.0
+frame_9/texture = ExtResource("13_lt8o4")
+frame_9/duration = 1.0
+frame_10/texture = ExtResource("4_0g67m")
+frame_10/duration = 1.0
+frame_11/texture = ExtResource("5_4tke3")
+frame_11/duration = 1.0
+
+[node name="GameOver" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("1_x6451")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RocketPlanet" type="TextureRect" parent="."]
+layout_mode = 2
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -465.0
+offset_top = -450.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("AnimatedTexture_3ue4c")
