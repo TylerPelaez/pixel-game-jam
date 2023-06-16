@@ -59,7 +59,7 @@ func start_placing(trap_placement_id: TrapData.TrapId):
 	
 	get_parent().add_child.call_deferred(trap_placement_instance)
 	trap_placement_instance.call_deferred("init", trap_placement_id)
-	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	placement_started.emit()
 
 func can_place(current_trap: TrapStandin, pos: Vector2):
