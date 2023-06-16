@@ -2,6 +2,11 @@ extends Node2D
 
 signal collected(amount: int)
 
+
+@onready var sfx_1: AudioStream = preload("res://MusicSound/Gem_Pickup_1.mp3")
+@onready var sfx_2: AudioStream = preload("res://MusicSound/Gem_Pickup_2.mp3")
+@onready var sfx_3: AudioStream = preload("res://MusicSound/Gem_Pickup_3.mp3")
+
 @onready var sprite: Sprite2D = $Sprite2D
 var amount: int = 10
 
@@ -25,6 +30,17 @@ func _process(delta):
 		var to_target = global_position.direction_to(suck_target.global_position)
 		global_position += to_target * suck_speed * delta
 		if global_position.distance_to(suck_target.global_position) < suck_complete_distance:
+			var rand = randf()
+			var stream
+			if rand < 0.33:
+				stream = sfx_1
+			elif rand < 0.66:
+				stream = sfx_2
+			else:
+				stream = sfx_3
+			
+			SfxController.play_gem_sfx(stream)
+			
 			collected.emit(amount)
 			queue_free()
 	

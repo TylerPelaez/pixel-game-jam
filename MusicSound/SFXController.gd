@@ -4,6 +4,7 @@ extends Node2D
 
 @onready var trap_sfx = $TrapSFX
 @onready var enemy_sfx = $EnemySFX
+@onready var gem_sfx = $GemSFX
 
 func play_trap_sfx(stream: AudioStream):
 	play_audio_in_group(trap_sfx, stream)
@@ -19,6 +20,10 @@ func play_audio_in_group(group: Node2D, stream: AudioStream):
 
 func play_enemy_sfx(stream: AudioStream):
 	play_audio_in_group(enemy_sfx, stream)
+	
+func play_gem_sfx(stream: AudioStream):
+#	play_audio_in_group(gem_sfx, stream)
+	pass
 
 func play_one_off(stream: AudioStream):
 	var fx = one_off_prefab.instantiate()

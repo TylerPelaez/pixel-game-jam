@@ -38,17 +38,21 @@ func _on_scroll_complete():
 	scroll_complete = true
 
 func _on_play_pressed():
-	showing_backstory = true
-	animation_player.play("ShowBackstory")
+	if !showing_backstory:
+		showing_backstory = true
+		animation_player.play("ShowBackstory")
 
 func _on_credits_pressed():
-	animation_player.play("Show Credits")
+	if !showing_backstory:
+		animation_player.play("Show Credits")
 
 func _on_quit_pressed():
-	get_tree().quit()
+	if !showing_backstory:
+		get_tree().quit()
 
 func _on_credits_back_pressed():
-	animation_player.play("Hide Credits")
+	if !showing_backstory:
+		animation_player.play("Hide Credits")
 	
 func _on_backstory_complete():
 	get_tree().change_scene_to_packed(game_scene)

@@ -126,6 +126,7 @@ func start_wave():
 	wave_start_time = Time.get_ticks_msec()
 	wave_active	= true
 	wave_started.emit()
+	MusicController.fade_gameplay_music()
 
 func end_wave():
 	core.got_hit(-current_wave_makeup.core_health_reward)

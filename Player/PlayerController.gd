@@ -20,6 +20,8 @@ enum State {
 var state: State = State.MOVE
 var scratch_velocity: Vector2 = Vector2.ZERO
 
+@onready var melee_sfx: AudioStream = preload("res://MusicSound/Knockback_Trap_SFX.mp3")
+
 @onready var stats: Stats = $Stats
 @onready var hurtbox = $Hurtbox
 @onready var blink_animation_player: AnimationPlayer = $BlinkAnimationPlayer
@@ -146,6 +148,7 @@ func start_attack():
 	state = State.ATTACK
 	animation_state.travel("KnockBack")
 	attacked.emit()
+	SfxController.play_one_off(melee_sfx)
 
 func on_attack_animation_complete():
 	state = State.MOVE

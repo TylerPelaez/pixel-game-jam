@@ -994,6 +994,7 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_156xp")
+volume_db = -6.0
 bus = &"Sound"
 
 [connection signal="timeout" from="RadialMenuObjects/RadialMenuFollow/ResetTimer" to="RadialMenuObjects/RadialMenuFollow" method="_on_reset_timer_timeout"]
