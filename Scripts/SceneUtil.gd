@@ -5,7 +5,7 @@ extends Node
 
 var game_world_viewport: SubViewport
 
-var tutorial_completed: bool = true
+var tutorial_completed: bool = false
 
 func start_game():
 	get_tree().change_scene_to_packed(game_scene)

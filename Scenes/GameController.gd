@@ -130,7 +130,7 @@ func _process(delta):
 	if loss_animation_started:
 		get_tree().call_group("Energy", "queue_free")
 	
-	if !wave_active:
+	if !wave_active and !loss_animation_started:
 		if Input.is_action_just_pressed("Start Wave"):
 			start_wave()
 	elif spawned_enemies_count < wave_enemy_spawn_limit:
