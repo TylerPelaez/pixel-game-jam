@@ -7,6 +7,10 @@ class_name UIController
 @onready var energy_label: Label = $HBoxContainer/EnergyLabel
 @onready var game_scene: GameController = $SubViewportContainer/SubViewport/TestScene
 @onready var tutorial_label: Label = $TutorialText
+@onready var energy_holder: HBoxContainer = $HBoxContainer
+@onready var respawning_text: Label = $RespawningText
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 var tutorial_state: TutorialState = TutorialState.COMPLETE
 
@@ -24,6 +28,12 @@ func _ready():
 	game_scene.trap_placed.connect(on_trap_placed)
 	game_scene.wave_started.connect(on_wave_started)
 	game_scene.trap_cancelled.connect(on_trap_cancel)
+	game_scene.player_died.connect(on_player_died)
+
+func on_game_over_started():
+	respawning_text.visible = false
+	wave_label.visible = false
+	energy_holder.visible = false
 
 func on_game_lost(wave_number: int, time_elapsed: int):
 	game_scene.queue_free()
@@ -46,6 +56,12 @@ enum TutorialState {
 	START_WAVE,
 	COMPLETE
 }
+
+func on_player_died():
+	animation_player.play("PlayerRespawningAnimation")
+
+func on_player_respawn_animation_complete():
+	game_scene.spawn_player()
 
 func on_player_moved():
 	if tutorial_state == TutorialState.MOVE:
@@ -84,3 +100,4 @@ func on_wave_started():
 
 func on_tutorial_complete():
 	tutorial_label.queue_free()
+

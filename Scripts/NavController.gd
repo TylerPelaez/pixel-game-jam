@@ -31,6 +31,7 @@ func rebuild_polygon_from_outlines():
 	var new_navigation_polygon = original_navigation_polygon.duplicate()
 	merge_outlines(new_navigation_polygon)
 	new_navigation_polygon.make_polygons_from_outlines()
+	var newpoly = original_navigation_polygon.get_vertices()
 	set_navigation_polygon(new_navigation_polygon)
 	NavigationServer2D.region_set_navigation_polygon(get_region_rid(), navigation_polygon)
 
@@ -87,21 +88,27 @@ func should_create_outline(collider: CollisionPolygon2D):
 	return !collider.disabled and collider.is_in_group("ImpedesNavigation")
 
 func _add_structure(collider: CollisionPolygon2D):
-	if !should_create_outline(collider):
-		return
-	
-	var grid_pos = grid_controller.world_pos_to_grid_coords(collider.global_position)
+	if !should_create_outline(collider) || !(collider is NavGridImpediment):
+		return	
+
 	var collisionpolygon_transform: Transform2D = collider.get_global_transform()
 	var collisionpolygon: PackedVector2Array = collider.polygon
 	
-	var new_collision_outline: PackedVector2Array = collisionpolygon_transform * collisionpolygon
+	var grid_pos = grid_controller.world_pos_to_grid_coords(collider.global_position)
+	var grid_positions = []
+	for slot_offset in collider.slots_taken_up:
+		grid_positions.append(grid_pos + slot_offset)
 	
-	grid_to_outline[grid_pos.x][grid_pos.y] = outline_count
+	var new_collision_outline: PackedVector2Array = collisionpolygon_transform * collisionpolygon
 	outlines[outline_count] = new_collision_outline
-	if !outlines_to_grids.has(outline_count):
-		outlines_to_grids[outline_count] = []
-		
-	outlines_to_grids[outline_count].append(grid_pos)
+	
+	for pos in grid_positions:
+		grid_to_outline[pos.x][pos.y] = outline_count
+
+		if !outlines_to_grids.has(outline_count):
+			outlines_to_grids[outline_count] = []
+			
+		outlines_to_grids[outline_count].append(pos)
 	outline_count += 1
 	
 	

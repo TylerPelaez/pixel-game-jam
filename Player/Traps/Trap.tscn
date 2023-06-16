@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwr11fohp87hh"]
+[gd_scene load_steps=10 format=3 uid="uid://bwr11fohp87hh"]
 
 [ext_resource type="Script" path="res://Player/Traps/Trap.gd" id="1_1mc55"]
 [ext_resource type="Texture2D" uid="uid://bk3x2b2lstbcf" path="res://Textures/Player/Traps/Landmine.png" id="2_b3ye4"]
 [ext_resource type="Script" path="res://Scripts/Stats/Stats.gd" id="3_h0gjx"]
+[ext_resource type="Script" path="res://Scripts/NavGridImpediment.gd" id="3_uxfxp"]
 [ext_resource type="PackedScene" uid="uid://cbibtl5k17ewk" path="res://Overlap/Hurtbox.tscn" id="4_csj2m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4be0o"]
@@ -58,6 +59,7 @@ collision_mask = 0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavCollider" groups=["ImpedesNavigation"]]
 visible = false
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+script = ExtResource("3_uxfxp")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false

@@ -1,11 +1,85 @@
-[gd_scene load_steps=6 format=3 uid="uid://dos2g6h404rdh"]
+[gd_scene load_steps=8 format=3 uid="uid://dos2g6h404rdh"]
 
 [ext_resource type="Script" path="res://Scripts/UI Controller.gd" id="1_p2v83"]
 [ext_resource type="PackedScene" uid="uid://diohj4tqgqc7s" path="res://Scenes/TestScene.tscn" id="3_4ahno"]
 [ext_resource type="Theme" uid="uid://b4dxdcfcr0qbl" path="res://theme.tres" id="3_60t4w"]
 [ext_resource type="Texture2D" uid="uid://clv3unxis3w5g" path="res://Textures/UI/SmallEnergyIcon.png" id="4_psq8p"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_odpvc"]
+[sub_resource type="Animation" id="Animation_v7pm3"]
+resource_name = "PlayerRespawningAnimation"
+length = 5.0
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RespawningText:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": ["Returning in 5...", "Returning in 4...", "Returning in 3...", "Returning in 2...", "Returning in 1..."]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RespawningText:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_player_respawn_animation_complete"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_dq6b7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RespawningText:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Respawning in 5..."]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RespawningText:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ctq8d"]
+_data = {
+"PlayerRespawningAnimation": SubResource("Animation_v7pm3"),
+"RESET": SubResource("Animation_dq6b7")
+}
 
 [node name="UI Controller" type="CanvasLayer"]
 script = ExtResource("1_p2v83")
@@ -29,9 +103,8 @@ size = Vector2i(640, 360)
 render_target_update_mode = 4
 
 [node name="TestScene" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_4ahno")]
-
-[node name="AnimationTree" parent="SubViewportContainer/SubViewport/TestScene/Player" index="6"]
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_odpvc")
+starting_energy = 9999
+starting_wave = 30
 
 [node name="RadialMenuFollow" parent="SubViewportContainer/SubViewport/TestScene/RadialMenuObjects" index="0"]
 offset = Vector2(20, 20)
@@ -54,7 +127,7 @@ horizontal_alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 clip_contents = true
 offset_left = 10.0
-offset_right = 130.0
+offset_right = 250.0
 offset_bottom = 68.0
 theme_override_constants/separation = 5
 
@@ -68,13 +141,14 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 6.8
 theme = ExtResource("3_60t4w")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 4
 theme_override_font_sizes/font_size = 64
-text = "100"
+text = "9999999"
 vertical_alignment = 1
 
 [node name="TutorialText" type="Label" parent="."]
@@ -98,14 +172,32 @@ text = "WASD To Move"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="RespawningText" type="Label" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_60t4w")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_font_sizes/font_size = 72
+text = "Respawning in 5..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ctq8d")
+}
+
 [connection signal="game_lost" from="SubViewportContainer/SubViewport/TestScene" to="." method="on_game_lost"]
 [connection signal="inventory_updated" from="SubViewportContainer/SubViewport/TestScene" to="." method="on_inventory_updated" flags=3]
 [connection signal="new_wave" from="SubViewportContainer/SubViewport/TestScene" to="." method="new_wave" flags=3]
 
 [editable path="SubViewportContainer/SubViewport/TestScene"]
-[editable path="SubViewportContainer/SubViewport/TestScene/Player"]
-[editable path="SubViewportContainer/SubViewport/TestScene/Player/Hurtbox"]
-[editable path="SubViewportContainer/SubViewport/TestScene/Player/SoftCollision"]
-[editable path="SubViewportContainer/SubViewport/TestScene/Player/Hitbox"]
 [editable path="SubViewportContainer/SubViewport/TestScene/Wall3"]
 [editable path="SubViewportContainer/SubViewport/TestScene/Wall2"]

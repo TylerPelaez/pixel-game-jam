@@ -134,7 +134,7 @@ func _invincibility_started():
 
 func _on_stats_no_health():
 	emit_signal("died")
-	print("Died")
+	queue_free()
 
 func on_placement_started():
 	state = State.PLACEMENT

@@ -108,7 +108,6 @@ PlayerAttack={
 2d_physics/layer_13="Collectible"
 2d_physics/layer_14="CoreRange"
 2d_physics/layer_15="EnemyContactHitbox"
-2d_physics/layer_16="PlayerCollectionRange"
 2d_physics/default_edge_connection_margin=3
 
 [navigation]

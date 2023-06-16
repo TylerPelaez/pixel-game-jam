@@ -11,13 +11,16 @@ signal radial_menu_opened
 signal trap_placed
 signal wave_started
 signal trap_cancelled
+signal player_died
 
 @onready var grid_controller: GridController = $GridController
-@onready var player: PlayerController = $Player
+
 @onready var nav_controller: NavController = $NavigationRegion2D
 @onready var spawners: Node2D = $Spawners
 @onready var radial_menu_follow = $RadialMenuObjects/RadialMenuFollow
 @onready var radial_menu: RadialMenu = $RadialMenuObjects/RadialMenuFollow/RadialMenu
+
+@onready var player_spawner: Node2D = $PlayerSpawnLocation
 
 @onready var core: Core = $Core
 @onready var core_death_orchestrator = $CoreDeathOrchestrator 
@@ -34,9 +37,12 @@ signal trap_cancelled
 @export var energy_drop_prefab: PackedScene
 @export_range(0, 1) var variant_percentage: float = 0.5
 @export var starting_energy: int = 50
+@export var player_prefab: PackedScene = preload("res://Player/PlayerController.tscn")
+@export var starting_wave: int = 1
 
+var player: PlayerController
 
-var wave_counter: int = 1
+var wave_counter: int = starting_wave
 var wave_enemy_spawn_limit: int
 var spawned_enemies_count: int
 var wave_active: bool = false
@@ -51,6 +57,9 @@ var loss_animation_started: bool = false
 func _ready():
 	start_time = Time.get_ticks_msec()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	spawn_player()
+	
 	grid_controller.placement_started.connect(player.on_placement_started)
 	grid_controller.placement_started.connect(radial_menu_follow.start_follow_mouse)
 	grid_controller.placement_ended.connect(player.on_placement_ended)
@@ -79,6 +88,16 @@ func _ready():
 	player.attacked.connect(func(): player_meleed.emit())
 	
 	pre_wave()
+
+
+func spawn_player():
+	player = player_prefab.instantiate()
+	add_child(player)
+	player.global_position = player_spawner.global_position
+	player.died.connect(on_player_death)
+
+func on_player_death():
+	player_died.emit()
 
 func pre_wave():
 	active_spawner_parent = spawners.get_child(randi_range(0, spawners.get_child_count() - 1))
@@ -124,7 +143,6 @@ func _input(event):
 		radial_menu.set_open(false)
 
 func spawn_enemy():
-	var player_pos = player.global_position
 	var pos_a: Vector2 = active_spawner_parent.get_child(0).global_position
 	var pos_b: Vector2 = active_spawner_parent.get_child(1).global_position
 	var r = randf()
@@ -173,7 +191,9 @@ func core_death_start():
 	wave_active = false
 	get_tree().call_group("Enemy", "die")
 	get_tree().call_group("Trap", "queue_free")
-
+	
+	if player != null:
+		player.healthbar.visible = false
 	core_death_orchestrator.play("Death")
 	
 func on_orchestrator_complete():

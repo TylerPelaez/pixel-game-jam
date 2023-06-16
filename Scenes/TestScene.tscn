@@ -1,7 +1,6 @@
-[gd_scene load_steps=38 format=3 uid="uid://diohj4tqgqc7s"]
+[gd_scene load_steps=37 format=3 uid="uid://diohj4tqgqc7s"]
 
 [ext_resource type="Script" path="res://Scenes/GameController.gd" id="1_ja4hw"]
-[ext_resource type="PackedScene" uid="uid://dmhyo6tmrmtsh" path="res://Player/PlayerController.tscn" id="1_xlw7c"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="2_g67e5"]
 [ext_resource type="PackedScene" uid="uid://dc8c2m6m4pib0" path="res://Enemy/Enemy.tscn" id="3_50qa3"]
 [ext_resource type="Texture2D" uid="uid://cu8l1p3qgesde" path="res://Textures/Environment/Planet_Ground_Background.png" id="3_bacdg"]
@@ -13,18 +12,17 @@
 [ext_resource type="Script" path="res://Scripts/NavController.gd" id="9_r7anm"]
 [ext_resource type="PackedScene" uid="uid://bcruqu6j56sxy" path="res://Player/Traps/TrapStandin.tscn" id="9_v4ruk"]
 [ext_resource type="PackedScene" uid="uid://c206v4c4ft2mf" path="res://Scenes/Inventory.tscn" id="11_v0peg"]
+[ext_resource type="Script" path="res://Scripts/NavGridImpediment.gd" id="13_aq8qu"]
 [ext_resource type="Script" path="res://Scripts/RadialMenuFollow.gd" id="14_k1f3b"]
 [ext_resource type="PackedScene" uid="uid://c4p6sq8o3f2h5" path="res://UI/radial_menu.tscn" id="15_nq4b4"]
 [ext_resource type="Texture2D" uid="uid://cw00scmuvh4xw" path="res://Textures/Environment/Base.png" id="16_dtrga"]
 [ext_resource type="Texture2D" uid="uid://3kck6rmy0gcr" path="res://Textures/Environment/Satellite.png" id="17_hkrs0"]
 [ext_resource type="Texture2D" uid="uid://dp7mkerkmtnul" path="res://Textures/Environment/Wire.png" id="18_50f07"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_fgtqn"]
-
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d0f8k"]
-vertices = PackedVector2Array(-336, -176, -336, -544, -89, -544, -89, -519, 320, -176, 89, -519, 320, -544, 89, -544)
+vertices = PackedVector2Array(-336, -176, -336, -544, -96, -544, -96, -512, 320, -176, 96, -512, 320, -544, 96, -544)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(6, 4, 5, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-336, -544, -89, -544, -89, -519, 89, -519, 89, -544, 320, -544, 320, -176, -336, -176)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-336, -544, -96, -544, -96, -512, 96, -512, 96, -544, 320, -544, 320, -176, -336, -176)])
 
 [sub_resource type="Gradient" id="Gradient_kvgfw"]
 offsets = PackedFloat32Array(0, 0.972826)
@@ -445,42 +443,6 @@ tracks/7/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Player/Sprite2D:modulate")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(1, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Player/HealthBar:visible")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("../../../HBoxContainer:visible")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_q5j2x"]
 length = 0.001
@@ -568,42 +530,6 @@ tracks/6/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Player/Sprite2D:modulate")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Player/HealthBar:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("../../../HBoxContainer:visible")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_utle3"]
 _data = {
@@ -630,17 +556,14 @@ offset = Vector2(0, -324)
 region_enabled = true
 region_rect = Rect2(0, 0, 1280, 1280)
 
-[node name="Player" parent="." instance=ExtResource("1_xlw7c")]
+[node name="PlayerSpawnLocation" type="Node2D" parent="."]
 position = Vector2(0, -300)
-
-[node name="AnimationTree" parent="Player" index="6"]
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_fgtqn")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(0, -376)
 position_smoothing_speed = 10.0
 script = ExtResource("2_g67e5")
-player = NodePath("../Player")
+player = NodePath("")
 
 [node name="Core" parent="." instance=ExtResource("5_5uk77")]
 position = Vector2(0, -384)
@@ -696,8 +619,10 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/Satellite6/StaticBody2D" groups=["ImpedesNavigation"]]
-position = Vector2(11, 0)
-polygon = PackedVector2Array(-41, -4, -36, -16, -33, -20, -29, -22, 17, -22, 21, -20, 24, -16, 29, -4, 28, 1, 25, 4, -38, 4, -40, 1)
+position = Vector2(8, -2)
+polygon = PackedVector2Array(-38, -2, -33, -14, -30, -18, -26, -20, 20, -20, 24, -18, 27, -14, 32, -2, 31, 3, 28, 6, -35, 6, -37, 3)
+script = ExtResource("13_aq8qu")
+slots_taken_up = Array[Vector2i]([Vector2i(0, 0), Vector2i(1, 0), Vector2i(-1, 0)])
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="NavigationRegion2D/Satellite6"]
 position = Vector2(-11, 0)
@@ -705,7 +630,7 @@ collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/Satellite6/StaticBody2D2"]
 position = Vector2(11, 0)
-polygon = PackedVector2Array(-37, -4, -31.567, -15.7715, -28, -18, 16, -18, 19, -16, 25, -4, 23, 0, -35, 0)
+polygon = PackedVector2Array(-37, -4, -33, -16, -28, -18, 16, -18, 19, -16, 25, -4, 23, 0, -35, 0)
 
 [node name="Satellite7" type="Sprite2D" parent="NavigationRegion2D"]
 y_sort_enabled = true
@@ -718,8 +643,10 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/Satellite7/StaticBody2D" groups=["ImpedesNavigation"]]
-position = Vector2(11, 0)
-polygon = PackedVector2Array(-41, -4, -36, -16, -33, -20, -29, -22, 17, -22, 21, -20, 24, -16, 29, -4, 28, 1, 25, 4, -38, 4, -40, 1)
+position = Vector2(11, -2)
+polygon = PackedVector2Array(-41, -2, -36, -14, -33, -18, -29, -20, 17, -20, 21, -18, 24, -14, 29, -2, 28, 3, 25, 6, -38, 6, -40, 3)
+script = ExtResource("13_aq8qu")
+slots_taken_up = Array[Vector2i]([Vector2i(0, 0), Vector2i(1, 0), Vector2i(-1, 0)])
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="NavigationRegion2D/Satellite7"]
 collision_mask = 0
@@ -782,11 +709,11 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/blend_position = Vector2(0, 0)
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 collision_layer = 2048
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+visible = false
 polygon = PackedVector2Array(-288, -528, -112, -528, -112, -512, 112, -512, 112, -528, 288, -528, 288, -368, 224, -368, 224, -352, 288, -352, 288, -224, -288, -224, -288, -352, -224, -352, -224, -368, -288, -368)
 
 [node name="Inventory" parent="." instance=ExtResource("11_v0peg")]
@@ -795,7 +722,7 @@ polygon = PackedVector2Array(-288, -528, -112, -528, -112, -512, 112, -512, 112,
 
 [node name="RadialMenuFollow" type="Node2D" parent="RadialMenuObjects" node_paths=PackedStringArray("player", "top_left_bound", "bottom_right_bound")]
 script = ExtResource("14_k1f3b")
-player = NodePath("../../Player")
+player = NodePath("")
 top_left_bound = NodePath("../RadialMenuTopLeftBounds")
 bottom_right_bound = NodePath("../RadialMenuBottomRightBounds")
 offset = Vector2(18, 16)
@@ -855,9 +782,5 @@ libraries = {
 
 [connection signal="timeout" from="RadialMenuObjects/RadialMenuFollow/ResetTimer" to="RadialMenuObjects/RadialMenuFollow" method="_on_reset_timer_timeout"]
 
-[editable path="Player"]
-[editable path="Player/Hurtbox"]
-[editable path="Player/SoftCollision"]
-[editable path="Player/Hitbox"]
 [editable path="Wall3"]
 [editable path="Wall2"]
