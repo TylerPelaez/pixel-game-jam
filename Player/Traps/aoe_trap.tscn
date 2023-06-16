@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://p2p5lkv5hhql"]
+[gd_scene load_steps=15 format=3 uid="uid://p2p5lkv5hhql"]
 
 [ext_resource type="PackedScene" uid="uid://bwr11fohp87hh" path="res://Player/Traps/Trap.tscn" id="1_svjpt"]
 [ext_resource type="Script" path="res://Player/Traps/AOETrap.gd" id="2_xo1b3"]
 [ext_resource type="PackedScene" uid="uid://cvk3t6e3yov1" path="res://Overlap/Hitbox.tscn" id="3_jl0jh"]
 [ext_resource type="PackedScene" uid="uid://dmk7dg4skspks" path="res://Scenes/Effects/explosion_effect.tscn" id="3_x5y02"]
+[ext_resource type="AudioStream" uid="uid://b8g7t6sth3c0u" path="res://MusicSound/Landmine_Explosion_SFX.mp3" id="4_mfsrx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w44by"]
 radius = 8.0
@@ -150,6 +151,7 @@ explosion_count = 40
 explosion = ExtResource("3_x5y02")
 explosion_size = 9.0
 id = 0
+attack_sfx = ExtResource("4_mfsrx")
 
 [node name="Sprite2D" parent="." index="0"]
 frame = 5

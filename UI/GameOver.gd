@@ -18,6 +18,7 @@ func init(_time: int, _waves_defeated: int):
 
 func _ready():
 	animation_player.play("FadeIn")
+	MusicController.play_title_music()
 
 func on_fade_in_complete():
 	star_holder.scroll_camera_down(3.0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://clhjj6y2kg2ux"]
+[gd_scene load_steps=17 format=3 uid="uid://clhjj6y2kg2ux"]
 
 [ext_resource type="Script" path="res://Player/Core.gd" id="1_05bff"]
 [ext_resource type="Texture2D" uid="uid://b3n25hx24s1x5" path="res://Textures/Environment/Pixel_Core_In_the_Ground-Sheet.png" id="2_4i60h"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bnc0c08lyuxd3" path="res://Textures/Environment/Pixel_Core_Too_Much_Damage_with_Dim_Light.png" id="5_hr3jf"]
 [ext_resource type="PackedScene" uid="uid://bx56f6muq82tr" path="res://UI/HealthBar.tscn" id="5_l0q6n"]
 [ext_resource type="Texture2D" uid="uid://bpbw7nrvoga3g" path="res://Textures/Environment/Pixel_Core_Explosion_-Sheet.png" id="8_pdj5b"]
+[ext_resource type="AudioStream" uid="uid://cmrinhi8dni4r" path="res://MusicSound/Enemy_Attack_SFX.mp3" id="10_kmbt7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_achx4"]
 height = 85.0
@@ -113,38 +114,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/path = NodePath("HealthBar:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_4i60h")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HealthBar:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
 "values": [true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:hframes")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_laxfy"]
@@ -212,6 +189,10 @@ offset_top = -40.0
 offset_right = -20.0
 offset_bottom = -40.0
 scale = Vector2(2, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_kmbt7")
+bus = &"Sound"
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]

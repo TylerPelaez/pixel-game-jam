@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalTrapData="*res://Scripts/TrapData.gd"
 SceneUtil="*res://Scenes/SceneUtil.tscn"
+MusicController="*res://Scenes/MusicController.tscn"
 
 [display]
 

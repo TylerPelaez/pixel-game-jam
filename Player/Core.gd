@@ -4,6 +4,11 @@ class_name Core
 signal death_started
 signal died
 
+
+@onready var hit_sfx = preload("res://MusicSound/Core_Damage_SFX.mp3")
+@onready var explosion_sfx = preload("res://MusicSound/Pixel_Core_Explosion.mp3")
+@onready var audio_player = $AudioStreamPlayer
+
 @export var no_damage_texture: Texture2D
 @export var light_damage_texture: Texture2D
 @export var medium_damage_texture: Texture2D
@@ -17,7 +22,7 @@ signal died
 
 var dying = false
 
-func _reset():
+func _ready():
 	stats.health_changed.connect(_on_stats_health_changed)
 
 func _on_stats_no_health():
@@ -25,6 +30,10 @@ func _on_stats_no_health():
 	dying = true
 
 func play_death_animation():
+	MusicController.stop()
+	audio_player.stop()
+	audio_player.stream = explosion_sfx
+	audio_player.play()
 	animation_player.play("Death")
 
 func _on_hurtbox_area_entered(area: Area2D):
@@ -37,6 +46,9 @@ func got_hit(damage):
 		hurtbox.start_invincibility(stats.hit_invincibility_time_seconds)
 		_invincibility_started()
 		hurtbox.create_hit_effect()
+		audio_player.stop()
+		audio_player.stream = hit_sfx
+		audio_player.play()
 	
 	var health_pct = float(stats.health) / float(stats.max_health)
 	if health_pct > 0.66:

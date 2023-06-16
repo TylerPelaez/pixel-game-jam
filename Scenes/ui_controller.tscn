@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dos2g6h404rdh"]
+[gd_scene load_steps=9 format=3 uid="uid://dos2g6h404rdh"]
 
 [ext_resource type="Script" path="res://Scripts/UI Controller.gd" id="1_p2v83"]
 [ext_resource type="PackedScene" uid="uid://diohj4tqgqc7s" path="res://Scenes/TestScene.tscn" id="3_4ahno"]
 [ext_resource type="Theme" uid="uid://b4dxdcfcr0qbl" path="res://theme.tres" id="3_60t4w"]
 [ext_resource type="Texture2D" uid="uid://clv3unxis3w5g" path="res://Textures/UI/SmallEnergyIcon.png" id="4_psq8p"]
+[ext_resource type="Texture2D" uid="uid://d0evsosulilcv" path="res://Textures/UI/EnemyHead.png" id="4_qk8ot"]
 
 [sub_resource type="Animation" id="Animation_v7pm3"]
 resource_name = "PlayerRespawningAnimation"
@@ -107,13 +108,17 @@ render_target_update_mode = 4
 [node name="RadialMenuFollow" parent="SubViewportContainer/SubViewport/TestScene/RadialMenuObjects" index="0"]
 offset = Vector2(20, 20)
 
-[node name="WaveLabel" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -192.0
-offset_bottom = 68.0
+offset_left = -176.0
+offset_right = -8.0
+offset_bottom = 124.0
 grow_horizontal = 0
+
+[node name="WaveLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
 theme = ExtResource("3_60t4w")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -121,6 +126,33 @@ theme_override_constants/shadow_outline_size = 4
 theme_override_font_sizes/font_size = 64
 text = "Wave 1"
 horizontal_alignment = 1
+
+[node name="CountHolder" type="HBoxContainer" parent="VBoxContainer"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CountHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_qk8ot")
+stretch_mode = 5
+
+[node name="EnemyCount" type="Label" parent="VBoxContainer/CountHolder"]
+layout_mode = 2
+size_flags_vertical = 1
+size_flags_stretch_ratio = 3.0
+theme = ExtResource("3_60t4w")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 48
+text = "999"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 clip_contents = true

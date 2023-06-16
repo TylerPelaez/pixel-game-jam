@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cngny766lomx0"]
+[gd_scene load_steps=11 format=3 uid="uid://cngny766lomx0"]
 
 [ext_resource type="PackedScene" uid="uid://bwr11fohp87hh" path="res://Player/Traps/Trap.tscn" id="1_kl5m8"]
 [ext_resource type="Script" path="res://Player/Traps/KnockbackTrap.gd" id="2_to172"]
 [ext_resource type="Texture2D" uid="uid://bija22e0ef4jf" path="res://Textures/Player/Traps/KnockbackTrap.png" id="3_a78vm"]
+[ext_resource type="AudioStream" uid="uid://bi03oc3y7soks" path="res://MusicSound/Knockback_Trap_SFX.mp3" id="3_f4odd"]
 [ext_resource type="Shape2D" uid="uid://dxo6yusc7a2rl" path="res://Player/KnockbackShape.tres" id="5_24b01"]
 
 [sub_resource type="Animation" id="Animation_ocd1w"]
@@ -119,6 +120,7 @@ radius = 24.0
 script = ExtResource("2_to172")
 id = 2
 attack_cooldown = 2.0
+attack_sfx = ExtResource("3_f4odd")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_a78vm")

@@ -3,7 +3,7 @@ class_name UIController
 
 @export var game_over: PackedScene = preload("res://Scenes/GameOver.tscn")
 
-@onready var wave_label: Label = $WaveLabel
+@onready var wave_label: Label = $VBoxContainer/WaveLabel
 @onready var energy_label: Label = $HBoxContainer/EnergyLabel
 @onready var game_scene: GameController = $SubViewportContainer/SubViewport/TestScene
 @onready var tutorial_label: Label = $TutorialText
@@ -11,10 +11,15 @@ class_name UIController
 @onready var respawning_text: Label = $RespawningText
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+@onready var count_holder = $VBoxContainer/CountHolder
+@onready var count_label = $VBoxContainer/CountHolder/EnemyCount
+
 
 var tutorial_state: TutorialState = TutorialState.COMPLETE
 
 func _ready():
+	MusicController.start_gameplay_music()
+	
 	if !SceneUtil.tutorial_completed: 
 		tutorial_state = TutorialState.MOVE
 		tutorial_label.visible = true
@@ -29,11 +34,16 @@ func _ready():
 	game_scene.wave_started.connect(on_wave_started)
 	game_scene.trap_cancelled.connect(on_trap_cancel)
 	game_scene.player_died.connect(on_player_died)
+	game_scene.loss_started.connect(on_game_over_started)
+
+func _process(delta):
+	count_label.text = str(game_scene.get_wave_enemies_remaining())
 
 func on_game_over_started():
 	respawning_text.visible = false
 	wave_label.visible = false
 	energy_holder.visible = false
+	count_holder.visible = false
 
 func on_game_lost(wave_number: int, time_elapsed: int):
 	game_scene.queue_free()
@@ -43,6 +53,7 @@ func on_game_lost(wave_number: int, time_elapsed: int):
 
 func new_wave(wave_number: int):
 	wave_label.text = "Wave " + str(wave_number)
+	count_holder.visible = false
 	
 func on_inventory_updated(inventory: Inventory):
 	energy_label.text = "%d" % inventory.energy
@@ -96,7 +107,8 @@ func on_wave_started():
 		tutorial_label.text = "Protect the Pixel Core. Good luck!"
 		var timer = get_tree().create_timer(5.0)
 		timer.timeout.connect(on_tutorial_complete)
-		
+	
+	count_holder.visible = true
 
 func on_tutorial_complete():
 	tutorial_label.queue_free()

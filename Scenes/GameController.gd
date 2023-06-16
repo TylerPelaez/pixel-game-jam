@@ -12,6 +12,7 @@ signal trap_placed
 signal wave_started
 signal trap_cancelled
 signal player_died
+signal loss_started
 
 @onready var grid_controller: GridController = $GridController
 
@@ -28,6 +29,8 @@ signal player_died
 @onready var spawner_visuals_animation_tree: AnimationTree = $SpawnerVisuals/AnimationTree
 
 @onready var inventory: Inventory = $Inventory
+@onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
+
 
 @export var enemy_prefab: PackedScene
 @export var enemy_variant_prefab: PackedScene
@@ -116,6 +119,8 @@ func start_wave():
 	wave_started.emit()
 
 func end_wave():
+	MusicController.dim_game_music_for_wave_complete()
+	audio_player.play()
 	wave_counter += 1
 	wave_active = false
 	new_wave.emit(wave_counter)
@@ -165,7 +170,7 @@ func on_enemy_died(enemy: Enemy):
 	energy.call_deferred("set_flipped", enemy.is_flipped())
 	
 	dead_enemies_count += 1
-	if dead_enemies_count >= wave_enemy_spawn_limit:
+	if dead_enemies_count >= wave_enemy_spawn_limit && !loss_animation_started:
 		end_wave()
 	
 func _on_energy_collected(amount: int):
@@ -193,6 +198,8 @@ func core_death_start():
 	get_tree().call_group("Enemy", "die")
 	get_tree().call_group("Trap", "queue_free")
 	
+	loss_started.emit()
+	
 	if player != null:
 		player.healthbar.visible = false
 	core_death_orchestrator.play("Death")
@@ -202,3 +209,6 @@ func on_orchestrator_complete():
 
 func grant_starting_energy():
 	inventory.energy += starting_energy
+
+func get_wave_enemies_remaining():
+	return wave_enemy_spawn_limit - dead_enemies_count

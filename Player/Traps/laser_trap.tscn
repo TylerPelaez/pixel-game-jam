@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://3bqfu01dt05n"]
+[gd_scene load_steps=14 format=3 uid="uid://3bqfu01dt05n"]
 
 [ext_resource type="PackedScene" uid="uid://bwr11fohp87hh" path="res://Player/Traps/Trap.tscn" id="1_r6fbg"]
 [ext_resource type="Texture2D" uid="uid://cp185pq0g4sct" path="res://Textures/Player/Traps/LaserTrap.png" id="2_2iaal"]
 [ext_resource type="Script" path="res://Player/Traps/laser_trap.gd" id="2_21mnl"]
+[ext_resource type="AudioStream" uid="uid://cp166xvqt7d1l" path="res://MusicSound/Laser_Trap_Attack_SFX.mp3" id="3_ecqv0"]
 [ext_resource type="Material" uid="uid://ch8kaoi4s8wen" path="res://Player/Traps/laser_trap.tres" id="3_hfxw6"]
 [ext_resource type="Texture2D" uid="uid://c2srf8v288l1s" path="res://Textures/Player/Traps/LaserBase.png" id="4_na1kp"]
 [ext_resource type="Texture2D" uid="uid://d1cqppiduqfeq" path="res://Textures/Test/Circle6.png" id="4_ykkhc"]
@@ -91,6 +92,20 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 4, 2, 1, 0]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_2gtjb"]
@@ -199,6 +214,7 @@ radius = 128.0
 [node name="LaserTrap" instance=ExtResource("1_r6fbg")]
 script = ExtResource("2_21mnl")
 attack_cooldown = 2.0
+attack_sfx = ExtResource("3_ecqv0")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_2iaal")

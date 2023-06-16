@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dc8c2m6m4pib0"]
+[gd_scene load_steps=40 format=3 uid="uid://dc8c2m6m4pib0"]
 
 [ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_ffyyh"]
 [ext_resource type="Texture2D" uid="uid://djh3avk8oa4ff" path="res://Textures/Enemy/EnemyCombined.png" id="2_wy6hc"]
@@ -9,6 +9,8 @@
 [ext_resource type="AnimationLibrary" uid="uid://dm5xt7fr45ifi" path="res://Animation/Blink.res" id="6_t53d6"]
 [ext_resource type="Texture2D" uid="uid://bb7tg0fl7hai" path="res://Textures/Enemy/AttackHands.png" id="7_fento"]
 [ext_resource type="PackedScene" uid="uid://bx56f6muq82tr" path="res://UI/HealthBar.tscn" id="9_jep8a"]
+[ext_resource type="AudioStream" uid="uid://cmrinhi8dni4r" path="res://MusicSound/Enemy_Attack_SFX.mp3" id="10_50xhd"]
+[ext_resource type="Texture2D" uid="uid://co1l3643l3pv7" path="res://Textures/Shadows/MediumShadow.png" id="11_svm30"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lwlm7"]
 radius = 4.0
@@ -721,6 +723,14 @@ collision_mask = 4
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(0, -9)
 shape = SubResource("CapsuleShape2D_0ymti")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_50xhd")
+bus = &"Sound"
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+texture = ExtResource("11_svm30")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]

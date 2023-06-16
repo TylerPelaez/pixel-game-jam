@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://diohj4tqgqc7s"]
+[gd_scene load_steps=38 format=3 uid="uid://diohj4tqgqc7s"]
 
 [ext_resource type="Script" path="res://Scenes/GameController.gd" id="1_ja4hw"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="2_g67e5"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://cw00scmuvh4xw" path="res://Textures/Environment/Base.png" id="16_dtrga"]
 [ext_resource type="Texture2D" uid="uid://3kck6rmy0gcr" path="res://Textures/Environment/Satellite.png" id="17_hkrs0"]
 [ext_resource type="Texture2D" uid="uid://dp7mkerkmtnul" path="res://Textures/Environment/Wire.png" id="18_50f07"]
+[ext_resource type="AudioStream" uid="uid://con0hq1g8iico" path="res://MusicSound/Wave_Complete.mp3" id="19_156xp"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d0f8k"]
 vertices = PackedVector2Array(-336, -176, -336, -528, -96, -528, -96, -512, 320, -176, 96, -512, 320, -528, 96, -528)
@@ -778,6 +779,10 @@ autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_utle3")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_156xp")
+bus = &"Sound"
 
 [connection signal="timeout" from="RadialMenuObjects/RadialMenuFollow/ResetTimer" to="RadialMenuObjects/RadialMenuFollow" method="_on_reset_timer_timeout"]
 

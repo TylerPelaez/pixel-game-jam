@@ -81,6 +81,9 @@ shape = SubResource("RectangleShape2D_h7s3l")
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="."]
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Sound"
+
 [connection signal="no_health" from="Stats" to="." method="_on_stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 

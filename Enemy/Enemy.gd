@@ -22,6 +22,12 @@ var scratch_velocity: Vector2 = Vector2.ZERO
 
 @export var attack_check_distance = 24
 
+@onready var attack_sfx = preload("res://MusicSound/Enemy_Attack_SFX.mp3")
+@onready var death_sfx_1 = preload("res://MusicSound/Enemy_Death_SFX.mp3")
+@onready var death_sfx_2 = preload("res://MusicSound/Enemy_Death_SFX_2.mp3")
+
+@onready var audio_player = $AudioStreamPlayer
+
 @onready var stats: Stats = $Stats
 @onready var hurtbox = $Hurtbox
 @onready var blink_animation_player = $BlinkAnimationPlayer
@@ -143,6 +149,10 @@ func start_attack(_attack_target_pos: Vector2, is_core_attack: bool):
 	attacking_core = is_core_attack
 	last_attack_start = Time.get_ticks_msec()
 	attack_damage_started = false
+	audio_player.stop()
+	audio_player.stream = attack_sfx
+	audio_player.play()
+	
 	
 func attack_state(delta):
 	hands.global_position = attack_target_pos
@@ -193,6 +203,9 @@ func _on_stats_no_health():
 func die():
 	state = State.DYING
 	animation_state.travel("Death")
+	audio_player.stop()
+	audio_player.stream = death_sfx_1 if randf() > 0.5 else death_sfx_2
+	audio_player.play()
 
 func _on_stats_health_changed(value):
 	health_bar.update(stats.health, stats.max_health)

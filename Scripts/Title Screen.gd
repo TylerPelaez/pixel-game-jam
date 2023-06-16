@@ -13,6 +13,7 @@ var scroll_complete: bool = false
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	MusicController.play_title_music()
 
 func _input(event):
 	if event.is_pressed() && !scrolling_to_main_menu && !scroll_complete:
@@ -28,8 +29,6 @@ func start_cam_scroll():
 func _on_scroll_complete():
 	scrolling_to_main_menu = false
 	scroll_complete = true
-	
-
 
 func _on_play_pressed():
 	get_tree().change_scene_to_packed(game_scene)

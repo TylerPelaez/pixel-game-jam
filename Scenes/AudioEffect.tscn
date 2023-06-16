@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bexvpj4x16b5h"]
+
+[ext_resource type="Script" path="res://Scripts/AudioEffect.gd" id="1_kdt4b"]
+
+[node name="AudioEffect" type="AudioStreamPlayer"]
+volume_db = -3.0
+bus = &"Sound"
+script = ExtResource("1_kdt4b")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
