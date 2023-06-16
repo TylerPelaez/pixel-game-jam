@@ -124,14 +124,6 @@ func _on_Hurtbox_invincibility_ended():
 func _invincibility_started():
 	blink_animation_player.play("Start")
 
-#func pickup_health():
-#	$ItemPickupPlayer.stream = PickupHealthSound
-#	$ItemPickupPlayer.play()
-#
-#func pickup_shard():
-#	$ItemPickupPlayer.stream = PickupGemSound
-#	$ItemPickupPlayer.play()
-
 func _on_stats_no_health():
 	emit_signal("died")
 	queue_free()

@@ -10,6 +10,7 @@ extends Control
 var scrolling_to_main_menu: bool = false
 var scroll_complete: bool = false
 
+var showing_backstory: bool = false
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -18,6 +19,12 @@ func _ready():
 func _input(event):
 	if event.is_pressed() && !scrolling_to_main_menu && !scroll_complete:
 		move_to_main_menu()
+
+func _process(delta):
+	if Input.is_anything_pressed() && showing_backstory:
+		animation_player.speed_scale = 4
+	elif showing_backstory:
+		animation_player.speed_scale = 1
 		
 func move_to_main_menu():
 	scrolling_to_main_menu = true
@@ -31,10 +38,17 @@ func _on_scroll_complete():
 	scroll_complete = true
 
 func _on_play_pressed():
-	get_tree().change_scene_to_packed(game_scene)
+	showing_backstory = true
+	animation_player.play("ShowBackstory")
 
 func _on_credits_pressed():
-	pass # Replace with function body.
+	animation_player.play("Show Credits")
 
 func _on_quit_pressed():
 	get_tree().quit()
+
+func _on_credits_back_pressed():
+	animation_player.play("Hide Credits")
+	
+func _on_backstory_complete():
+	get_tree().change_scene_to_packed(game_scene)
