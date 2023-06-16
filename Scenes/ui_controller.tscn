@@ -33,6 +33,9 @@ render_target_update_mode = 4
 [node name="AnimationTree" parent="SubViewportContainer/SubViewport/TestScene/Player" index="6"]
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_odpvc")
 
+[node name="RadialMenuFollow" parent="SubViewportContainer/SubViewport/TestScene/RadialMenuObjects" index="0"]
+offset = Vector2(20, 20)
+
 [node name="WaveLabel" type="Label" parent="."]
 anchors_preset = 1
 anchor_left = 1.0

@@ -15,11 +15,7 @@ func set_cost(cost: int):
 
 #TODO - modulate abuse!
 func set_unpurchaseable(unpurchaseable: bool):
-	modulate.a = 0.5 if unpurchaseable else 1.0
-	modulate.g = 0 if unpurchaseable else 1.0
-	modulate.b = 0 if unpurchaseable else 1.0 
+	modulate = Color.RED if unpurchaseable else Color.WHITE
 
 func set_highlight(highlight: bool):
-	modulate.r = 0 if highlight else 1
-	modulate.g = 1
-	modulate.b = 0 if highlight else 1
+	modulate = Color.GREEN if highlight else Color.WHITE

@@ -6,15 +6,21 @@ extends Node2D
 @export var offset: Vector2
 @onready var follow_mouse_timer: Timer = $ResetTimer
 
-var follow_mouse: bool = false
+var follow_mouse: bool = true
 var menu_open: bool = false
 
-
 func _process(delta):
-	if menu_open:
+	if menu_open || follow_mouse:
 		return
-	var target_pos = get_global_mouse_position() if follow_mouse else (player.global_position + offset)
-	var new_pos = target_pos
+	update_position(player.global_position + offset)
+
+func _input(event):
+	if event is InputEventMouseMotion and follow_mouse and !menu_open:
+		var pos = get_viewport_transform().affine_inverse() * event.position
+		update_position(pos + offset)
+
+func update_position(target: Vector2):
+	var new_pos = target
 	if new_pos.x < top_left_bound.global_position.x:
 		new_pos.x = top_left_bound.global_position.x
 	if new_pos.y < top_left_bound.global_position.y:
@@ -28,11 +34,13 @@ func _process(delta):
 
 func start_follow_mouse():
 	follow_mouse = true
-	follow_mouse_timer.stop()
+#	follow_mouse_timer.stop()
 
 func begin_stop_follow_mouse():
-	follow_mouse_timer.start()
+	pass
+#	follow_mouse_timer.start()
 
 func _on_reset_timer_timeout():
-	follow_mouse = false
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	follow_mouse = true
+#	follow_mouse = false
+#	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

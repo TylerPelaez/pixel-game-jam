@@ -72,6 +72,7 @@ func _ready():
 	
 	spawner_visuals_animation_tree.active = true
 	inventory.updated.connect(func(_val): inventory_updated.emit(inventory))
+	inventory.updated.connect(func(_val): radial_menu.energy_count_updated(_val.energy))
 	inventory_updated.emit(inventory)
 	
 	player.moved.connect(func(): player_moved.emit())

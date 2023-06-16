@@ -743,14 +743,14 @@ polygon = PackedVector2Array(-288, -528, -112, -528, -112, -512, 112, -512, 112,
 
 [node name="Inventory" parent="." instance=ExtResource("11_v0peg")]
 
-[node name="RadialMenuObjects" type="Node" parent="."]
+[node name="RadialMenuObjects" type="Node2D" parent="."]
 
 [node name="RadialMenuFollow" type="Node2D" parent="RadialMenuObjects" node_paths=PackedStringArray("player", "top_left_bound", "bottom_right_bound")]
 script = ExtResource("14_k1f3b")
 player = NodePath("../../Player")
 top_left_bound = NodePath("../RadialMenuTopLeftBounds")
 bottom_right_bound = NodePath("../RadialMenuBottomRightBounds")
-offset = Vector2(18, 4)
+offset = Vector2(18, 16)
 
 [node name="RadialMenu" parent="RadialMenuObjects/RadialMenuFollow" instance=ExtResource("15_nq4b4")]
 visible = false

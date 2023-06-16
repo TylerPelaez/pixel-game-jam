@@ -17,6 +17,8 @@ signal closed
 var current_radial_pos := Vector2.ZERO
 var current_selection : UITrapBox  
 
+var cur_energy_count: int = 0
+
 func _ready():
 	var i = 0
 	for trap_id in TrapData.TrapId:
@@ -29,40 +31,48 @@ func _process(delta):
 	indicator.rotation = Vector2.ZERO.angle_to_point(current_radial_pos)
 
 func energy_count_updated(new_amount):
-	var i = 0
-	for trap_id in TrapData.TrapId:
-		var id = TrapData.TrapId.get(trap_id)
-		fill_order[i].set_unpurchaseable(GlobalTrapData.get_cost(id) > new_amount)
-		i += 1
+	cur_energy_count = new_amount
+	update_colors()
 
 func set_open(value: bool):
 	current_radial_pos = Vector2.ZERO
 	visible = value
 	(opened if visible else closed).emit()
+	
+	update_colors()
 
 func _input(event):
 	if !visible:
 		return
 	if event is InputEventMouseMotion:
-		current_radial_pos.x = clamp(current_radial_pos.x + (event.relative.x / 20.0), -1, 1)
-		current_radial_pos.y = clamp(current_radial_pos.y + (event.relative.y / 20.0), -1, 1)
-		current_radial_pos = current_radial_pos.normalized()
-		
+		current_radial_pos += event.relative
 	
+	update_colors()
+
+
+func update_colors():
 	var max_dot = -9999
 	var highlighted_box
 	for box in fill_order:
 		var direction = (box.global_position - global_position).normalized()
-		var d = current_radial_pos.dot(direction)
+		var d = current_radial_pos.normalized().dot(direction)
 		box.set_highlight(false)
 		if d > max_dot:
 			max_dot = d
 			highlighted_box = box
 	
-	highlighted_box.set_highlight(true)
 	name_label.text = GlobalTrapData.get_name_for_trap(highlighted_box.trap_id)
 	cost_label.text = str(GlobalTrapData.get_cost(highlighted_box.trap_id))
 	current_selection = highlighted_box
+	
+	var i = 0
+	for trap_id in TrapData.TrapId:
+		var id = TrapData.TrapId.get(trap_id)
+		fill_order[i].set_unpurchaseable(GlobalTrapData.get_cost(id) > cur_energy_count)
+		if GlobalTrapData.get_cost(id) <= cur_energy_count and fill_order[i] == highlighted_box:
+			highlighted_box.set_highlight(true)
+		
+		i += 1
 	
 func get_currently_selected_trap():
 	return null if current_selection == null else current_selection.trap_id
