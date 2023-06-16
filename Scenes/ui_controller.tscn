@@ -33,9 +33,6 @@ render_target_update_mode = 4
 [node name="AnimationTree" parent="SubViewportContainer/SubViewport/TestScene/Player" index="6"]
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_odpvc")
 
-[node name="Sprite2D" parent="SubViewportContainer/SubViewport/TestScene/Wall3" index="1"]
-modulate = Color(0.639216, 0.619608, 0.619608, 1)
-
 [node name="WaveLabel" type="Label" parent="."]
 anchors_preset = 1
 anchor_left = 1.0

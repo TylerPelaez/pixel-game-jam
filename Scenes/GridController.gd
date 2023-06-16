@@ -33,17 +33,22 @@ func _process(delta):
 		State.DEFAULT:
 			return
 		State.PLACING:
-			var mouse_pos = get_global_mouse_position()
-			var grid_pos = snap_to_grid(mouse_pos)
-			trap_placement_instance.global_position = grid_pos
+			var grid_pos = snap_to_grid(trap_placement_instance.global_position)
 			trap_placement_instance.modulate = Color.WHITE if can_place(trap_placement_instance, grid_pos) else Color.RED
 
 func _input(event):
 	if state == State.PLACING and event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			place_trap(trap_placement_instance, snap_to_grid(get_global_mouse_position()))
+			event = make_input_local(event)
+			place_trap(trap_placement_instance, snap_to_grid(event.position))
 		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed: 
 			finish_placement()
+	if state == State.PLACING and event is InputEventMouseMotion:
+			event = make_input_local(event)
+			var mouse_pos = event.position
+			var grid_pos = snap_to_grid(mouse_pos)
+			trap_placement_instance.global_position = grid_pos
+			trap_placement_instance.modulate = Color.WHITE if can_place(trap_placement_instance, grid_pos) else Color.RED
 
 func start_placing(trap_placement_id: TrapData.TrapId):
 	if state == State.PLACING:
