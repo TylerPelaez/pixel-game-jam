@@ -35,4 +35,4 @@ func begin_stop_follow_mouse():
 
 func _on_reset_timer_timeout():
 	follow_mouse = false
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

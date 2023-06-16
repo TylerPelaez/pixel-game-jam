@@ -123,7 +123,7 @@ func finish_placement():
 		trap_placement_instance.queue_free()
 		state = State.DEFAULT
 		placement_ended.emit()
-		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func on_radial_menu_opened():
 	if state == State.PLACING:

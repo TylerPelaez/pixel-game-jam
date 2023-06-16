@@ -48,7 +48,7 @@ var loss_animation_started: bool = false
 
 func _ready():
 	start_time = Time.get_ticks_msec()
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	grid_controller.placement_started.connect(player.on_placement_started)
 	grid_controller.placement_started.connect(radial_menu_follow.start_follow_mouse)
 	grid_controller.placement_ended.connect(player.on_placement_ended)
