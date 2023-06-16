@@ -194,7 +194,11 @@ func knockback(strength: float, source_pos: Vector2):
 	if state == State.ATTACK && !attack_damage_started:
 		state = State.MOVE
 		animation_state.travel("Idle")
+		if attacking_core && target is Core:
+			target.set_being_attacked(false)
+		
 		attacking_core = false
+
 
 func _on_Hurtbox_invincibility_ended():
 	blink_animation_player.play("Blink/Stop")
