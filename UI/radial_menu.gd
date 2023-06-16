@@ -52,15 +52,17 @@ func _input(event):
 
 func update_colors():
 	var max_dot = -9999
-	var highlighted_box
-	for box in fill_order:
-		var direction = (box.global_position - global_position).normalized()
-		var d = current_radial_pos.normalized().dot(direction)
-		box.set_highlight(false)
-		if d > max_dot:
-			max_dot = d
-			highlighted_box = box
+	var highlighted_box = right_box
 	
+	if current_radial_pos != Vector2.ZERO:
+		for box in fill_order:
+			var direction = (box.global_position - global_position).normalized()
+			var d = current_radial_pos.normalized().dot(direction)
+			box.set_highlight(false)
+			if d > max_dot:
+				max_dot = d
+				highlighted_box = box
+		
 	name_label.text = GlobalTrapData.get_name_for_trap(highlighted_box.trap_id)
 	cost_label.text = str(GlobalTrapData.get_cost(highlighted_box.trap_id))
 	current_selection = highlighted_box
