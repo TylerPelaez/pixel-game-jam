@@ -84,6 +84,8 @@ func pre_wave():
 	active_spawner_parent = spawners.get_child(randi_range(0, spawners.get_child_count() - 1))
 	var direction = (active_spawner_parent.global_position - spawners.global_position).normalized()
 	spawner_visuals_animation_tree.set("parameters/blend_position", direction)
+	core.got_hit(-5)
+	player.got_hit(-3)
 
 func start_wave():
 	spawned_enemies_count = 0

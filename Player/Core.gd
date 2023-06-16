@@ -17,6 +17,9 @@ signal died
 
 var dying = false
 
+func _reset():
+	stats.health_changed.connect(_on_stats_health_changed)
+
 func _on_stats_no_health():
 	death_started.emit()
 	dying = true
@@ -30,12 +33,10 @@ func _on_hurtbox_area_entered(area: Area2D):
 
 func got_hit(damage):
 	stats.health -= damage
-	if stats.health > 0:
+	if stats.health > 0 and damage > 0:
 		hurtbox.start_invincibility(stats.hit_invincibility_time_seconds)
 		_invincibility_started()
 		hurtbox.create_hit_effect()
-	
-	healthbar.update(stats.health, stats.max_health)
 	
 	var health_pct = float(stats.health) / float(stats.max_health)
 	if health_pct > 0.66:
@@ -60,3 +61,6 @@ func _invincibility_started():
 func _on_death_animation_complete():
 	died.emit()
 	queue_free()
+
+func _on_stats_health_changed(value):
+	healthbar.update(stats.health, stats.max_health)
