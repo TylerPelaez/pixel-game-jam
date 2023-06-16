@@ -14,7 +14,7 @@ signal closed
 @onready var name_label: Label = $InfoBox/VBoxContainer/Name
 @onready var cost_label: Label = $InfoBox/VBoxContainer/HBoxContainer/Cost
 
-var current_radial_pos := Vector2.RIGHT
+var current_radial_pos := Vector2.ZERO
 var current_selection : UITrapBox  
 
 func _ready():
@@ -36,6 +36,7 @@ func energy_count_updated(new_amount):
 		i += 1
 
 func set_open(value: bool):
+	current_radial_pos = Vector2.ZERO
 	visible = value
 	(opened if visible else closed).emit()
 

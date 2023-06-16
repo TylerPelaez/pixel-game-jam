@@ -6,9 +6,6 @@ signal updated(inventory: Inventory)
 var trap_inventory := {}
 var energy := 0 : set = _set_energy
 
-func _ready():
-	energy = 200
-
 func add_trap(trap_id: TrapData.TrapId, count: int):
 	if !trap_inventory.has(trap_id):
 		trap_inventory[trap_id] = count

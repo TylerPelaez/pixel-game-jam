@@ -33,6 +33,8 @@ signal trap_cancelled
 @export var wave_spawn_time_seconds: float = 30.0
 @export var energy_drop_prefab: PackedScene
 @export_range(0, 1) var variant_percentage: float = 0.5
+@export var starting_energy: int = 50
+
 
 var wave_counter: int = 1
 var wave_enemy_spawn_limit: int
@@ -173,3 +175,6 @@ func core_death_start():
 	
 func on_orchestrator_complete():
 	core.play_death_animation()
+
+func grant_starting_energy():
+	inventory.energy += starting_energy
