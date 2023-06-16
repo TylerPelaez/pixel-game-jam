@@ -98,7 +98,7 @@ func on_trap_placed():
 func on_trap_cancel():
 	if tutorial_state == TutorialState.CANCEL_TRAP:
 		tutorial_state = TutorialState.START_WAVE
-		tutorial_label.text = "TAB To Start Wave When Ready."
+		tutorial_label.text = "TAB To Start Wave When Ready. Enemies Will Approach From the Direction of the Blue Light"
 
 func on_wave_started():
 	if tutorial_state == TutorialState.START_WAVE:

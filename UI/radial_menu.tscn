@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4p6sq8o3f2h5"]
+[gd_scene load_steps=10 format=3 uid="uid://c4p6sq8o3f2h5"]
 
 [ext_resource type="Script" path="res://UI/radial_menu.gd" id="1_31xik"]
+[ext_resource type="Texture2D" uid="uid://ddob56hofused" path="res://Textures/UI/RadialBG.png" id="2_5p2tj"]
 [ext_resource type="PackedScene" uid="uid://dxt6u2amn8l16" path="res://UI/ui_trap_box.tscn" id="2_jkcbw"]
 [ext_resource type="Texture2D" uid="uid://dn3l2yq8cukl8" path="res://Textures/Player/Traps/LandmineIcon.png" id="3_aipkl"]
 [ext_resource type="Texture2D" uid="uid://p3nmqli2qro4" path="res://Textures/Player/Traps/LaserIcon.png" id="3_opwe3"]
@@ -15,6 +16,15 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_31xik")
+
+[node name="BG" type="TextureRect" parent="."]
+modulate = Color(0.619608, 0.619608, 0.619608, 0.937255)
+layout_mode = 0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("2_5p2tj")
 
 [node name="TopBox" parent="." instance=ExtResource("2_jkcbw")]
 layout_mode = 0

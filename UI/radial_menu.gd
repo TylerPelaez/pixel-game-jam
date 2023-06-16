@@ -65,12 +65,15 @@ func update_colors():
 		
 	name_label.text = GlobalTrapData.get_name_for_trap(highlighted_box.trap_id)
 	cost_label.text = str(GlobalTrapData.get_cost(highlighted_box.trap_id))
+	cost_label.add_theme_color_override("font_color", Color.WHITE)
 	current_selection = highlighted_box
 	
 	var i = 0
 	for trap_id in TrapData.TrapId:
 		var id = TrapData.TrapId.get(trap_id)
 		fill_order[i].set_unpurchaseable(GlobalTrapData.get_cost(id) > cur_energy_count)
+		if fill_order[i] == highlighted_box and GlobalTrapData.get_cost(id) > cur_energy_count:
+			cost_label.add_theme_color_override("font_color", Color.RED)
 		if GlobalTrapData.get_cost(id) <= cur_energy_count and fill_order[i] == highlighted_box:
 			highlighted_box.set_highlight(true)
 		
