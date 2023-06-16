@@ -20,12 +20,9 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.2, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [],
-"method": &"do_damage"
-}, {
 "args": [],
 "method": &"do_damage"
 }, {
@@ -195,7 +192,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vfhww"]
-radius = 128.0
+radius = 104.0
 
 [node name="LaserTrap" instance=ExtResource("1_r6fbg")]
 script = ExtResource("2_21mnl")
@@ -213,6 +210,9 @@ visible = false
 [node name="CollisionPolygon2D" parent="PlacementBlockingBody" index="0"]
 visible = false
 
+[node name="Stats" parent="." index="6"]
+attack_cooldown_seconds = 0.25
+
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 visible = false
 
@@ -223,7 +223,6 @@ libraries = {
 }
 
 [node name="ShapeCast2D" parent="." index="9"]
-visible = false
 shape = SubResource("CircleShape2D_vfhww")
 target_position = Vector2(0, 0)
 collision_mask = 16

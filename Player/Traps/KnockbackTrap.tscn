@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cngny766lomx0"]
+[gd_scene load_steps=12 format=3 uid="uid://cngny766lomx0"]
 
 [ext_resource type="PackedScene" uid="uid://bwr11fohp87hh" path="res://Player/Traps/Trap.tscn" id="1_kl5m8"]
 [ext_resource type="Script" path="res://Player/Traps/KnockbackTrap.gd" id="2_to172"]
 [ext_resource type="Texture2D" uid="uid://bija22e0ef4jf" path="res://Textures/Player/Traps/KnockbackTrap.png" id="3_a78vm"]
 [ext_resource type="AudioStream" uid="uid://bi03oc3y7soks" path="res://MusicSound/Knockback_Trap_SFX.mp3" id="3_f4odd"]
 [ext_resource type="Shape2D" uid="uid://dxo6yusc7a2rl" path="res://Player/KnockbackShape.tres" id="5_24b01"]
+[ext_resource type="PackedScene" uid="uid://cvk3t6e3yov1" path="res://Overlap/Hitbox.tscn" id="6_8y1x3"]
 
 [sub_resource type="Animation" id="Animation_ocd1w"]
 resource_name = "Attack"
@@ -42,7 +43,19 @@ tracks/2/path = NodePath("Knockback/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -105,6 +118,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ah4x0"]
 _data = {
@@ -135,7 +160,7 @@ visible = false
 visible = false
 
 [node name="NavigationRegion2D" parent="." index="5"]
-travel_cost = 2.0
+travel_cost = 1.1
 
 [node name="Stats" parent="." index="6"]
 knockback_strength = 500.0
@@ -163,6 +188,15 @@ collision_mask = 16
 collide_with_areas = true
 collide_with_bodies = false
 
+[node name="Hitbox" parent="." index="11" instance=ExtResource("6_8y1x3")]
+collision_layer = 128
+collision_mask = 16
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = ExtResource("5_24b01")
+disabled = true
+
 [connection signal="area_entered" from="Knockback" to="." method="_on_knockback_area_entered"]
 
 [editable path="Hurtbox"]
+[editable path="Hitbox"]

@@ -50,12 +50,15 @@ func should_attack() -> bool:
 		var closest_collider
 		for i in collision_count:
 			var collider = shape_cast.get_collider(i)
-			if collider is Node2D:
+			if collider is Node2D and collider.get_parent().state != Enemy.State.DYING:
 				var distance = collider.global_position.distance_to(global_position)
 				if distance < min_distance:
 					min_distance = distance
 					closest_collider = collider
-					
+		
+		if closest_collider == null:
+			return false
+		
 		# TODO: Clean this up, expecting a lot from the trap attack flow for this to work correctly
 		last_target = closest_collider.get_parent()
 		

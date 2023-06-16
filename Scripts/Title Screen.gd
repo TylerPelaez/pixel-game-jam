@@ -22,7 +22,7 @@ func _input(event):
 
 func _process(delta):
 	if Input.is_anything_pressed() && showing_backstory:
-		animation_player.speed_scale = 4
+		animation_player.speed_scale = 6
 	elif showing_backstory:
 		animation_player.speed_scale = 1
 		

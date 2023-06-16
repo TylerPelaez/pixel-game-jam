@@ -28,4 +28,4 @@ func _set_energy(amount: int):
 	updated.emit(self)
 
 func can_afford(id: TrapData.TrapId):
-	return energy > GlobalTrapData.get_cost(id)
+	return energy >= GlobalTrapData.get_cost(id)

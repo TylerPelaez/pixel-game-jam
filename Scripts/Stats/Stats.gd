@@ -10,6 +10,8 @@ var health = max_health: set = set_health
 
 @export var attack_cooldown_seconds: float = 0.5
 
+@export var knockback_resistance: float = 1.0
+
 signal no_health
 signal health_changed(value)
 signal max_health_changed(value)

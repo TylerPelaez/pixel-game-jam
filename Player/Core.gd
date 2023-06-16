@@ -22,6 +22,8 @@ signal died
 
 var dying = false
 
+var being_attacked = false
+
 func _ready():
 	stats.health_changed.connect(_on_stats_health_changed)
 
@@ -76,3 +78,6 @@ func _on_death_animation_complete():
 
 func _on_stats_health_changed(value):
 	healthbar.update(stats.health, stats.max_health)
+
+func set_being_attacked(val):
+	being_attacked = val

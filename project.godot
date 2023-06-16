@@ -21,6 +21,7 @@ GlobalTrapData="*res://Scripts/TrapData.gd"
 SceneUtil="*res://Scenes/SceneUtil.tscn"
 MusicController="*res://Scenes/MusicController.tscn"
 SfxController="*res://MusicSound/SFXController.tscn"
+WaveDataDB="*res://Scripts/WaveData.gd"
 
 [display]
 

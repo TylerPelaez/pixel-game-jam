@@ -16,7 +16,8 @@ signal placed_trap(trap: Trap)
 
 enum State {
 	DEFAULT,
-	PLACING
+	PLACING,
+	PLAYER_DEAD
 }
 
 var state: State = State.DEFAULT
@@ -30,7 +31,7 @@ func world_pos_to_grid_coords(pos: Vector2) -> Vector2i:
 
 func _process(delta):
 	match state:
-		State.DEFAULT:
+		[State.DEFAULT, State.PLAYER_DEAD]:
 			return
 		State.PLACING:
 			var grid_pos = snap_to_grid(trap_placement_instance.global_position)
@@ -128,3 +129,12 @@ func finish_placement():
 func on_radial_menu_opened():
 	if state == State.PLACING:
 		finish_placement()
+
+func on_player_death():
+	if state == State.PLACING:
+		finish_placement()
+	state = State.PLAYER_DEAD
+
+func player_revived():
+	if state == State.PLAYER_DEAD:
+		state = State.DEFAULT

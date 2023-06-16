@@ -11,6 +11,15 @@ var suck_speed: float = 100.0
 
 var suck_complete_distance: float = 5
 
+func _ready():
+	var timer = get_tree().create_timer(25.0)
+	timer.timeout.connect(on_blink_start_timer_complete)
+
+func on_blink_start_timer_complete():
+	$Blink.play("Blink")
+	var timer = get_tree().create_timer(5.0)
+	timer.timeout.connect(queue_free)
+	
 func _process(delta):
 	if being_sucked:
 		var to_target = global_position.direction_to(suck_target.global_position)

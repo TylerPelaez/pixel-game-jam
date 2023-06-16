@@ -167,6 +167,7 @@ disabled = true
 [node name="NavigationRegion2D" parent="." index="5"]
 visible = true
 enabled = false
+travel_cost = 2.0
 
 [node name="AttackCast" type="ShapeCast2D" parent="." index="7"]
 shape = SubResource("CircleShape2D_w44by")
@@ -178,7 +179,7 @@ collide_with_bodies = false
 [node name="Hitbox" parent="." index="9" instance=ExtResource("3_jl0jh")]
 collision_layer = 128
 collision_mask = 16
-damage = 3
+damage = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource("CircleShape2D_wnv7f")

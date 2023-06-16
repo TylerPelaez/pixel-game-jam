@@ -19,7 +19,7 @@ var db = {
 		"trap": preload("res://Player/Traps/aoe_trap.tscn"),
 		"ui_icon": preload("res://Textures/Player/Traps/LandmineIcon.png"),
 		"placement_offset": Vector2(0, 4),
-		"cost": 10,
+		"cost": 5,
 		"name": "Landmine"
 	},
 	TrapId.Laser: {

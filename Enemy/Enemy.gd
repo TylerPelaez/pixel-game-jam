@@ -94,7 +94,7 @@ func waiting_to_attack_state(delta):
 		state = State.MOVE
 		waiting_to_attack_core = false
 		return
-	if !is_attack_on_cooldown():
+	if should_attack(waiting_to_attack_core):
 		start_attack(waiting_to_attack_target_pos, waiting_to_attack_core)
 
 func move_state(delta):
@@ -109,7 +109,7 @@ func move_state(delta):
 			
 			var attack_target_pos = attack_raycast.get_collider().global_position
 			
-			if is_attack_on_cooldown():
+			if !should_attack(is_core):
 				state = State.WAITING_TO_ATTACK
 				waiting_to_attack_target_pos = attack_target_pos
 				waiting_to_attack_core = is_core
@@ -135,11 +135,21 @@ func move_state(delta):
 	
 	move()
 
+func should_attack(is_core: bool):
+	if is_attack_on_cooldown():
+		return false
+	if is_core and target is Core and target.being_attacked:
+		return false
+	return true
+
 func is_attack_on_cooldown():
 	return Time.get_ticks_msec() - last_attack_start < (stats.attack_cooldown_seconds * 1000)
 
 func start_attack(_attack_target_pos: Vector2, is_core_attack: bool):
 	state = State.ATTACK
+	if is_core_attack and target is Core:
+		target.set_being_attacked(true)
+	
 	attack_target_pos = _attack_target_pos
 	hands.global_position = _attack_target_pos
 	animation_tree.set("parameters/Attack/blend_position", (agent.get_next_path_position() - global_position).normalized().x)
@@ -177,7 +187,7 @@ func got_hit(damage):
 func knockback(strength: float, source_pos: Vector2):
 	var direction = (global_position - source_pos).normalized()
 	var distance = global_position.distance_to(source_pos)
-	var offset = (direction * strength)
+	var offset = direction * strength / stats.knockback_resistance
 	scratch_velocity += offset
 	velocity += offset
 	
@@ -196,6 +206,8 @@ func _on_stats_no_health():
 	die()
 
 func die():
+	if attacking_core and target is Core:
+		target.set_being_attacked(false)
 	state = State.DYING
 	animation_state.travel("Death")
 	SfxController.play_enemy_sfx(death_sfx_1 if randf() > 0.5 else death_sfx_2)
