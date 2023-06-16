@@ -42,7 +42,7 @@ signal player_died
 
 var player: PlayerController
 
-var wave_counter: int = starting_wave
+var wave_counter: int
 var wave_enemy_spawn_limit: int
 var spawned_enemies_count: int
 var wave_active: bool = false
@@ -55,6 +55,7 @@ var start_time
 var loss_animation_started: bool = false
 
 func _ready():
+	wave_counter = starting_wave
 	start_time = Time.get_ticks_msec()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
@@ -68,7 +69,7 @@ func _ready():
 	grid_controller.placement_ended.connect(func(): trap_cancelled.emit())
 	
 	grid_controller.placed_trap.connect(func(trap: Trap): nav_controller.add_structure(trap, trap.nav_collision_polygon))
-	grid_controller.placed_trap.connect(func(trap): player.on_placement())
+	grid_controller.placed_trap.connect(func(trap): if player != null: player.on_placement())
 	grid_controller.placed_trap.connect(func(trap): trap_placed.emit())	
 	
 	

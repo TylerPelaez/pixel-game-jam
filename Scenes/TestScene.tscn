@@ -20,9 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://dp7mkerkmtnul" path="res://Textures/Environment/Wire.png" id="18_50f07"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d0f8k"]
-vertices = PackedVector2Array(-336, -176, -336, -544, -96, -544, -96, -512, 320, -176, 96, -512, 320, -544, 96, -544)
+vertices = PackedVector2Array(-336, -176, -336, -528, -96, -528, -96, -512, 320, -176, 96, -512, 320, -528, 96, -528)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(6, 4, 5, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-336, -544, -96, -544, -96, -512, 96, -512, 96, -544, 320, -544, 320, -176, -336, -176)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-336, -528, -96, -528, -96, -512, 96, -512, 96, -528, 320, -528, 320, -176, -336, -176)])
 
 [sub_resource type="Gradient" id="Gradient_kvgfw"]
 offsets = PackedFloat32Array(0, 0.972826)
@@ -574,18 +574,18 @@ inventory = NodePath("../Inventory")
 trap_placement_prefab = ExtResource("9_v4ruk")
 
 [node name="Wall3" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(0, -544)
+position = Vector2(0, -545)
 scale = Vector2(1.2, 1)
 
 [node name="Sprite2D" parent="Wall3" index="1"]
 modulate = Color(0.639216, 0.619608, 0.619608, 1)
 
 [node name="Wall5" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(0, -112)
+position = Vector2(0, -96)
 scale = Vector2(1.2, 1)
 
 [node name="Wall2" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(304, -352)
+position = Vector2(320, -352)
 rotation = 1.57079
 scale = Vector2(0.7, 1)
 
@@ -596,9 +596,9 @@ position = Vector2(0.000427246, -48)
 visible = false
 
 [node name="Wall4" parent="." instance=ExtResource("8_q1nra")]
-position = Vector2(-400, -352)
+position = Vector2(-416, -352)
 rotation = 1.57079
-scale = Vector2(0.6, 1)
+scale = Vector2(0.8, 1)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." node_paths=PackedStringArray("grid_controller")]
 y_sort_enabled = true
@@ -713,8 +713,7 @@ collision_layer = 2048
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-visible = false
-polygon = PackedVector2Array(-288, -528, -112, -528, -112, -512, 112, -512, 112, -528, 288, -528, 288, -368, 224, -368, 224, -352, 288, -352, 288, -224, -288, -224, -288, -352, -224, -352, -224, -368, -288, -368)
+polygon = PackedVector2Array(-288, -512, -112, -512, -112, -496, 112, -496, 112, -512, 288, -512, 288, -368, 224, -368, 224, -352, 288, -352, 288, -224, -288, -224, -288, -352, -224, -352, -224, -368, -288, -368)
 
 [node name="Inventory" parent="." instance=ExtResource("11_v0peg")]
 
