@@ -12,7 +12,7 @@ func play_title_music():
 func start_gameplay_music():
 	audio_player.stop()
 	audio_player.stream = gameplay_music
-	audio_player.play()
+#	audio_player.play()
 
 func dim_game_music_for_wave_complete():
 	audio_player.volume_db = -6
