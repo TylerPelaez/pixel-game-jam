@@ -11,10 +11,12 @@ class_name UIController
 var tutorial_state: TutorialState = TutorialState.COMPLETE
 
 func _ready():
-	if !SceneUtil.tutorial_completed:
+	if !SceneUtil.tutorial_completed: 
 		tutorial_state = TutorialState.MOVE
 		tutorial_label.visible = true
 		tutorial_label.text = "WASD To Move"
+	else:
+		game_scene.grant_starting_energy()
 		
 	game_scene.player_moved.connect(on_player_moved)
 	game_scene.player_meleed.connect(on_player_melee)
@@ -58,6 +60,7 @@ func on_player_melee():
 func on_radial_open():
 	if tutorial_state == TutorialState.OPEN_RADIAL:
 		tutorial_state = TutorialState.PLACE_TRAP
+		game_scene.grant_starting_energy()
 		tutorial_label.text = "Release SPACE To Select Trap. LEFT CLICK To Place."
 
 func on_trap_placed():
