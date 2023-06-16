@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Enemy_Death_SFX.mp3-175dbb001d1dd1a551a03f1a1
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://b86o450ufpii3"]
+
+[ext_resource type="Script" path="res://MusicSound/SFXController.gd" id="1_am7h0"]
+
+[node name="SFXController" type="Node2D"]
+script = ExtResource("1_am7h0")
+
+[node name="TrapSFX" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TrapSFX"]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="TrapSFX"]
+bus = &"Sound"
+
+[node name="EnemySFX" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="EnemySFX"]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="EnemySFX"]
+bus = &"Sound"
