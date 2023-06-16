@@ -149,7 +149,7 @@ func _process(delta):
 	if !wave_active and !loss_animation_started:
 		if Input.is_action_just_pressed("Start Wave"):
 			start_wave()
-	elif enemies_spawned < enemy_spawn_limit:
+	elif wave_active && enemies_spawned < enemy_spawn_limit:
 		var now = Time.get_ticks_msec()
 		var wave_time_progress = float(now - wave_start_time) / float(current_wave_makeup.spawn_duration_seconds * 1000.0)
 		var wave_spawn_progress = float(enemies_spawned) / float(enemy_spawn_limit)
