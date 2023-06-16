@@ -37,7 +37,8 @@ func _ready():
 	game_scene.loss_started.connect(on_game_over_started)
 
 func _process(delta):
-	count_label.text = str(game_scene.get_wave_enemies_remaining())
+	if game_scene != null:
+		count_label.text = str(game_scene.get_wave_enemies_remaining())
 
 func on_game_over_started():
 	respawning_text.visible = false
